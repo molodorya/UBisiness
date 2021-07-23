@@ -31,7 +31,6 @@ class News: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.vanillaWhite
-        
        
         
         settingHeaderView()
@@ -59,11 +58,13 @@ class News: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: userImage, style: .plain, target: self, action: #selector(user))
         
         navigationController?.navigationBar.barTintColor = UIColor.vanillaWhite
+        
+       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     
@@ -107,7 +108,7 @@ class News: UITableViewController {
         buttonTitleImage.clipsToBounds = true
         buttonTitleImage.contentMode = .scaleAspectFill
         // Use setBackgroundImage or setImage
-        buttonTitleImage.setBackgroundImage(UIImage(named: "businessPhoto"), for: .normal)
+        buttonTitleImage.setBackgroundImage(UIImage(named: "crimea"), for: .normal)
         
         buttonTitleImage.addTarget(self, action: #selector(btnTitleImage), for: .touchDown)
     }
@@ -115,6 +116,9 @@ class News: UITableViewController {
     func settingTitleButton() {
         titleButton.textColor = .white
         titleButton.text = "Может ли самозанятый платить НДП с процентов по займам"
+        titleButton.adjustsFontSizeToFitWidth = true
+
+//        titleButton.lineBreakMode = NSLineBreakMode.byTruncatingTail
   
     }
     

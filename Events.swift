@@ -12,6 +12,9 @@ class Events: UITableViewController {
     @IBOutlet var headerView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     
+    @IBOutlet weak var buttonHeader: UIButton!
+    
+    
     let linesImage = UIImage(systemName: "list.dash")?.withTintColor(.black, renderingMode: .alwaysOriginal)
     let userImage = UIImage(systemName: "person")?.withTintColor(.black, renderingMode: .alwaysOriginal)
     
@@ -35,6 +38,11 @@ class Events: UITableViewController {
         
         navigationController?.navigationBar.barTintColor = UIColor.vanillaWhite
     }
+    
+    @IBAction func actionButtonHeader(_ sender: UIButton) {
+        print("actionButtonHeader")
+    }
+    
     
     @objc func didTapMenuButton() {
         print("didTapMenuButton")
