@@ -11,8 +11,7 @@ import UIKit
 
 class News: UITableViewController {
     
-    let linesImage = UIImage(systemName: "list.dash")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-    let userImage = UIImage(systemName: "person")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+
     
     static let cellName = "newsCell"
     
@@ -25,6 +24,8 @@ class News: UITableViewController {
     @IBOutlet weak var promptButton: UILabel!
     
 
+    @IBOutlet weak var menu: UIBarButtonItem!
+    @IBOutlet weak var filter: UIBarButtonItem!
     
     
     
@@ -45,7 +46,9 @@ class News: UITableViewController {
         
         title = "новости"
         
-      
+        hideKeyboardWhenTappedScreen()
+        
+        actionMenu(.init())
         
     }
     
@@ -53,13 +56,6 @@ class News: UITableViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: linesImage, style: .plain, target: self, action: #selector(didTapMenuButton))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: userImage, style: .plain, target: self, action: #selector(user))
-        
-        navigationController?.navigationBar.barTintColor = UIColor.vanillaWhite
-        
-       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,15 +63,13 @@ class News: UITableViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    
-    @objc func didTapMenuButton() {
-        print("lines")
-        
-      
+    @IBAction func actionMenu(_ sender: UIBarButtonItem) {
+        menu.target = revealViewController()
+        menu.action = #selector(revealViewController()?.revealSideMenu)
     }
     
-    @objc func user() {
-        print("user")
+    @IBAction func actionFilter(_ sender: UIBarButtonItem) {
+        
     }
     
     func settingHeaderView() {

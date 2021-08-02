@@ -25,8 +25,12 @@ class ConfirmCode: UIViewController {
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         
-        navigationController?.isNavigationBarHidden = true
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+            navigationBar?.shadowImage = UIImage()
+        navigationBar?.backgroundColor = UIColor.clear
         
+        navigationItem.backBarButtonItem?.tintColor = .black
 
         settingCodeView()
         settingButton()

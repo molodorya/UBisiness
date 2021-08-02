@@ -12,49 +12,52 @@ class Files: UIViewController {
     static let nameTableCell: String = "filesTable"
     static let nameCollectionCell: String = "filesCollection"
 
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView?
+    @IBOutlet weak var contentView: UIView?
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var titleLabel: UILabel?
+    @IBOutlet weak var collectionView: UICollectionView?
     
-    @IBOutlet weak var viewButton: UIView!
-    @IBOutlet weak var buttonLast: UIButton!
-    @IBOutlet weak var buttonFavorite: UIButton!
+    @IBOutlet weak var viewButton: UIView?
+    @IBOutlet weak var buttonLast: UIButton?
+    @IBOutlet weak var buttonFavorite: UIButton?
+    
+    
+    @IBOutlet weak var leftBarButton: UIBarButtonItem!
     
     
     func settingButtonLast() {
-        buttonLast.backgroundColor = .vanillaWhiteContrast
-        buttonLast.setTitleColor(.black, for: .normal)
+        buttonLast?.backgroundColor = .vanillaWhiteContrast
+        buttonLast?.setTitleColor(.black, for: .normal)
         
-        buttonLast.layer.cornerRadius = 5
+        buttonLast?.layer.cornerRadius = 5
     }
     
     func settingButtonFavorite() {
-        buttonFavorite.setTitleColor(.lightGray, for: .normal)
-        buttonFavorite.backgroundColor = .clear
+        buttonFavorite?.setTitleColor(.lightGray, for: .normal)
+        buttonFavorite?.backgroundColor = .clear
         
-        buttonFavorite.layer.cornerRadius = 5
+        buttonFavorite?.layer.cornerRadius = 5
     }
     
     
     @IBAction func actionLast(_ sender: UIButton) {
-        buttonFavorite.backgroundColor = .clear
-        buttonFavorite.setTitleColor(.lightGray, for: .normal)
+        buttonFavorite?.backgroundColor = .clear
+        buttonFavorite?.setTitleColor(.lightGray, for: .normal)
         
-        buttonLast.backgroundColor = .vanillaWhiteContrast
-        buttonLast.setTitleColor(.black, for: .normal)
+        buttonLast?.backgroundColor = .vanillaWhiteContrast
+        buttonLast?.setTitleColor(.black, for: .normal)
         
         
         
     }
     
     @IBAction func actionFavorite(_ sender: UIButton) {
-        buttonLast.backgroundColor = .clear
-        buttonLast.setTitleColor(.lightGray, for: .normal)
+        buttonLast?.backgroundColor = .clear
+        buttonLast?.setTitleColor(.lightGray, for: .normal)
         
-        buttonFavorite.backgroundColor = .vanillaWhiteContrast
-        buttonFavorite.setTitleColor(.black, for: .normal)
+        buttonFavorite?.backgroundColor = .vanillaWhiteContrast
+        buttonFavorite?.setTitleColor(.black, for: .normal)
         
         
     }
@@ -67,29 +70,55 @@ class Files: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
-//        bounceScroll(scrollView: scrollView)
+        leftBarButton.image = linesImage
         
-        viewButton.backgroundColor = .vanillaWhite
-        settingButtonLast()
-        settingButtonFavorite()
-
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = .vanillaWhite
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
-       
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = .vanillaWhite
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 90)
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+            navigationBar?.shadowImage = UIImage()
+        navigationBar?.backgroundColor = UIColor.clear
     
         
-   
+        leftAction(.init())
+    }
+    
+    @IBAction func leftAction(_ sender: UIBarButtonItem) {
+        leftBarButton.target = revealViewController()
+        leftBarButton.action = #selector(revealViewController()?.revealSideMenu)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+        
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
+        
+        settingButtonLast()
+        settingButtonFavorite()
+        
+        viewButton?.backgroundColor = .vanillaWhite
+     
+
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        tableView?.backgroundColor = .vanillaWhite
+        tableView?.separatorStyle = .none
+        tableView?.showsVerticalScrollIndicator = false
+       
+        
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.backgroundColor = .vanillaWhite
+        collectionView?.showsVerticalScrollIndicator = false
+        collectionView?.showsHorizontalScrollIndicator = false
+        self.collectionView?.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 90)
     }
     
     

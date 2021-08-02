@@ -12,5 +12,9 @@ import Foundation
 class Token {
     static var accessToken = UserDefaults.standard.string(forKey: "accessToken")
     static var refreshToken = UserDefaults.standard.string(forKey: "refreshToken")
+    
+    
+    static var auth = UserDefaults.standard.bool(forKey: "auth")
+    
 }
 

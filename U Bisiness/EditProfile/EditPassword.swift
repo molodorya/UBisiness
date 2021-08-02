@@ -34,11 +34,16 @@ class EditPassword: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.isNavigationBarHidden = true
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+            navigationBar?.shadowImage = UIImage()
+        navigationBar?.backgroundColor = UIColor.clear
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
         
+    
+        navigationItem.backBarButtonItem?.tintColor = .black
         
         
         settingOldView()
@@ -46,8 +51,7 @@ class EditPassword: UIViewController {
         settingConfirmView()
         settingButton()
     }
-    
-    
+   
     
     @IBAction func actionButton(_ sender: UIButton) {
         print("actionButton")

@@ -8,93 +8,130 @@
 import UIKit
 
 
-//class EventPage: UIViewController {
-//    
-//    // nav bar items ???
-//    
-//    @IBOutlet weak var contentView: UIView!
-//    @IBOutlet weak var headerView: UIView!
-//    @IBOutlet weak var imageView: UIImageView!
-//    
-//    @IBOutlet weak var typeContent: UILabel!
-//    @IBOutlet weak var titleContent: UILabel!
-//    @IBOutlet weak var dateContent: UILabel!
-//    
-//    @IBOutlet weak var label: UILabel!
-//    
-//    @IBOutlet weak var button: UIButton!
-//    
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//       
-//        
-//        let linesImage = UIImage(systemName: "list.dash")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-//        let userImage = UIImage(systemName: "person")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-//        
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        navigationController?.navigationBar.shadowImage = nil
-//        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: linesImage, style: .plain, target: self, action: nil)
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: userImage, style: .plain, target: self, action: nil)
-//     
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        settingTypeContent()
-//        settingTitleContent()
-//        settingDateContent()
-//        settingLabel()
-//        settingButton()
-//    }
-//    
-//    
-//    
-//    @IBAction func buttonTouch(_ sender: UIButton) {
-//        print("нажал")
-//    }
-//    
-//
-//    
-//    func settingTypeContent() {
-//        typeContent.textColor = .white
-//        typeContent.textAlignment = .left
-//        typeContent.font = UIFont.systemFont(ofSize: 12)
-//    }
-//    
-//    func settingTitleContent() {
-//        titleContent.textColor = .white
-//        titleContent.textAlignment = .left
-//        titleContent.font = UIFont.boldSystemFont(ofSize: 18)
-//    }
-//    
-//    func settingDateContent() {
-//        dateContent.textColor = .lightGray
-//        dateContent.textAlignment = .left
-//        dateContent.font = UIFont.systemFont(ofSize: 12)
-//    }
-//    
-//    func settingLabel() {
-//        label.numberOfLines = 0
-//        label.text = TextBig.textUI
-//        label.backgroundColor = .clear
-//        label.textAlignment = .left
-//        label.setLineSpacing(lineSpacing: 0, lineHeightMultiple: 1.6)
-//    }
-//    
-//    func settingButton() {
-//        button.layer.cornerRadius = 5
-//    }
-//    
-//    
-//    
-//  
-//
-//
-//}
+class EventPage: UIViewController {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var typeContent: UILabel!
+    @IBOutlet weak var titleContent: UILabel!
+    @IBOutlet weak var dateContent: UILabel!
+    @IBOutlet weak var headerViewLabel: UIView!
+    @IBOutlet weak var userHeader: UIView!
+    @IBOutlet weak var stackViewLabel: UIStackView!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var viewProfileLabel: UIView!
+    @IBOutlet weak var button: UIButton!
+    
+    
+    @IBOutlet weak var back: UIBarButtonItem!
+    @IBOutlet weak var share: UIBarButtonItem!
+    
+   
+   
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
+        
+        headerView.backgroundColor = .vanillaWhite
+        label.backgroundColor = .vanillaWhite
+        headerViewLabel.backgroundColor = .vanillaWhite
+        userHeader.backgroundColor = .vanillaWhite
+        stackViewLabel.backgroundColor = .vanillaWhite
+        viewProfileLabel.backgroundColor = .vanillaWhite
+        
+        
+        
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+        navigationBar?.shadowImage = UIImage()
+        navigationBar?.backgroundColor = UIColor.clear
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        settingTypeContent()
+        settingTitleContent()
+        settingDateContent()
+        settingLabel()
+        settingButton()
+    }
+    
+    @IBAction func navBack(_ sender: UIBarButtonItem) {
+      dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func shareAction(_ sender: UIView) {
+        
+        let articleTitle = titleContent.text
+        let titleImage = imageView.image ?? #imageLiteral(resourceName: "logo")
+        
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let textToShare: String = "U-Bisiness: \(articleTitle ?? "Pages")"
+        
+        if let myWebsite = URL(string: "https://ubusiness-ithub.ru/") {//Enter link to your app here
+            let objectsToShare = [textToShare, myWebsite, image ?? titleImage] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            
+            //Excluded Activities
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            //
+            
+            activityVC.popoverPresentationController?.sourceView = sender
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func buttonTouch(_ sender: UIButton) {
+        print("нажал")
+    }
+    
+    
+    func settingTypeContent() {
+        typeContent.textColor = .white
+        typeContent.textAlignment = .left
+        typeContent.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    
+    func settingTitleContent() {
+        titleContent.textColor = .white
+        titleContent.textAlignment = .left
+        titleContent.font = UIFont.boldSystemFont(ofSize: 18)
+    }
+    
+    
+    func settingDateContent() {
+        dateContent.textColor = .lightGray
+        dateContent.textAlignment = .left
+        dateContent.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    
+    func settingLabel() {
+        label.numberOfLines = 0
+        label.text = TextBig.textUI
+        label.backgroundColor = .clear
+        label.textAlignment = .left
+        label.setLineSpacing(lineSpacing: 0, lineHeightMultiple: 1.6)
+    }
+    
+    
+    func settingButton() {
+        button.layer.cornerRadius = 5
+    }
+}
 
 
 

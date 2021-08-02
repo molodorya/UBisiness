@@ -7,4 +7,9 @@ target 'U Bisiness' do
 
 pod 'SideMenuSwift'
 
+platform :ios, '10.0'
+use_frameworks!
+
+pod 'SideMenu'
+
 end
