@@ -39,6 +39,7 @@
 		4E8AED6626889C87005523AF /* UserMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8AED6526889C87005523AF /* UserMenu.swift */; };
 		4E8CC010261C9439008F65A9 /* SingIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8CC00F261C9439008F65A9 /* SingIn.swift */; };
 		4E97F77526A03B6A00E8F211 /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E97F77426A03B6A00E8F211 /* Gallery.swift */; };
+		4EA5B21826B9761400E58432 /* testScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA5B21726B9761400E58432 /* testScroll.swift */; };
 		4EAC0947268491B2002FA47D /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC0946268491B2002FA47D /* Files.swift */; };
 		4EB272D8264499800002AD44 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB272D7264499800002AD44 /* Home.swift */; };
 		4EB724E6261F08450030F862 /* SingUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB724E5261F08450030F862 /* SingUp.swift */; };
@@ -97,6 +98,7 @@
 		4E8AED6526889C87005523AF /* UserMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenu.swift; sourceTree = "<group>"; };
 		4E8CC00F261C9439008F65A9 /* SingIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingIn.swift; sourceTree = "<group>"; };
 		4E97F77426A03B6A00E8F211 /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
+		4EA5B21726B9761400E58432 /* testScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testScroll.swift; sourceTree = "<group>"; };
 		4EAC0946268491B2002FA47D /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		4EB272D7264499800002AD44 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		4EB724E5261F08450030F862 /* SingUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUp.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				4EAC0946268491B2002FA47D /* Files.swift */,
+				4EA5B21726B9761400E58432 /* testScroll.swift */,
 			);
 			name = Files;
 			path = ..;
@@ -496,6 +499,7 @@
 				4E49881226AF5AE000FFB77E /* SideMenuCell.swift in Sources */,
 				4E825CDF267A72E000826AC3 /* ProfileMenu1.swift in Sources */,
 				4EEAD2F626A0A34400D43A8E /* SettingProfile.swift in Sources */,
+				4EA5B21826B9761400E58432 /* testScroll.swift in Sources */,
 				4E163D0D2617B4CE00F02B4C /* Welcome.swift in Sources */,
 				4E49880C26AF5A5D00FFB77E /* MainViewController.swift in Sources */,
 				4EBAAFCC269F205F003F9AF6 /* EditPassword.swift in Sources */,

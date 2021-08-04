@@ -31,6 +31,7 @@ class SettingOffer: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .vanillaWhite
       
         
         collectionView.delegate = self
@@ -80,10 +81,9 @@ extension SettingOffer: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOffer", for: indexPath)
-        cell.backgroundColor = .red
+        cell.backgroundColor = .gray
         cell.layer.cornerRadius = 5
 
-        
         return cell
     }
     
