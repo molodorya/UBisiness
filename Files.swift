@@ -91,6 +91,7 @@ class Files: UIViewController {
         navigationBar?.backgroundColor = UIColor.clear
         
         leftAction(.init())
+      
     }
     
     @IBAction func leftAction(_ sender: UIBarButtonItem) {
@@ -169,7 +170,7 @@ extension Files: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 20
     }
     
     
@@ -180,6 +181,7 @@ extension Files: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "filesTable", for: indexPath) as! FilesTable
+        
         cell.imageFiles.layer.cornerRadius = 5
         cell.contentImage.layer.cornerRadius = 5
         cell.backgroundColor = .vanillaWhite

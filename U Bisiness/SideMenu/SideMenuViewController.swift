@@ -37,6 +37,7 @@ class SideMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // TableView
         self.tableView.delegate = self
@@ -46,7 +47,7 @@ class SideMenuViewController: UIViewController {
 
         // Set Highlighted Cell
         DispatchQueue.main.async {
-            let defaultRow = IndexPath(row: self.defaultHighlightedCell, section: 0)
+            let defaultRow = IndexPath(row: self.defaultHighlightedCell, section: 1)
             self.tableView.selectRow(at: defaultRow, animated: false, scrollPosition: .none)
         }
     

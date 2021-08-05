@@ -80,8 +80,6 @@ class Home: UIViewController, UIViewControllerTransitioningDelegate {
     @IBAction func sideMenu(_ sender: UIBarButtonItem) {
         sideMenuOutlet.target = revealViewController()
         sideMenuOutlet.action = #selector(revealViewController()?.revealSideMenu)
-        
-        
     }
   
 

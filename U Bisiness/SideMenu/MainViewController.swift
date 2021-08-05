@@ -27,8 +27,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
-        
-       
 
         // Shadow Background View
         self.sideMenuShadowView = UIView(frame: self.view.bounds)
@@ -154,8 +152,6 @@ extension MainViewController: SideMenuViewControllerDelegate {
             self.showViewController(viewController: UINavigationController.self, storyboardId: "MoviesNavID")
         case 3:
             break
-            // Books
-//            self.showViewController(viewController: BooksViewController.self, storyboardId: "BooksVCID")
         case 4:
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navNews")
         case 5:
