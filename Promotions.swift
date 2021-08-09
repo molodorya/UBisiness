@@ -33,6 +33,8 @@ class Promotions: UITableViewController {
         settingTableView()
         settingSearchTextField()
         view.backgroundColor = UIColor.vanillaWhite
+        
+        fetchOffers()
     }
     
     @objc func didTapMenuButton() {
@@ -103,7 +105,9 @@ class Promotions: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Promotions.cellName, for: indexPath) as! PromotionsCell
         
-     
+        cell.titlePromotions.text = FetchOffersEnum.title
+      
+
         
         return cell
     }
@@ -115,6 +119,7 @@ class Promotions: UITableViewController {
        
         print("Нажата ячейка №\(indexPath.row)")
     }
+    
     
 
     
@@ -137,6 +142,76 @@ class PromotionsCell: UITableViewCell {
         imagePromotions.layer.cornerRadius = 30
         contentView.backgroundColor = UIColor.vanillaWhite
         
+    }
+}
+
+extension Promotions {
+    
+    struct FetchOffersStruct: Codable {
+        var id: Int?
+        var img, title, fetchOffersElementProtocol, timecreation: String?
+        var term, text: String?
+        var idcreator: Int?
+    }
+    
+    enum FetchOffersEnum {
+        static var id = 0
+        static var img = ""
+        static var title = ""
+        static var fetchOffersElementProtocol = ""
+        static var timecreation = ""
+        static var term = ""
+        static var text = ""
+        static var idcreator = ""
+    }
+    
+    func fetchOffers() {
+        let session = URLSession.shared
+        let url = URL(string: "https://ubusiness-ithub.ru/api/fetchOffers")!
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(Token.accessToken!)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            
+            if error != nil || data == nil {
+                print("Client error!")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("Server error!")
+                return
+            }
+            
+            guard let mime = response.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                return
+            }
+            
+            do {
+                let json = try JSONDecoder().decode([FetchOffersStruct].self, from: data!)
+                FetchOffersEnum.id = json[0].id ?? 0
+                FetchOffersEnum.img = json[0].img ?? "-"
+                FetchOffersEnum.title = json[0].title ?? "-"
+                FetchOffersEnum.fetchOffersElementProtocol = json[0].fetchOffersElementProtocol ?? "-"
+                FetchOffersEnum.timecreation = json[0].timecreation ?? "-"
+                FetchOffersEnum.text = json[0].text ?? "-"
+                FetchOffersEnum.id = json[0].idcreator ?? 0
+                
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            } catch {
+                print("JSON error: \(error.localizedDescription)")
+            }
+            
+        }
+        task.resume()
     }
 }
 

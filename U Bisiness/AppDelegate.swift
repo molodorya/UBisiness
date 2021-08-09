@@ -18,7 +18,7 @@ struct Login: Decodable {
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
-    static var nowNetworkConnection = false
+    static var nowNetworkConnection = true
     var window: UIWindow?
     
     
@@ -27,31 +27,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        /// Сделать ее умней проверять при запуске сначала
         
         
-    
+        print("Token \(Token.accessToken)")
         
-        
-//        Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { Timer in
-//            DispatchQueue.main.async {
-//                let url = URL(string: "https://www.google.com")!
-//                let request = URLRequest(url: url)
-//
-//                let task = URLSession.shared.dataTask(with: request) {data, response, error in
-//
-//                    if error != nil {
-//                        AppDelegate.nowNetworkConnection = false
-//                    }
-//                    else if let httpResponse = response as? HTTPURLResponse {
-//                        if httpResponse.statusCode == 200 {
-//                            AppDelegate.nowNetworkConnection = true
-//                        }
-//                    }
-//                }
-////                print("Internet connection: \(AppDelegate.nowNetworkConnection)")
-//                task.resume()
-//            }
-//        }
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { Timer in
+            DispatchQueue.main.async {
+                let url = URL(string: "https://www.google.com")!
+                let request = URLRequest(url: url)
+
+                let task = URLSession.shared.dataTask(with: request) {data, response, error in
+
+                    if error != nil {
+                        AppDelegate.nowNetworkConnection = false
+                    }
+                    else if let httpResponse = response as? HTTPURLResponse {
+                        if httpResponse.statusCode == 200 {
+                            AppDelegate.nowNetworkConnection = true
+                        }
+                    }
+                }
+                print("Internet connection: \(AppDelegate.nowNetworkConnection)")
+                task.resume()
+            }
+        }
         
         
         return true

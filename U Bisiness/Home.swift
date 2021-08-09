@@ -8,53 +8,37 @@
 import UIKit
 import Foundation
 
-class Home: UIViewController, UIViewControllerTransitioningDelegate {
+class Home: UIViewController {
 
-    private var sideMenuViewController: SideMenuViewController!
+   
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var sideMenuOutlet: UIBarButtonItem!
     
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    
     @IBOutlet weak var user: UIBarButtonItem!
     
     let statusAuth = UserDefaults.standard.bool(forKey: "auth")
-  
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        guard let viewControllers = navigationController?.viewControllers,
-        let index = viewControllers.firstIndex(of: self) else { return }
-        navigationController?.viewControllers.remove(at: index)
-        
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if UserDefaults.standard.string(forKey: "accessToken") == nil {
             let vc = storyboard?.instantiateViewController(identifier: "Welcome")
             vc?.modalPresentationStyle = .fullScreen
             self.present(vc!, animated: true, completion: nil)
         }
-        
-        
-        
-        
-        
-        
-        checkToken(url: "https://ubusiness-ithub.ru/api/fetchBusinessCard")
+ 
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
-        
-        
-        
-        view.backgroundColor = #colorLiteral(red: 1, green: 0.9058110118, blue: 0.8383547664, alpha: 1)
-
         
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .vanillaWhite
+        collectionView.showsHorizontalScrollIndicator = false
+      
         
         sideMenuOutlet.image = linesImage
         
@@ -64,7 +48,7 @@ class Home: UIViewController, UIViewControllerTransitioningDelegate {
             navigationBar?.shadowImage = UIImage()
         navigationBar?.backgroundColor = UIColor.clear
       
-       
+        pageControl.numberOfPages = 10
     
         
         sideMenu(.init())
@@ -86,10 +70,7 @@ class Home: UIViewController, UIViewControllerTransitioningDelegate {
     
     
     @IBAction func actionUser(_ sender: UIBarButtonItem) {
-//        let vc = storyboard!.instantiateViewController(withIdentifier: "navUser")
-        
-    
-        
+        print("user")
     }
     
   
@@ -102,8 +83,19 @@ class Home: UIViewController, UIViewControllerTransitioningDelegate {
     }
     
     
+    @IBAction func pageAction(_ sender: UIPageControl) {
+        self.collectionView.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    
+    
+    let numberOfCells = 9
+    let kCellHeight : CGFloat = 250
+    let kLineSpacing : CGFloat = 15
+    let kInset: CGFloat = 10
   
 }
+
+
 
 extension Home: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -111,16 +103,42 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate {
         return 10
     }
     
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "events", for: indexPath) as! collectionViewCell
-        
         cell.imageCollection.image = UIImage.init(named: "crimea")
-      
-        
         
         return cell
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        if let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint) {
+            self.pageControl.currentPage = visibleIndexPath.row
+        }
+    }
+    
+    
+    
+}
+
+extension Home: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 170, height: 250)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+   
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 90)
+    }
+    
+   
 }
 
 
@@ -172,6 +190,7 @@ extension Home {
         dataTask.resume()
     }
 }
+
    
 
 

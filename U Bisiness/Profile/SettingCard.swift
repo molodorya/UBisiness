@@ -28,48 +28,62 @@ class SettingCard: UIViewController {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var change: UIButton!
     
+    @IBOutlet weak var viewButtonsTop: UIView!
     @IBOutlet weak var details: UIButton!
     @IBOutlet weak var imageDetails: UIImageView!
     
+    @IBOutlet weak var viewButtonsBottom: UIView!
     @IBOutlet weak var turn: UIButton!
     @IBOutlet weak var imageTurn: UIImageView!
     
+    @IBOutlet weak var headerUserView: UIView!
     @IBOutlet weak var nameUser: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     
+    
+    @IBOutlet weak var userView: UIView!
+    @IBOutlet weak var userGroup: UILabel!
     @IBOutlet weak var statusTel: UIImageView!
     @IBOutlet weak var statusTelText: UILabel!
     
     
     
+    @IBOutlet weak var industryView: UIView!
     @IBOutlet weak var industryTitle: UILabel!
     @IBOutlet weak var industryText: UITextView!
     @IBOutlet weak var industryLines: UIView!
     
+    @IBOutlet weak var nameCompanyView: UIView!
     @IBOutlet weak var nameCompanyTitle: UILabel!
     @IBOutlet weak var nameCompanyText: UITextView!
     @IBOutlet weak var nameCompanyLines: UIView!
     
+    @IBOutlet weak var imageCompanyView: UIView!
     @IBOutlet weak var imageCompany: UIImageView!
     
+    @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var phoneTitle: UILabel!
     @IBOutlet weak var phoneText: UITextView!
     @IBOutlet weak var phoneLines: UIView!
     
+    @IBOutlet weak var contryView: UIView!
     @IBOutlet weak var countryTitle: UILabel!
     @IBOutlet weak var countryText: UITextView!
     @IBOutlet weak var countryLines: UIView!
     
+    @IBOutlet weak var streetView: UIView!
     @IBOutlet weak var streetTitle: UILabel!
     @IBOutlet weak var streetText: UITextView!
     @IBOutlet weak var streetLines: UIView!
     
     
+    @IBOutlet weak var tagView: UIView!
     @IBOutlet weak var tagTitle: UILabel!
     @IBOutlet weak var tagText: UITextView!
     @IBOutlet weak var tagLines: UIView!
     
-
+    
+    
     
     
     func headerPreset() {
@@ -87,6 +101,8 @@ class SettingCard: UIViewController {
         headerTextCabinet.adjustsFontSizeToFitWidth = true
         headerTextOffer.text = "мои спец.\nпредложения"
         headerButtonOffer.backgroundColor = .clear
+        
+        
     }
    
     
@@ -100,7 +116,10 @@ class SettingCard: UIViewController {
 
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         cardView.backgroundColor = .vanillaWhiteContrast
+        
         cardView.layer.cornerRadius = 5
+        cardView.clipsToBounds = true
+        
         
         userImage.layer.cornerRadius = 50
         
@@ -108,14 +127,27 @@ class SettingCard: UIViewController {
         change.layer.borderWidth = 2
         change.layer.borderColor = UIColor.black.cgColor
         
+        headerUserView.backgroundColor = .vanillaWhiteContrast
+        userView.backgroundColor = .vanillaWhiteContrast
+        viewButtonsTop.backgroundColor = .vanillaWhiteContrast
+        viewButtonsBottom.backgroundColor = .vanillaWhiteContrast
+        industryView.backgroundColor = .vanillaWhiteContrast
+        nameCompanyView.backgroundColor = .vanillaWhiteContrast
+        phoneView.backgroundColor = .vanillaWhiteContrast
+        imageCompanyView.backgroundColor = .vanillaWhiteContrast
+        contryView.backgroundColor = .vanillaWhiteContrast
+        streetView.backgroundColor = .vanillaWhiteContrast
+        tagView.backgroundColor = .vanillaWhiteContrast
+        
         addText()
         headerPreset()
+        startPreset()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.cardView.frame.size.height = 411
+//        self.cardView.frame.size.height = 411
 
         fetchBusinessCard()
     }
@@ -128,10 +160,15 @@ class SettingCard: UIViewController {
         streetText.text = "Малая ордынка. д 20"
         tagText.text = "#gazprom, #usdrub, #music, #cosmetics"
         
-        startPreset()
+        
     }
     
+    
+    
     func startPreset() {
+        
+        self.topConstraint.constant = 50
+        self.bottomConstraint.constant = 643
         
         details.isHidden = false
         imageDetails.isHidden = false
@@ -172,6 +209,9 @@ class SettingCard: UIViewController {
     }
     
     func offPreset() {
+        
+        self.topConstraint.constant = 50
+        self.bottomConstraint.constant = 50
         
         details.isHidden = true
         imageDetails.isHidden = true
@@ -224,6 +264,8 @@ class SettingCard: UIViewController {
         }
     }
     
+    
+    
     @IBAction func actionCabinet(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
         setSubView(vc!)
@@ -234,11 +276,20 @@ class SettingCard: UIViewController {
         setSubView(vc!)
     }
     
+    
+    // default 50
+    // change 643
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    // default 50
+    // change 643
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     @IBAction func buttonDetails(_ sender: UIButton) {
         
         UIView.animate(withDuration: 0.3) {
-            self.cardView.frame.size.height = 903
-//            self.cardViewBottomConstraint.constant = 542
+//            self.topConstraint.constant = 50
+//            self.bottomConstraint.constant = 50
         }
         offPreset()
     }
@@ -246,10 +297,43 @@ class SettingCard: UIViewController {
     @IBAction func buttonTurn(_ sender: UIButton) {
         
         UIView.animate(withDuration: 0.3) {
-            self.cardView.frame.size.height = 411
-//            self.cardViewBottomConstraint.constant = 50
+//            self.topConstraint.constant = 50
+//            self.bottomConstraint.constant = 643
         }
         startPreset()
+    }
+    
+    
+    
+    
+    var buttonSelectable = false
+    @IBAction func buttonChange(_ sender: UIButton) {
+        
+        if buttonSelectable == false {
+            offPreset()
+            
+            
+            change.setTitle("СОХРАНИТЬ", for: .normal)
+            change.backgroundColor = .black
+            change.setTitleColor(.white, for: .normal)
+//            change.isHidden = true
+            buttonSelectable = true
+            settingTextView(permission: true)
+            DispatchQueue.main.async {
+                    print("изменить данные (отправка на сервер)")
+            }
+        } else {
+            
+            change.setTitle("ИЗМЕНИТЬ", for: .normal)
+            change.backgroundColor = .clear
+            change.layer.borderWidth = 2
+            change.layer.borderColor = UIColor.black.cgColor
+            change.setTitleColor(.black, for: .normal)
+            buttonSelectable = false
+//            change.isHidden = clea
+            settingTextView(permission: false)
+        }
+        
     }
     
 }
@@ -317,7 +401,7 @@ extension SettingCard {
                         NetworkSettingCard.status = json[0].status ?? false
                         
                         DispatchQueue.main.async { [self] in
-                            
+                            nameUser.text = NetworkSettingCard.name
                             phoneText.text = NetworkSettingProfile.phoneNetwork
                             nameUser.text = NetworkSettingProfile.userNetwork
                             nameCompanyText.text = NetworkSettingCard.company
@@ -332,8 +416,8 @@ extension SettingCard {
                                 statusTel.isHidden = false
                                 statusTelText.isHidden = false
                             } else {
-                                statusTel.isHidden = true
-                                statusTelText.isHidden = true
+//                                statusTel.isHidden = true
+//                                statusTelText.isHidden = true
                             }
                     
                         }

@@ -49,8 +49,8 @@ public func offLinesScroll(scrollView: UIScrollView) {
 
 public func bounceScroll(scrollView: UIScrollView) {
     scrollView.alwaysBounceVertical = true
-    scrollView.showsHorizontalScrollIndicator = false
-    scrollView.showsVerticalScrollIndicator = false
+    scrollView.showsHorizontalScrollIndicator = true
+    scrollView.showsVerticalScrollIndicator = true
 }
 
 

@@ -33,6 +33,11 @@ class News: UITableViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.vanillaWhite
        
+  
+        
+        DispatchQueue.main.async {
+            self.fetchNewsList()
+        }
         
         settingHeaderView()
         settingTableView()
@@ -49,6 +54,8 @@ class News: UITableViewController {
         hideKeyboardWhenTappedScreen()
         
         actionMenu(.init())
+        
+        
         
     }
     
@@ -167,8 +174,6 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var titleNews: UILabel!
     @IBOutlet weak var promptNews: UILabel!
     
-    
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: true)
         
@@ -179,6 +184,97 @@ class NewsCell: UITableViewCell {
         contentView.backgroundColor = UIColor.vanillaWhite
         
     }
-    
-    
 }
+
+
+extension News {
+    
+    struct FetchNewsList: Codable {
+        var id: Int
+        var title: String
+        var date: String
+        var banner: String
+        var type: String
+    }
+    
+    enum NewsEmum {
+        static var id = 0
+        static var title = ""
+        static var date = ""
+        static var banner = ""
+        static var type = ""
+    }
+    
+    func fetchNewsList() {
+        let session = URLSession.shared
+        let url = URL(string: "https://ubusiness-ithub.ru/api/fetchnewslist")!
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(Token.accessToken!)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            
+            if error != nil || data == nil {
+                print("Client error!")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("Server error!")
+                return
+            }
+            
+            guard let mime = response.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                return
+            }
+            
+            do {
+                let json = try JSONDecoder().decode([FetchNewsList].self, from: data!)
+                
+                NewsEmum.id = json[0].id
+                NewsEmum.title = json[0].title
+                NewsEmum.date = json[0].date
+                NewsEmum.banner = json[0].banner
+                NewsEmum.type = json[0].type
+                
+                
+                
+                DispatchQueue.main.async {
+                    
+                    let cell = NewsCell()
+                    
+                    cell.titleNews.text = NewsEmum.title
+                    cell.promptNews.text = NewsEmum.type
+                        
+                        
+//                    let url = URL(string: "https://ubusiness-ithub.ru/api/fetchOffers")
+//                    if url != nil {
+//                        DispatchQueue.global().async {
+//                            let data = try? Data(contentsOf: url!) //убедитесь, что ваше изображение в этом URL-адресе действительно существует, в противном случае разверните его в if let check / try-catch
+//                            DispatchQueue.main.async {
+//                                if data != nil {
+//                                    cell.imageNews.image = UIImage(data:data!)
+//                                }else{
+//                                    cell.imageNews.image = UIImage(named: "default.png")
+//                                }
+//                            }
+//                        }
+//                    }
+                
+                    cell.dateNews.text = NewsEmum.date
+                    self.tableView.reloadData()
+                }
+                
+            } catch {
+                print("JSON error: \(error.localizedDescription)")
+            }
+            
+        }
+        task.resume()
+    }
+}
+
+

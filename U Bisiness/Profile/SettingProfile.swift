@@ -140,12 +140,13 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         
         
-        
+        // Может быть мелькает при переходах потому-что в viewDidAppear это засунул?
         UserDefaults.standard.setValue(NetworkSettingProfile.userNetwork, forKey: "userNetwok")
         UserDefaults.standard.setValue(NetworkSettingProfile.emailNetwork, forKey: "emailNetwork")
         UserDefaults.standard.setValue(NetworkSettingProfile.phoneNetwork, forKey: "phoneNetwork")
         UserDefaults.standard.setValue(NetworkSettingProfile.languageNetwork, forKey: "languageNetwork")
         
+
         nameText.text = UserDefaults.standard.string(forKey: "userNetwok")
         emailText.text = UserDefaults.standard.string(forKey: "emailNetwork")
         phoneText.text = UserDefaults.standard.string(forKey: "phoneNetwork")
@@ -166,7 +167,8 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func actionSetting(_ sender: UIBarButtonItem) {
-        
+//        let vc = storyboard!.instantiateViewController(withIdentifier: "settings") as! Settings
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -234,7 +236,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         settingSubscribe.layer.cornerRadius = 5
         settingSubscribe.layer.borderWidth = 2
         settingSubscribe.layer.borderColor = UIColor.black.cgColor
-        
         
         settingTextView(permission: false)
     }
@@ -349,14 +350,11 @@ enum NetworkSettingProfile {
 
 extension SettingProfile {
     
-    
-   
-    
     //MARK: - Network
     func httpGet() {
         let url = URL(string: "https://ubusiness-ithub.ru/api/fetchProfile")!
         var request = URLRequest(url: url)
-        request.addValue("Bearer \(Token.accessToken ?? "Error Token")", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Nywicm9sZSI6InVzZXIiLCJpYXQiOjE2MjgzNzMzMDksImV4cCI6MTYzMDk2NTMwOX0.CMt0-9cWpNGA9lWzTya4GUe3H6mDc8KphQZSd-xBkjg", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = "GET"
@@ -366,15 +364,17 @@ extension SettingProfile {
             guard let data = data else { return }
             let nsHTTPResponse = response as! HTTPURLResponse
             let statusCode = nsHTTPResponse.statusCode
-
+            print(statusCode)
+        
             do {
-            let json = try JSONDecoder().decode([Profile].self, from: data)
+                let json = try JSONDecoder().decode(Profile.self, from: data)
+                print(json)
                 if statusCode == 200 {
-                    NetworkSettingProfile.userNetwork = json[0].name ?? "—"
-                    NetworkSettingProfile.emailNetwork = json[0].email ?? "—"
-                    NetworkSettingProfile.phoneNetwork = json[0].tel ?? "—"
-                    NetworkSettingProfile.languageNetwork = json[0].lang ?? "—"
-                    NetworkSettingProfile.idUser = json[0].idUser ?? 0
+                    NetworkSettingProfile.userNetwork = json.name ?? "—"
+                    NetworkSettingProfile.emailNetwork = json.email ?? "—"
+                    NetworkSettingProfile.phoneNetwork = json.tel ?? "—"
+                    NetworkSettingProfile.languageNetwork = json.lang ?? "—"
+                    NetworkSettingProfile.idUser = json.idUser ?? 0
                     print("Добавить для аватара")
                     
                     DispatchQueue.main.async {
@@ -385,17 +385,9 @@ extension SettingProfile {
                     }
                 }
             } catch {
-                
-                let error = error as NSError
-                
-                
-                if error.code == -1009 {
-                    print("d")
-                } else {
-                    print("a")
-                }
-                
-               
+                print("errpor profile")
+                print(error
+                )
             }
             
         }.resume()
@@ -408,8 +400,7 @@ extension SettingProfile {
         let tel = phoneText.text ?? ""
         let lang = languageText.text ?? ""
         
-        
-        
+    
         let url = NSURL(string: "https://ubusiness-ithub.ru/api/editProfile")!
         
         let parameters: [String: Any] = [
