@@ -28,6 +28,14 @@ class OnBoardThree: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Invisible navigation bar
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+            navigationBar?.shadowImage = UIImage()
+        navigationBar?.backgroundColor = UIColor.clear
+        
+        // Set color buttom back in black
+        navigationItem.backBarButtonItem?.tintColor = .black
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)

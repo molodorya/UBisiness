@@ -56,6 +56,9 @@ class Welcome: UIViewController, CLLocationManagerDelegate {
             navigationBar?.shadowImage = UIImage()
         navigationBar?.backgroundColor = UIColor.clear
         
+        // Set color buttom back in black
+        navigationItem.backBarButtonItem?.tintColor = .black
+        
         // Add swipe delegate
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         

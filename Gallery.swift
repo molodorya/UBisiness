@@ -23,7 +23,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 
 
 
-            sectionHeader.headerLabel.text = "Библиотека"
+            sectionHeader.headerLabel.text = "Фотопленка"
             
             return sectionHeader
         }

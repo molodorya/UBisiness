@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("Token \(Token.accessToken)")
         
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { Timer in
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { Timer in
             DispatchQueue.main.async {
                 let url = URL(string: "https://www.google.com")!
                 let request = URLRequest(url: url)

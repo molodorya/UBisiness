@@ -58,18 +58,22 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageUser: UIImageView!
     
+    @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var nameText: UITextView!
     @IBOutlet weak var nameLines: UIView!
     
+    @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var emailText: UITextView!
     @IBOutlet weak var emailLine: UIView!
     
+    @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var phoneText: UITextView!
-    @IBOutlet weak var emailLines: UIView!
+    @IBOutlet weak var phoneLines: UIView!
     
+    @IBOutlet weak var languageView: UIView!
     @IBOutlet weak var language: UILabel!
     @IBOutlet weak var languageText: UITextView!
     @IBOutlet weak var languageLines: UIView!
@@ -120,6 +124,13 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
         
+        nameView.backgroundColor = .vanillaWhite
+        emailView.backgroundColor = .vanillaWhite
+        phoneView.backgroundColor = .vanillaWhite
+        languageView.backgroundColor = .vanillaWhite
+        
+        
+        
  
         settingMenu()
         settingSubscriptionView()
@@ -151,6 +162,10 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         emailText.text = UserDefaults.standard.string(forKey: "emailNetwork")
         phoneText.text = UserDefaults.standard.string(forKey: "phoneNetwork")
         languageText.text = UserDefaults.standard.string(forKey: "languageNetwork")
+        
+        
+
+   
 
      
     }
@@ -205,6 +220,26 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         
         
         subscriptionView.isHidden = true
+        titleLabel.isHidden = false
+        imageUser.isHidden = false
+        nameView.isHidden = false
+        name.isHidden = false
+        nameText.isHidden = false
+        nameLines.isHidden = false
+        emailView.isHidden = false
+        email.isHidden = false
+        emailText.isHidden = false
+        emailLine.isHidden = false
+        phoneView.isHidden = false
+        phone.isHidden = false
+        phoneText.isHidden = false
+        phoneLines.isHidden = false
+        languageView.isHidden = false
+        language.isHidden = false
+        languageText.isHidden = false
+        languageLines.isHidden = false
+        editMyCabinet.isHidden = false
+        settingSubscribe.isHidden = false
 
     }
     
@@ -288,6 +323,29 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func actionSettingSubscribe(_ sender: UIButton) {
         subscriptionView.isHidden = false
+        
+        cabinetView.isHidden = false
+        titleLabel.isHidden = true
+        imageUser.isHidden = true
+        nameView.isHidden = true
+        name.isHidden = true
+        nameText.isHidden = true
+        nameLines.isHidden = true
+        emailView.isHidden = true
+        email.isHidden = true
+        emailText.isHidden = true
+        emailLine.isHidden = true
+        phoneView.isHidden = true
+        phone.isHidden = true
+        phoneText.isHidden = true
+        phoneLines.isHidden = true
+        languageView.isHidden = true
+        language.isHidden = true
+        languageText.isHidden = true
+        languageLines.isHidden = true
+        editMyCabinet.isHidden = true
+        settingSubscribe.isHidden = true
+        
         print("setting Subscribe")
     }
     
@@ -299,8 +357,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     
    
     //MARK: - Подписка
-    
-    
     @IBAction func actionExtend(_ sender: UIButton) {
         print("actionExtend")
     }
@@ -320,20 +376,14 @@ extension SettingProfile {
     func settingSubscriptionView() {
         subscriptionView.backgroundColor = .vanillaWhite
         subscriptionHeader.backgroundColor = .vanillaWhiteContrast
-        
+
         extend.layer.cornerRadius = 5
-        
         change.backgroundColor = .clear
         change.layer.borderWidth = 2
         change.layer.borderColor = UIColor.black.cgColor
         change.layer.cornerRadius = 5
-        
         subscriptionView.isHidden = true
-        
-        
-        
     }
-    
 }
 
 

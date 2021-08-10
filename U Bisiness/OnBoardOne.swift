@@ -28,7 +28,16 @@ class OnBoardOne: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
+     
+        // Invisible navigation bar
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+            navigationBar?.shadowImage = UIImage()
+        navigationBar?.backgroundColor = UIColor.clear
+        
+        // Set color buttom back in black
+        navigationItem.backBarButtonItem?.tintColor = .black
+        
         view.backgroundColor = UIColor(red: 255/255, green: 249/255, blue: 244/255, alpha: 1.0)
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)

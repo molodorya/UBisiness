@@ -43,6 +43,7 @@
 		4EB724F3261F0D310030F862 /* IsWaiting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB724F2261F0D310030F862 /* IsWaiting.swift */; };
 		4EB9A1A3261C80B5000927B5 /* OnBoardTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB9A1A2261C80B5000927B5 /* OnBoardTwo.swift */; };
 		4EB9A1A6261C883C000927B5 /* OnBoardThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB9A1A5261C883C000927B5 /* OnBoardThree.swift */; };
+		4EBA6D5726C1D013003222F9 /* testWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA6D5626C1D013003222F9 /* testWelcome.swift */; };
 		4EBAAFCC269F205F003F9AF6 /* EditPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAAFCB269F205F003F9AF6 /* EditPassword.swift */; };
 		4EBAAFCE269F299C003F9AF6 /* ConfirmPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAAFCD269F299C003F9AF6 /* ConfirmPhone.swift */; };
 		4EBAAFD0269F2A5E003F9AF6 /* ConfirmCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAAFCF269F2A5E003F9AF6 /* ConfirmCode.swift */; };
@@ -100,6 +101,7 @@
 		4EB724F2261F0D310030F862 /* IsWaiting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsWaiting.swift; sourceTree = "<group>"; };
 		4EB9A1A2261C80B5000927B5 /* OnBoardTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardTwo.swift; sourceTree = "<group>"; };
 		4EB9A1A5261C883C000927B5 /* OnBoardThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardThree.swift; sourceTree = "<group>"; };
+		4EBA6D5626C1D013003222F9 /* testWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testWelcome.swift; sourceTree = "<group>"; };
 		4EBAAFCB269F205F003F9AF6 /* EditPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPassword.swift; sourceTree = "<group>"; };
 		4EBAAFCD269F299C003F9AF6 /* ConfirmPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPhone.swift; sourceTree = "<group>"; };
 		4EBAAFCF269F2A5E003F9AF6 /* ConfirmCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCode.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				4EEAD2F726A0A68A00D43A8E /* Profile */,
 				4EBAAFCA269F203C003F9AF6 /* EditProfile */,
 				4E163CFD2617B0C100F02B4C /* Main.storyboard */,
+				4EBA6D5626C1D013003222F9 /* testWelcome.swift */,
 				4E163D022617B0C500F02B4C /* LaunchScreen.storyboard */,
 				4E163D052617B0C500F02B4C /* Info.plist */,
 			);
@@ -474,6 +477,7 @@
 				4E55751126AAFD2E00BDDE56 /* TemporaryNavigation.swift in Sources */,
 				4EFEA13826AA46B3009CFD24 /* Language.swift in Sources */,
 				4EDFEE6A26BB497200831634 /* CardSearch.swift in Sources */,
+				4EBA6D5726C1D013003222F9 /* testWelcome.swift in Sources */,
 				4E53B2AD26C08AC90060F18B /* testViewController.swift in Sources */,
 				4EED2673267967A300F597DD /* PublucFunction.swift in Sources */,
 				4EB724E6261F08450030F862 /* SingUp.swift in Sources */,
