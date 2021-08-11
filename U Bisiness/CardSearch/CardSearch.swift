@@ -7,8 +7,22 @@
 
 import UIKit
 
-class CardSearch: UIViewController {
+class CardCell: UITableViewCell {
     
+    @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var company: UILabel!
+    @IBOutlet weak var specification: UILabel!
+    @IBOutlet weak var verification: UIImageView!
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        photo.layer.cornerRadius = 50
+    }
+}
+
+class CardSearch: UIViewController {
+  
  
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -28,8 +42,10 @@ class CardSearch: UIViewController {
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
             navigationBar?.shadowImage = UIImage()
         navigationBar?.backgroundColor = UIColor.clear
+//        fetchBusinessCards(url: "https://ubusiness-ithub.ru/api/fetchBusinessCards")
+        
+        
     }
-    
     
   
     @IBAction func menuAction(_ sender: UIBarButtonItem) {
@@ -58,9 +74,9 @@ class CardSearch: UIViewController {
             }
         }
     }
-    
-    
 }
+
+
 
 extension CardSearch: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,7 +84,7 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
     }
    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        return 20
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -80,35 +96,44 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
-    
+  
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell {
-            
-            cell.backgroundColor = .vanillaWhite
-            
-            cell.name.text = "Nikita Molodorya"
-            cell.company.text = "Rostelecom"
-            cell.specification.text = "Telecommunication"
-            
+          
             return cell
         }
         
         return UITableViewCell()
     }
+    
+    
 }
 
-class CardCell: UITableViewCell {
+
+
+extension CardSearch {
     
-    @IBOutlet weak var photo: UIImageView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var company: UILabel!
-    @IBOutlet weak var specification: UILabel!
-    @IBOutlet weak var verification: UIImageView!
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        photo.layer.cornerRadius = 50
+    func fetchBusinessCards(url: String) {
+        var request =  URLRequest.init(url: NSURL(string: url)! as URL)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(Token.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession.init(configuration: config)
+        
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+            if let data = data {
+                do {
+                  
+                    
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        task.resume()
     }
-    
 }

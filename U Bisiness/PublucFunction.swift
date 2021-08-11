@@ -7,6 +7,15 @@
 import UIKit
 import Foundation
 
+class Nav: UIViewController {
+    public func presetNavigationConroller(withIdentifier: String, modalPresentationStyle: UIModalPresentationStyle) {
+        let viewController = storyboard!.instantiateViewController(withIdentifier: withIdentifier)
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = modalPresentationStyle
+        present(navController, animated: true, completion: nil)
+    }
+}
+
 
 public let screenRect = UIScreen.main.bounds
 public let screenWidth = screenRect.size.width
@@ -52,6 +61,8 @@ public func bounceScroll(scrollView: UIScrollView) {
     scrollView.showsHorizontalScrollIndicator = true
     scrollView.showsVerticalScrollIndicator = true
 }
+
+
 
 
 // Валид e,mail

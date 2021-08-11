@@ -7,7 +7,7 @@
 
 import UIKit
 
-class testWelcome: UIViewController, UIScrollViewDelegate {
+class Welcome: UIViewController {
     
     // Views
     @IBOutlet weak var collectionView: UICollectionView!
@@ -18,6 +18,7 @@ class testWelcome: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var two: UIView!
     @IBOutlet weak var three: UIView!
     @IBOutlet weak var four: UIView!
+    @IBOutlet weak var five: UIView!
     
 
     
@@ -25,6 +26,9 @@ class testWelcome: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         // Color background
         view.backgroundColor = .vanillaWhite
+        
+        // Hidden navigation bar
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         // Color collectionView
         collectionView.backgroundColor = .vanillaWhite
@@ -40,6 +44,7 @@ class testWelcome: UIViewController, UIScrollViewDelegate {
         collectionView.showsHorizontalScrollIndicator = false
         settingProgressBar()
     }
+
     
     // Preset ProgressBar
     private func settingProgressBar() {
@@ -57,6 +62,9 @@ class testWelcome: UIViewController, UIScrollViewDelegate {
 
         four.rotate(radians: -165.83)
         four.layer.cornerRadius = 4
+        
+        five.rotate(radians: -165.83)
+        five.layer.cornerRadius = 4
     }
 }
 
@@ -170,11 +178,11 @@ class OnboardFour: UICollectionViewCell {
     }
 }
 
-extension testWelcome: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension Welcome: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // Amount cell
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 5
         
     }
     
@@ -219,8 +227,14 @@ extension testWelcome: UICollectionViewDelegate, UICollectionViewDataSource, UIC
             two.backgroundColor = .lightGray
             three.backgroundColor = .lightGray
             four.backgroundColor = .black
+        case 4:
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SingIn")
+            let navController = UINavigationController(rootViewController: viewController!)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true, completion: nil)
+            
         default:
-            break
+          break
         }
     }
     
@@ -234,21 +248,27 @@ extension testWelcome: UICollectionViewDelegate, UICollectionViewDataSource, UIC
             return cellOne
         } else if indexPath.item == 1 {
             let cellTwo = collectionView.dequeueReusableCell(withReuseIdentifier: "welcomeTwo", for: indexPath) as! OnboardTwo
-            
             return cellTwo
+            
         } else if indexPath.item == 2 {
             let cellThree = collectionView.dequeueReusableCell(withReuseIdentifier: "welcomeThree", for: indexPath) as! OnboardThree
-            
             return cellThree
+            
         } else if indexPath.item == 3 {
             let cellFour = collectionView.dequeueReusableCell(withReuseIdentifier: "welcomeFour", for: indexPath) as! OnboardFour
-            
             return cellFour
-        } else {
-            print("else block")
-            let cellOne = collectionView.dequeueReusableCell(withReuseIdentifier: "welcome", for: indexPath) as! OnboardOne
             
+        } else if indexPath.item == 4 {
+            let cellFive = collectionView.dequeueReusableCell(withReuseIdentifier: "welcomeFive", for: indexPath)
+            cellFive.backgroundColor = .white
+            return cellFive
+            
+        } else {
+            let cellOne = collectionView.dequeueReusableCell(withReuseIdentifier: "welcome", for: indexPath) as! OnboardOne
+            print("else block welcome")
             return cellOne
         }
     }
 }
+
+

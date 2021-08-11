@@ -33,7 +33,7 @@ class SideMenuViewController: UIViewController {
         SideMenuModel(icon: UIImage(named: "home")!, title: "ГЛАВНАЯ СТРАНИЦА"),
     ]
     
-    let colorTable = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
+    let colorTable = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.9)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +91,7 @@ extension SideMenuViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SideMenuCell.identifier, for: indexPath) as? SideMenuCell else { fatalError("xib doesn't exist") }
         cell.iconImageView.image = self.menu[indexPath.row].icon
         cell.titleLabel.text = self.menu[indexPath.row].title
+        cell.titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
 
         // Highlighted color
         let myCustomSelectionColorView = UIView()

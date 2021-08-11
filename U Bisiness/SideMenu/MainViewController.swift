@@ -27,6 +27,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
+        
+//        navigationController?.setNavigationBarHidden(true, animated: false)
 
         // Shadow Background View
         self.sideMenuShadowView = UIView(frame: self.view.bounds)
@@ -71,7 +73,7 @@ class MainViewController: UIViewController {
         view.addGestureRecognizer(panGestureRecognizer)
 
         // Default Main View Controller
-        showViewController(viewController: UINavigationController.self, storyboardId: "navigationHome")
+        showViewController(viewController: UINavigationController.self, storyboardId: "navHome")
         
     }
     
@@ -149,7 +151,7 @@ extension MainViewController: SideMenuViewControllerDelegate {
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navCard")
         case 2:
             // Movies
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "MoviesNavID")
+            self.showViewController(viewController: UINavigationController.self, storyboardId: "navCalendar")
         case 3:
             break
         case 4:
@@ -160,11 +162,14 @@ extension MainViewController: SideMenuViewControllerDelegate {
         case 6:
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navPhoto")
         case 7:
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "navPhoto")
+            self.showViewController(viewController: UINavigationController.self, storyboardId: "navAbout")
         case 8:
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "navPhoto")
+//            self.showViewController(viewController: UINavigationController.self, storyboardId: "navContact")
+            let vc = storyboard!.instantiateViewController(identifier: "navContact")
+            vc.modalPresentationStyle = .automatic
+            present(vc, animated: true, completion: nil)
         case 9:
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "navigationHome")
+            self.showViewController(viewController: UINavigationController.self, storyboardId: "navHome")
         default:
             break
         }
