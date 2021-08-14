@@ -29,6 +29,15 @@ class SettingOffer: UIViewController {
     @IBOutlet weak var headerButtonOffer: UIButton!
     
     
+    @IBOutlet weak var actual: UIButton!
+    @IBOutlet weak var overdue: UIButton!
+    
+    
+    @IBOutlet weak var add: UIButton!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,8 +45,13 @@ class SettingOffer: UIViewController {
         tableView.backgroundColor = .vanillaWhite
         headerView.backgroundColor = .vanillaWhite
         
+        add.layer.cornerRadius = 5
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        actual.backgroundColor = .vanillaWhiteContrast
+        overdue.backgroundColor = .clear
         
         // Cabinet
         headerTextCabinet.adjustsFontSizeToFitWidth = true
@@ -69,6 +83,30 @@ class SettingOffer: UIViewController {
         print("2")
     }
     
+    
+    @IBAction func actualAction(_ sender: UIButton) {
+        actual.backgroundColor = .vanillaWhiteContrast
+        actual.setTitleColor(.black, for: .normal)
+        
+        overdue.backgroundColor = .clear
+        overdue.setTitleColor(.lightGray, for: .normal)
+    }
+    
+    
+    @IBAction func overdueAction(_ sender: UIButton) {
+        overdue.backgroundColor = .vanillaWhiteContrast
+        actual.backgroundColor = .clear
+        
+        overdue.setTitleColor(.black, for: .normal)
+        actual.setTitleColor(.lightGray, for: .normal)
+        
+    }
+    
+    @IBAction func addClick(_ sender: UIButton) {
+        
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
@@ -97,7 +135,7 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20
+        return 4
     }
     
    
@@ -121,13 +159,13 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.backgroundColor = .red
+            cell.contentView.backgroundColor = .red.withAlphaComponent(0.8)
         case 1:
-            cell.backgroundColor = .purple
+            cell.contentView.backgroundColor = .purple.withAlphaComponent(0.8)
         case 2:
-            cell.backgroundColor = .cyan
+            cell.contentView.backgroundColor = .cyan.withAlphaComponent(0.8)
         case 3:
-            cell.backgroundColor = .orange
+            cell.contentView.backgroundColor = .orange.withAlphaComponent(0.8)
         default:
             break
         }

@@ -129,7 +129,10 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         phoneView.backgroundColor = .vanillaWhite
         languageView.backgroundColor = .vanillaWhite
         
-        
+        nameText.text = ProfileData.nameUser
+        emailText.text = ProfileData.emailUser
+        phoneText.text = ProfileData.phoneUser
+        languageText.text = ProfileData.languageUser
         
  
         settingMenu()
@@ -149,25 +152,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
-        
-        // Может быть мелькает при переходах потому-что в viewDidAppear это засунул?
-        UserDefaults.standard.setValue(NetworkSettingProfile.userNetwork, forKey: "userNetwok")
-        UserDefaults.standard.setValue(NetworkSettingProfile.emailNetwork, forKey: "emailNetwork")
-        UserDefaults.standard.setValue(NetworkSettingProfile.phoneNetwork, forKey: "phoneNetwork")
-        UserDefaults.standard.setValue(NetworkSettingProfile.languageNetwork, forKey: "languageNetwork")
-        
-
-        nameText.text = UserDefaults.standard.string(forKey: "userNetwok")
-        emailText.text = UserDefaults.standard.string(forKey: "emailNetwork")
-        phoneText.text = UserDefaults.standard.string(forKey: "phoneNetwork")
-        languageText.text = UserDefaults.standard.string(forKey: "languageNetwork")
-        
-        
-
-   
-
-     
     }
     
     
@@ -386,25 +370,13 @@ extension SettingProfile {
     }
 }
 
-
-
-
-enum NetworkSettingProfile {
-    static var userNetwork = ""
-    static var emailNetwork = ""
-    static var phoneNetwork = ""
-    static var languageNetwork = ""
-    static var idUser = 1
-}
-
-
 extension SettingProfile {
     
     //MARK: - Network
     func httpGet() {
         let url = URL(string: "https://ubusiness-ithub.ru/api/fetchProfile")!
         var request = URLRequest(url: url)
-        request.addValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Nywicm9sZSI6InVzZXIiLCJpYXQiOjE2MjgzNzMzMDksImV4cCI6MTYzMDk2NTMwOX0.CMt0-9cWpNGA9lWzTya4GUe3H6mDc8KphQZSd-xBkjg", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(Token.accessToken ?? "Error token ")", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = "GET"
@@ -420,18 +392,16 @@ extension SettingProfile {
                 let json = try JSONDecoder().decode(Profile.self, from: data)
                 print(json)
                 if statusCode == 200 {
-                    NetworkSettingProfile.userNetwork = json.name ?? "—"
-                    NetworkSettingProfile.emailNetwork = json.email ?? "—"
-                    NetworkSettingProfile.phoneNetwork = json.tel ?? "—"
-                    NetworkSettingProfile.languageNetwork = json.lang ?? "—"
-                    NetworkSettingProfile.idUser = json.idUser ?? 0
-                    print("Добавить для аватара")
-                    
                     DispatchQueue.main.async {
-                        nameText.text = NetworkSettingProfile.userNetwork
-                        emailText.text = NetworkSettingProfile.emailNetwork
-                        phoneText.text = NetworkSettingProfile.phoneNetwork
-                        languageText.text = NetworkSettingProfile.languageNetwork
+                        UserDefaults.standard.setValue(json.name ?? "-", forKey: "profileName")
+                        UserDefaults.standard.setValue(json.email ?? "-", forKey: "profileEmail")
+                        UserDefaults.standard.setValue(json.tel ?? "-", forKey: "profilePhone")
+                        UserDefaults.standard.setValue(json.lang ?? "-", forKey: "profileLanguage")
+                        
+                        nameText.text = ProfileData.nameUser
+                        emailText.text = ProfileData.emailUser
+                        phoneText.text = ProfileData.phoneUser
+                        languageText.text = ProfileData.languageUser
                     }
                 }
             } catch {

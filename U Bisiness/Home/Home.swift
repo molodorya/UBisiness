@@ -7,29 +7,36 @@
     
 import UIKit
 import Foundation
-extension UIColor{
+
+extension UIColor {
     class func homeColorNav() -> UIColor {
         return UIColor.init(red: 251/255, green: 229/255, blue: 212/255, alpha: 1)
     }
 }
+
 class Home: UIViewController {
 
-   // CollectionViews
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewNews: UICollectionView!
-    
-    
-    
-    
-    
+    @IBOutlet weak var collectionViewOffer: UICollectionView!
+
+    // Views
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var user: UIBarButtonItem!
     @IBOutlet weak var sideMenuOutlet: UIBarButtonItem!
+    
+    //Event
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var titleEvent: UILabel!
+    @IBOutlet weak var dateEvent: UILabel!
+    
+    //News
+    @IBOutlet weak var collectionViewNews: UICollectionView!
+    
+    
+    // Content
     @IBOutlet weak var textEvent: UILabel!
     @IBOutlet weak var buttonEvent: UIButton!
-    
-    
+    @IBOutlet weak var textOffer: UILabel!
     
     @IBOutlet weak var one: UIView!
     @IBOutlet weak var two: UIView!
@@ -37,30 +44,57 @@ class Home: UIViewController {
     @IBOutlet weak var four: UIView!
     @IBOutlet weak var five: UIView!
     
-   
     @IBOutlet weak var oneNews: UIView!
     @IBOutlet weak var twoNews: UIView!
     @IBOutlet weak var threeNews: UIView!
     @IBOutlet weak var fourNews: UIView!
     @IBOutlet weak var fiveNews: UIView!
     
+    @IBOutlet weak var oneOffer: UIView!
+    @IBOutlet weak var twoOffer: UIView!
+    @IBOutlet weak var threeOffer: UIView!
+    @IBOutlet weak var fourOffer: UIView!
+    @IBOutlet weak var fiveOffer: UIView!
+    
     let colorHomeNav = UIColor.init(red: 251/255, green: 229/255, blue: 212/255, alpha: 1)
     let statusAuth = UserDefaults.standard.bool(forKey: "auth")
     
+    static var event: [EventType]?
+    static var news: [NewsStruct]?
+   
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//           super.viewWillAppear(animated)
+//           self.revealViewController()?.gestureEnabled = false
+//       }
+//
+//       override func viewWillDisappear(_ animated: Bool) {
+//           super.viewWillDisappear(animated)
+//           self.revealViewController()?.gestureEnabled = true
+//       }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        eventFetch(url: "https://ubusiness-ithub.ru/api/fetchevents")
+        newsFetch(url: "https://ubusiness-ithub.ru/api/fetchnewslist")
+        
         if UserDefaults.standard.string(forKey: "accessToken") == nil {
             let vc = storyboard?.instantiateViewController(identifier: "Welcome")
             vc?.modalPresentationStyle = .fullScreen
             self.present(vc!, animated: true, completion: nil)
         }
         
+        colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
+        scrollView.backgroundColor = colorHomeNav
+        scrollView.bounces = true
+        scrollView.showsVerticalScrollIndicator = false
+        
+        dateEvent.textColor = UIColor.init(red: 255/255, green: 152/255, blue: 155/255, alpha: 1)
+        
         collectionView.tag = 1
         collectionViewNews.tag = 2
- 
-        colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
-        
-        scrollView.backgroundColor = colorHomeNav
+        collectionViewOffer.tag = 3
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -71,55 +105,40 @@ class Home: UIViewController {
         collectionViewNews.dataSource = self
         collectionViewNews.backgroundColor = .vanillaWhite
         collectionViewNews.showsHorizontalScrollIndicator = false
-      
         
+        collectionViewOffer.delegate = self
+        collectionViewOffer.dataSource = self
+        collectionViewOffer.backgroundColor = .vanillaWhite
+        collectionViewOffer.showsHorizontalScrollIndicator = false
+        collectionViewOffer.backgroundColor = .vanillaWhite
         sideMenuOutlet.image = linesImage
-        
-       
-        
         navigationController?.navigationBar.barTintColor = colorHomeNav
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.shadowImage = UIImage()
         
         sideMenu(.init())
-        
         buttonEvent.layer.cornerRadius = 5
         buttonEvent.backgroundColor = .clear
         buttonEvent.layer.borderWidth = 2
         buttonEvent.layer.borderColor = UIColor.black.cgColor
         
         settingProgressBar()
-     
+
     }
     
-    let testVC = MainViewController()
-    
-    
-  
     @IBAction func sideMenu(_ sender: UIBarButtonItem) {
         sideMenuOutlet.target = revealViewController()
         sideMenuOutlet.action = #selector(revealViewController()?.revealSideMenu)
     }
   
-
-    
-    
     @IBAction func actionUser(_ sender: UIBarButtonItem) {
         print("user")
     }
-    
-  
-    
     
     @IBAction func actionEvent(_ sender: UIButton) {
         let vc = storyboard!.instantiateViewController(withIdentifier: "navEvent")
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func pageAction(_ sender: UIPageControl) {
-        self.collectionView.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .centeredHorizontally, animated: true)
     }
     
     // Preset ProgressBar
@@ -142,6 +161,7 @@ class Home: UIViewController {
         five.rotate(radians: -165.83)
         five.layer.cornerRadius = 4
         
+        // News page
         oneNews.backgroundColor = .black
         oneNews.layer.cornerRadius = 4
         
@@ -159,6 +179,25 @@ class Home: UIViewController {
         
         fiveNews.rotate(radians: -165.83)
         fiveNews.layer.cornerRadius = 4
+        
+        // Offer page
+        oneOffer.backgroundColor = .black
+        oneOffer.layer.cornerRadius = 4
+        
+        oneOffer.rotate(radians: -165.83)
+        oneOffer.clipsToBounds = true
+
+        twoOffer.rotate(radians: -165.83)
+        twoOffer.layer.cornerRadius = 4
+
+        threeOffer.rotate(radians: -165.83)
+        threeOffer.layer.cornerRadius = 4
+
+        fourOffer.rotate(radians: -165.83)
+        fourOffer.layer.cornerRadius = 4
+        
+        fiveOffer.rotate(radians: -165.83)
+        fiveOffer.layer.cornerRadius = 4
     }
     
     
@@ -182,16 +221,66 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             return 10
         }
     }
+    // правильная логика
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+        
+        }
+    
+    // неправильная логика
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+
+        if collectionViewNews.tag == 2 {
+            print("nees")
+            return true
+        } else {
+            return false
+        }
+       
+       
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCell
-            cell.imageCollection.image = UIImage.init(named: "crimea")
+            
+            if let title = Home.event?[indexPath.section] {
+                titleEvent.text = title[indexPath.section].title
+            }
+            
+            if let date = Home.event?[indexPath.section] {
+                dateEvent.text = date[indexPath.section].date
+            }
+          
+//            cell.imageCollection.image = UIImage.init(named: "crimea")
             return cell
             
         } else if collectionView.tag == 2 {
-            let newsCell = collectionViewNews.dequeueReusableCell(withReuseIdentifier: "newsCell", for: indexPath)
+            let newsCell = collectionViewNews.dequeueReusableCell(withReuseIdentifier: "newsCell", for: indexPath) as! CellNews
+            
+            if let title = Home.news?[indexPath.row] {
+                newsCell.title.text = title.title
+            }
+            
+            if let date = Home.news?[indexPath.row] {
+                newsCell.date.text = date.date
+            }
+            
+            if let banner = Home.news?[indexPath.row] {
+                
+            }
+            
+            if let id = Home.news?[indexPath.row] {
+                print("newsId \(id.id)")
+            }
+        
+            
             return newsCell
+            
+        } else if collectionViewOffer.tag == 3 {
+            let offerCell = collectionViewOffer.dequeueReusableCell(withReuseIdentifier: "offerCell", for: indexPath) as! CellOffer
+            offerCell.layer.cornerRadius = 5
+            return offerCell
             
         } else {
             return UICollectionViewCell()
@@ -282,22 +371,60 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             default:
               break
             }
-
         }
-
         
+        if collectionViewOffer.tag == 3 {
+            let witdh = collectionViewOffer.frame.width - (collectionViewOffer.contentInset.left * 2)
+            let index = collectionViewOffer.contentOffset.x / witdh * 3.2
+            let nowRoundedIndex = Int(round(index))
+            switch nowRoundedIndex {
+            case 0:
+                oneOffer.backgroundColor = .black
+                twoOffer.backgroundColor = .lightGray
+                threeOffer.backgroundColor = .lightGray
+                fourOffer.backgroundColor = .lightGray
+                fiveOffer.backgroundColor = .lightGray
+            case 1:
+                oneOffer.backgroundColor = .lightGray
+                twoOffer.backgroundColor = .black
+                threeOffer.backgroundColor = .lightGray
+                fourOffer.backgroundColor = .lightGray
+                fiveOffer.backgroundColor = .lightGray
+            case 2:
+                oneOffer.backgroundColor = .lightGray
+                twoOffer.backgroundColor = .lightGray
+                threeOffer.backgroundColor = .black
+                fourOffer.backgroundColor = .lightGray
+                fiveOffer.backgroundColor = .lightGray
+            case 3:
+                oneOffer.backgroundColor = .lightGray
+                twoOffer.backgroundColor = .lightGray
+                threeOffer.backgroundColor = .lightGray
+                fourOffer.backgroundColor = .black
+                fiveOffer.backgroundColor = .lightGray
+            case 4:
+                oneOffer.backgroundColor = .lightGray
+                twoOffer.backgroundColor = .lightGray
+                threeOffer.backgroundColor = .lightGray
+                fourOffer.backgroundColor = .lightGray
+                fiveOffer.backgroundColor = .black
+            default:
+              break
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView.tag == 1 {
-        } else if collectionView.tag == 2 {
+            return CGSize(width: 170, height: 250)
+        } else if collectionViewNews.tag == 2 {
             return CGSize(width: 170, height: 300)
+        } else if collectionViewOffer.tag == 3 {
+            return CGSize(width: 368, height: 200)
         } else {
-            
+            return CGSize()
         }
-        
-        return CGSize(width: 0, height: 0)
     }
     
 

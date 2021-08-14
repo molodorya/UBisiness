@@ -110,7 +110,29 @@ class SettingCard: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
+
+        fetchBusinessCard()
+        
+        // удалить
+        nameUser.text = ProfileData.nameUser
+//
+        if ProfileData.cardStatus == true {
+            statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.green)
+
+            statusTel.isHidden = false
+            statusTelText.isHidden = false
+        } else {
+            statusTel.isHidden = true
+            statusTelText.isHidden = true
+        }
+
+        nameCompanyText.text = ProfileData.cardNameCompany
+        phoneText.text = ProfileData.phoneUser
+        countryText.text = ProfileData.cardCountry
+        streetText.text = ProfileData.cardCompanyAddress
+        tagText.text = ProfileData.cardTags
+        
         nameUser.textAlignment = .left
         nameUser.adjustsFontSizeToFitWidth = true
 
@@ -139,30 +161,26 @@ class SettingCard: UIViewController {
         streetView.backgroundColor = .vanillaWhiteContrast
         tagView.backgroundColor = .vanillaWhiteContrast
         
-        addText()
+        
+       
+        
+//        addText()
         headerPreset()
         startPreset()
+        
+        
+       
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        self.cardView.frame.size.height = 411
+        industryText.text = ProfileData.cardIndustry
+        
+    }
+    
 
-        fetchBusinessCard()
-    }
-    
-    func addText() {
-        industryText.text = "Энергетика"
-        nameCompanyText.text = "Газпром"
-        phoneText.text = "+ 7 (926) 753-66-95"
-        countryText.text = "Россия"
-        streetText.text = "Малая ордынка. д 20"
-        tagText.text = "#gazprom, #usdrub, #music, #cosmetics"
-        
-        
-    }
-    
     
     
     func startPreset() {
@@ -311,26 +329,24 @@ class SettingCard: UIViewController {
         
         if buttonSelectable == false {
             offPreset()
-            
-            
             change.setTitle("СОХРАНИТЬ", for: .normal)
             change.backgroundColor = .black
             change.setTitleColor(.white, for: .normal)
 //            change.isHidden = true
             buttonSelectable = true
             settingTextView(permission: true)
-            DispatchQueue.main.async {
-                    print("изменить данные (отправка на сервер)")
-            }
+          print("a")
         } else {
-            
+            changeCard(url: "https://ubusiness-ithub.ru/api/editBusinessCard")
             change.setTitle("ИЗМЕНИТЬ", for: .normal)
             change.backgroundColor = .clear
             change.layer.borderWidth = 2
             change.layer.borderColor = UIColor.black.cgColor
             change.setTitleColor(.black, for: .normal)
             buttonSelectable = false
-//            change.isHidden = clea
+           
+            UserDefaults.standard.setValue(industryText.text, forKey: "cardIndustry")
+
             settingTextView(permission: false)
         }
         
@@ -343,27 +359,11 @@ class SettingCard: UIViewController {
 
 extension SettingCard {
     
-    
-    
-    
     struct FetchBusinessCardElement: Decodable {
         var name: String?
         var status: Bool?
         var avatarurl, company, urllogo, country: String?
         var address, tags: String?
-    }
-    
-    
-    enum NetworkSettingCard {
-        static var name = ""
-        static var industry = ""
-        static var avatar = ""
-        static var company = ""
-        static var logo = ""
-        static var country = ""
-        static var address = ""
-        static var tags = ""
-        static var status = false
     }
     
     func fetchBusinessCard() {
@@ -389,55 +389,130 @@ extension SettingCard {
      
                     let json = try JSONDecoder().decode([FetchBusinessCardElement].self, from: data)
                     
+                    let jsonData = json[0]
+                    
+
+                    
                     if statusCode == 200 {
                         
-                        NetworkSettingCard.name = json[0].name ?? "—"
-                        NetworkSettingCard.avatar = json[0].avatarurl ?? "—"
-                        NetworkSettingCard.company = json[0].company ?? "—"
-                        NetworkSettingCard.logo = json[0].urllogo ?? "—"
-                        NetworkSettingCard.country = json[0].country ?? "—"
-                        NetworkSettingCard.address = json[0].address ?? "—"
-                        NetworkSettingCard.tags = json[0].tags ?? "—"
-                        NetworkSettingCard.status = json[0].status ?? false
-                        
-                        DispatchQueue.main.async { [self] in
-                            nameUser.text = NetworkSettingCard.name
-                            phoneText.text = NetworkSettingProfile.phoneNetwork
-                            nameUser.text = NetworkSettingProfile.userNetwork
-                            nameCompanyText.text = NetworkSettingCard.company
-                            phoneText.text = NetworkSettingProfile.phoneNetwork
-                            countryText.text = NetworkSettingCard.country
-                            streetText.text = NetworkSettingCard.address
-                            tagText.text = NetworkSettingCard.tags
+                        DispatchQueue.main.async {
                             
-                            if NetworkSettingCard.status == true {
-                                statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.green)
-                                
-                                statusTel.isHidden = false
-                                statusTelText.isHidden = false
-                            } else {
+                            UserDefaults.standard.setValue(jsonData.status, forKey: "cardStatus")
+                            UserDefaults.standard.setValue(jsonData.company, forKey: "cardNameCompany")
+                            UserDefaults.standard.setValue(jsonData.country, forKey: "cardCountry")
+                            UserDefaults.standard.setValue(jsonData.address, forKey: "cardCompanyAddress")
+                            UserDefaults.standard.setValue(jsonData.tags, forKey: "cardTags")
+//
+//                            nameUser.text = ProfileData.nameUser
+////
+//                            if ProfileData.cardStatus == true {
+//                                statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.green)
+//
+//                                statusTel.isHidden = false
+//                                statusTelText.isHidden = false
+//                            } else {
 //                                statusTel.isHidden = true
 //                                statusTelText.isHidden = true
-                            }
-                    
+//                            }
+//
+//                            nameCompanyText.text = ProfileData.cardNameCompany
+//                            phoneText.text = ProfileData.phoneUser
+//                            countryText.text = ProfileData.cardCountry
+//                            streetText.text = ProfileData.cardCompanyAddress
+//                            tagText.text = ProfileData.cardTags
+//
+                         
                         }
-                        
                     } else if statusCode != 200 {
                         print(statusCode)
                     }
                     
-                    
-                    
-                    
-                    
-                  
-                    
                 } catch _ {
                     print ("Неправильный ответ в формате JSON")
-                   
                 }
             }
         })
         dataTask.resume()
     }
+    
+    
+    
+    
+    struct SuccesChange: Decodable {
+        let ru: String?
+        let en: String?
+        let de: String?
+    }
+    
+    func changeCard(url: String) {
+        let url = NSURL(string: url)!
+        
+        let industry = industryText.text ?? "-"
+        let company = nameCompanyText.text ?? "-"
+        let phone = phoneText.text ?? "-"
+        let country = countryText.text ?? "-"
+        let street = streetText.text ?? "-"
+        let tags = tagText.text ?? "-"
+        
+        
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(Token.accessToken ?? "Error Token")", forHTTPHeaderField: "Authorization")
+        request.addValue("Accept", forHTTPHeaderField: "application/json")
+        request.addValue("Content-Type", forHTTPHeaderField: "application/json")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let parameters :[String: Any]? = ["name": company,
+                                          "country": country,
+                                          "address": street,
+                                          "industry": industry,
+                                          "tags": tags,
+                                          "idUser": 7]
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters!, options: JSONSerialization.WritingOptions())
+            let task = session.dataTask(with: request as URLRequest as URLRequest, completionHandler: {(data, response, error) in
+                let nsHTTPResponse = response as? HTTPURLResponse
+                let statusCode = nsHTTPResponse?.statusCode
+                if response != nil {
+                    print ("status code = \(statusCode ?? 0)")
+                }
+                if let error = error {
+                    print (" \(error)")
+                }
+                if let data = data {
+                    do {
+                        let json = try JSONDecoder().decode(SuccesChange.self, from: data)
+                        print(json)
+                        DispatchQueue.main.async {
+                            if statusCode == 200 {
+                                UserDefaults.standard.setValue(industry, forKey: "cardIndustry")
+                                UserDefaults.standard.setValue(company, forKey: "cardNameCompany")
+                                UserDefaults.standard.setValue(country, forKey: "cardCountry")
+                                UserDefaults.standard.setValue(street, forKey: "cardCompanyAddress")
+                                UserDefaults.standard.setValue(tags, forKey: "cardTags")
+                                
+                                
+                            } else if statusCode == 401 {
+                                
+                                DispatchQueue.main.async {
+                                    let alert = UIAlertController(title: "Пользователь не найден", message: "E-Mail или пароль введены не корректно", preferredStyle: UIAlertController.Style.alert)
+                                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                                    self.present(alert, animated: true, completion: nil)
+                                    vibrationFunc(tapping: .heavy)
+                                }
+                            }
+                        }
+                    } catch _ {
+                        print ("Неправильный ответ в формате JSON")
+                    }
+                }
+            })
+            task.resume()
+        } catch _ {
+            print ("Незадокументированная ошибка")
+        }
+    }
+    
 }
+

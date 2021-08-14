@@ -151,9 +151,9 @@ extension MainViewController: SideMenuViewControllerDelegate {
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navCard")
         case 2:
             // Movies
-            self.showViewController(viewController: UINavigationController.self, storyboardId: "navCalendar")
+            self.showViewController(viewController: UINavigationController.self, storyboardId: "navigationEvents")
         case 3:
-            break
+            self.showViewController(viewController: UINavigationController.self, storyboardId: "navOffer")
         case 4:
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navNews")
         case 5:

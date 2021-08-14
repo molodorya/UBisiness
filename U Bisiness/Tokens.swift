@@ -15,6 +15,7 @@ class Token {
     
     
     static var auth = UserDefaults.standard.bool(forKey: "auth")
+    static var idUser = UserDefaults.standard.integer(forKey: "idUser")
     
 }
 

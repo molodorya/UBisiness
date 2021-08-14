@@ -13,6 +13,11 @@ class FilterController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    @IBOutlet weak var clear: UIButton!
+    @IBOutlet weak var confirm: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +28,12 @@ class FilterController: UIViewController {
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
         navigationBar?.shadowImage = UIImage()
         navigationBar?.backgroundColor = UIColor.clear
+        
+        clear.layer.borderWidth = 2
+        clear.layer.borderColor = UIColor.black.cgColor
+        clear.layer.cornerRadius = 5
+        
+        confirm.layer.cornerRadius = 5
         
         tableView.backgroundColor = .vanillaWhite
         

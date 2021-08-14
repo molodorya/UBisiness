@@ -4,49 +4,33 @@
 //
 //  Created by Nikita Molodorya on 14.06.2021.
 //
-
-
-//MARK: - Storyboard
 import UIKit
 
 class News: UITableViewController {
     
-
-    
     static let cellName = "newsCell"
     
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var buttonTitleImage: UIButton!
-    
-    
     @IBOutlet weak var titleButton: UILabel!
-    @IBOutlet weak var promptButton: UILabel!
-    
-
     @IBOutlet weak var menu: UIBarButtonItem!
-    @IBOutlet weak var filter: UIBarButtonItem!
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.vanillaWhite
-       
-  
-        
-        DispatchQueue.main.async {
-            self.fetchNewsList()
-        }
-        
+        searchView.backgroundColor = .vanillaWhite
+        searchTextField.backgroundColor = .vanillaWhite
+//        searchTextField.layer.cornerRadius = 5
         settingHeaderView()
         settingTableView()
         settingButtonTitleImage()
         settingSearchTextField()
         
         settingTitleButton()
-        settingPromptButton()
-        
+                
         
         
         title = "новости"
@@ -54,8 +38,6 @@ class News: UITableViewController {
         hideKeyboardWhenTappedScreen()
         
         actionMenu(.init())
-        
-        
         
     }
     
@@ -109,7 +91,7 @@ class News: UITableViewController {
         buttonTitleImage.clipsToBounds = true
         buttonTitleImage.contentMode = .scaleAspectFill
         // Use setBackgroundImage or setImage
-        buttonTitleImage.setBackgroundImage(UIImage(named: "crimea"), for: .normal)
+//        buttonTitleImage.setBackgroundImage(UIImage(named: "crimea"), for: .normal)
         
         buttonTitleImage.addTarget(self, action: #selector(btnTitleImage), for: .touchDown)
     }
@@ -123,10 +105,7 @@ class News: UITableViewController {
   
     }
     
-    func settingPromptButton() {
-        promptButton.textColor = .white
-        promptButton.text = "29 ФЕВРАЛЯ"
-    }
+   
     
     @objc func btnTitleImage() {
         
@@ -141,29 +120,51 @@ class News: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 10
+        return Home.news?.endIndex ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("indexPath: \(indexPath.section)")
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let id = Home.news?[indexPath.row] {
+            UserDefaults.standard.setValue(id.id ?? 0, forKey: "idNewsClick")
+        }
+        
+        
+        let vc = storyboard?.instantiateViewController(identifier: "NewsPage")
+        vc?.modalPresentationStyle = .fullScreen
+        present(vc!, animated: true, completion: nil)
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: News.cellName, for: indexPath) as! NewsCell
 
-      
+        
+        if let title = Home.news?[indexPath.row] {
+            cell.titleNews.text = title.title
+        }
+        
+        if let prompt = Home.news?[indexPath.row] {
+            cell.promptNews.text = prompt.type
+        }
+        
+        if let date = Home.news?[indexPath.row] {
+            
+       
+//            cell.dateNews.text = datec
+        }
+        
+        if let id = Home.news?[indexPath.row] {
+            print(id.id)
+        }
+    
 
         return cell
-    }
-    
-    //MARK: - Обработка касаний ячейки
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        vibrationFunc(tapping: .light)
-
-        print("Нажата ячейка №\(indexPath.row)")
     }
 }
 
@@ -185,96 +186,3 @@ class NewsCell: UITableViewCell {
         
     }
 }
-
-
-extension News {
-    
-    struct FetchNewsList: Codable {
-        var id: Int
-        var title: String
-        var date: String
-        var banner: String
-        var type: String
-    }
-    
-    enum NewsEmum {
-        static var id = 0
-        static var title = ""
-        static var date = ""
-        static var banner = ""
-        static var type = ""
-    }
-    
-    func fetchNewsList() {
-        let session = URLSession.shared
-        let url = URL(string: "https://ubusiness-ithub.ru/api/fetchnewslist")!
-        let request = NSMutableURLRequest(url: url as URL)
-        request.httpMethod = "GET"
-        request.addValue("Bearer \(Token.accessToken!)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            
-            if error != nil || data == nil {
-                print("Client error!")
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                print("Server error!")
-                return
-            }
-            
-            guard let mime = response.mimeType, mime == "application/json" else {
-                print("Wrong MIME type!")
-                return
-            }
-            
-            do {
-                let json = try JSONDecoder().decode([FetchNewsList].self, from: data!)
-                
-                NewsEmum.id = json[0].id
-                NewsEmum.title = json[0].title
-                NewsEmum.date = json[0].date
-                NewsEmum.banner = json[0].banner
-                NewsEmum.type = json[0].type
-                
-                
-                
-                DispatchQueue.main.async {
-                    
-                    let cell = NewsCell()
-                    
-                    cell.titleNews.text = NewsEmum.title
-                    cell.promptNews.text = NewsEmum.type
-                        
-                        
-//                    let url = URL(string: "https://ubusiness-ithub.ru/api/fetchOffers")
-//                    if url != nil {
-//                        DispatchQueue.global().async {
-//                            let data = try? Data(contentsOf: url!) //убедитесь, что ваше изображение в этом URL-адресе действительно существует, в противном случае разверните его в if let check / try-catch
-//                            DispatchQueue.main.async {
-//                                if data != nil {
-//                                    cell.imageNews.image = UIImage(data:data!)
-//                                }else{
-//                                    cell.imageNews.image = UIImage(named: "default.png")
-//                                }
-//                            }
-//                        }
-//                    }
-                
-                    cell.dateNews.text = NewsEmum.date
-                    self.tableView.reloadData()
-                }
-                
-            } catch {
-                print("JSON error: \(error.localizedDescription)")
-            }
-            
-        }
-        task.resume()
-    }
-}
-
-

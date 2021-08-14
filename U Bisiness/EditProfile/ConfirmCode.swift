@@ -31,23 +31,13 @@ class ConfirmCode: UIViewController {
         navigationBar?.backgroundColor = UIColor.clear
         
         navigationItem.backBarButtonItem?.tintColor = .black
-
-        settingCodeView()
-        settingButton()
+        button.layer.cornerRadius = 5
+        viewCode.backgroundColor = .vanillaWhite
+        textField.autocorrectionType = .no
     }
     
     @IBAction func actionButton(_ sender: UIButton) {
         print("actionButton")
     }
-    
-    
-    func settingCodeView() {
-        viewCode.backgroundColor = .vanillaWhite
-        textField.autocorrectionType = .no
-    }
-    
-    func settingButton() {
-        button.layer.cornerRadius = 5
-    }
-    
+ 
 }
