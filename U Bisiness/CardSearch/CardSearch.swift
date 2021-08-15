@@ -173,15 +173,17 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell {
             
-            cell.backgroundColor = .vanillaWhite
+           
             
-            switch indexPath.row {
+            switch indexPath.section {
             case 0...1:
                 cell.backgroundColor = .vanillaWhiteContrast
+            case 1...:
+                cell.backgroundColor = .vanillaWhite
             default:
                 break
             }
-            
+              
             
             if let avatar = cards?[indexPath.row] {
                 func downloadedFrom(link: String, imageView: UIImage) {

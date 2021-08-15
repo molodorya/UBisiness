@@ -149,6 +149,10 @@ class News: UITableViewController {
             cell.titleNews.text = title.title
         }
         
+        if let date = Home.news?[indexPath.row] {
+            cell.dateNews.text = date.date
+        }
+        
         if let prompt = Home.news?[indexPath.row] {
             cell.promptNews.text = prompt.type
         }

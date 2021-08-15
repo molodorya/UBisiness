@@ -98,28 +98,38 @@ class Promotions: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return Home.offers?.endIndex ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let id = Home.offers?[indexPath.row] {
+            UserDefaults.standard.setValue(id.id ?? 0, forKey: "idOfferClick")
+            
+            let vc = storyboard?.instantiateViewController(identifier: "OfferPage")
+            vc?.modalPresentationStyle = .fullScreen
+            present(vc!, animated: true, completion: nil)
+        }
+        
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Promotions.cellName, for: indexPath) as! PromotionsCell
         
+        if let title = Home.offers?[indexPath.row] {
+            cell.titlePromotions.text = title.title
+        }
         
+        if let date = Home.offers?[indexPath.row] {
+            cell.datePromotions.text = "ДО \(date.term ?? "")"
+        }
 
         return cell
-    }
-    
-    //MARK: - Обработка касаний ячейки
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        vibrationFunc(tapping: .light)
-       
-        print("Нажата ячейка №\(indexPath.row)")
     }
 }
 

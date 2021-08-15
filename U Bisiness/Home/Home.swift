@@ -59,32 +59,23 @@ class Home: UIViewController {
     let colorHomeNav = UIColor.init(red: 251/255, green: 229/255, blue: 212/255, alpha: 1)
     let statusAuth = UserDefaults.standard.bool(forKey: "auth")
     
-    static var event: [EventType]?
+    static var events: [EventStruct]?
     static var news: [NewsStruct]?
+    static var offers: [OfferStruct]?
    
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//           super.viewWillAppear(animated)
-//           self.revealViewController()?.gestureEnabled = false
-//       }
-//
-//       override func viewWillDisappear(_ animated: Bool) {
-//           super.viewWillDisappear(animated)
-//           self.revealViewController()?.gestureEnabled = true
-//       }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        eventFetch(url: "https://ubusiness-ithub.ru/api/fetchevents")
-        newsFetch(url: "https://ubusiness-ithub.ru/api/fetchnewslist")
-        
-        if UserDefaults.standard.string(forKey: "accessToken") == nil {
+        if (UserDefaults.standard.string(forKey: "Auth") != nil) == false {
             let vc = storyboard?.instantiateViewController(identifier: "Welcome")
             vc?.modalPresentationStyle = .fullScreen
             self.present(vc!, animated: true, completion: nil)
         }
         
+        eventFetch(url: "https://ubusiness-ithub.ru/api/fetchevents")
+        newsFetch(url: "https://ubusiness-ithub.ru/api/fetchnewslist")
+        offerFetch(url: "https://ubusiness-ithub.ru/api/fetchOffers")
+
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         scrollView.backgroundColor = colorHomeNav
         scrollView.bounces = true
@@ -123,6 +114,8 @@ class Home: UIViewController {
         buttonEvent.layer.borderColor = UIColor.black.cgColor
         
         settingProgressBar()
+        
+        print(Token.idUser)
 
     }
     
@@ -136,9 +129,8 @@ class Home: UIViewController {
     }
     
     @IBAction func actionEvent(_ sender: UIButton) {
-        let vc = storyboard!.instantiateViewController(withIdentifier: "navEvent")
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let viewController = storyboard!.instantiateViewController(withIdentifier: "navigationEvents")
+        present(viewController, animated: true, completion: nil)
     }
     
     // Preset ProgressBar
@@ -208,8 +200,6 @@ class Home: UIViewController {
   
 }
 
-
-
 extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -224,7 +214,7 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     // правильная логика
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
-        
+        print("fsf")
         }
     
     // неправильная логика
@@ -241,18 +231,15 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         if collectionView.tag == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCell
             
-            if let title = Home.event?[indexPath.section] {
-                titleEvent.text = title[indexPath.section].title
+            if let title = Home.events?[0] {
+                titleEvent.text = title.title
+                dateEvent.text = title.date
             }
-            
-            if let date = Home.event?[indexPath.section] {
-                dateEvent.text = date[indexPath.section].date
-            }
-          
-//            cell.imageCollection.image = UIImage.init(named: "crimea")
+ 
             return cell
             
         } else if collectionView.tag == 2 {
@@ -280,6 +267,12 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
         } else if collectionViewOffer.tag == 3 {
             let offerCell = collectionViewOffer.dequeueReusableCell(withReuseIdentifier: "offerCell", for: indexPath) as! CellOffer
             offerCell.layer.cornerRadius = 5
+            
+            if let title = Home.offers?[indexPath.row] {
+                offerCell.centerLabel.text = title.title
+            }
+            
+            
             return offerCell
             
         } else {

@@ -116,6 +116,12 @@ class SettingCard: UIViewController {
         
         // удалить
         nameUser.text = ProfileData.nameUser
+        phoneText.text = ProfileData.phoneUser
+        
+        
+        
+        
+        
 //
         if ProfileData.cardStatus == true {
             statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.green)
@@ -126,12 +132,6 @@ class SettingCard: UIViewController {
             statusTel.isHidden = true
             statusTelText.isHidden = true
         }
-
-        nameCompanyText.text = ProfileData.cardNameCompany
-        phoneText.text = ProfileData.phoneUser
-        countryText.text = ProfileData.cardCountry
-        streetText.text = ProfileData.cardCompanyAddress
-        tagText.text = ProfileData.cardTags
         
         nameUser.textAlignment = .left
         nameUser.adjustsFontSizeToFitWidth = true
@@ -162,7 +162,12 @@ class SettingCard: UIViewController {
         tagView.backgroundColor = .vanillaWhiteContrast
         
         
-       
+//        industryText.text = ProfileData.cardIndustry
+//        nameCompanyText.text = ProfileData.cardNameCompany
+//        phoneText.text = ProfileData.phoneUser
+//        countryText.text = ProfileData.cardCountry
+//        streetText.text = ProfileData.cardCompanyAddress
+//        tagText.text = ProfileData.cardTags
         
 //        addText()
         headerPreset()
@@ -176,8 +181,8 @@ class SettingCard: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        self.cardView.frame.size.height = 411
-        industryText.text = ProfileData.cardIndustry
         
+        print("ff")
     }
     
 
@@ -344,9 +349,9 @@ class SettingCard: UIViewController {
             change.layer.borderColor = UIColor.black.cgColor
             change.setTitleColor(.black, for: .normal)
             buttonSelectable = false
-           
-            UserDefaults.standard.setValue(industryText.text, forKey: "cardIndustry")
-
+        
+            
+            
             settingTextView(permission: false)
         }
         
@@ -402,25 +407,34 @@ extension SettingCard {
                             UserDefaults.standard.setValue(jsonData.country, forKey: "cardCountry")
                             UserDefaults.standard.setValue(jsonData.address, forKey: "cardCompanyAddress")
                             UserDefaults.standard.setValue(jsonData.tags, forKey: "cardTags")
+                            
+                            
+                            
+                            nameCompanyText.text = jsonData.company
+                            countryText.text = jsonData.country
+                            streetText.text = jsonData.address
+                            tagText.text = jsonData.tags
+                            
 //
 //                            nameUser.text = ProfileData.nameUser
-////
-//                            if ProfileData.cardStatus == true {
-//                                statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.green)
 //
-//                                statusTel.isHidden = false
-//                                statusTelText.isHidden = false
-//                            } else {
-//                                statusTel.isHidden = true
-//                                statusTelText.isHidden = true
-//                            }
+                            if ProfileData.cardStatus == true {
+                                statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.black)
+
+                                statusTel.isHidden = false
+                                statusTelText.isHidden = false
+                            } else {
+                                statusTel.isHidden = true
+                                statusTelText.isHidden = true
+                            }
 //
 //                            nameCompanyText.text = ProfileData.cardNameCompany
-//                            phoneText.text = ProfileData.phoneUser
+//
+//
 //                            countryText.text = ProfileData.cardCountry
 //                            streetText.text = ProfileData.cardCompanyAddress
 //                            tagText.text = ProfileData.cardTags
-//
+
                          
                         }
                     } else if statusCode != 200 {

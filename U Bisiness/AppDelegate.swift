@@ -28,9 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         /// Сделать ее умней проверять при запуске сначала
-        
-        
         print("Token \(Token.accessToken)")
+        
+        
+
+        
         
         Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { Timer in
             DispatchQueue.main.async {

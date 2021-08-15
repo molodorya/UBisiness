@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .black
         
-//        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
 
         // Shadow Background View
         self.sideMenuShadowView = UIView(frame: self.view.bounds)
@@ -72,10 +72,16 @@ class MainViewController: UIViewController {
         panGestureRecognizer.delegate = self
         view.addGestureRecognizer(panGestureRecognizer)
 
-        // Default Main View Controller
-        showViewController(viewController: UINavigationController.self, storyboardId: "navHome")
+
+            // Default Main View Controller
+            showViewController(viewController: UINavigationController.self, storyboardId: "navHome")
+    
+     
         
-    }
+        
+        
+
+}
     
     
     

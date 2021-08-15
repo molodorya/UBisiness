@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class Welcome: UIViewController {
     
@@ -32,7 +33,7 @@ class Welcome: UIViewController {
         
         // Color collectionView
         collectionView.backgroundColor = .vanillaWhite
-
+    
         // Delegates
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -43,7 +44,15 @@ class Welcome: UIViewController {
         // Off scroll horizontal indicator
         collectionView.showsHorizontalScrollIndicator = false
         settingProgressBar()
+        
+//        let defaults = UserDefaults.standard
+//            let dictionary = defaults.dictionaryRepresentation()
+//            dictionary.keys.forEach { key in
+//                defaults.removeObject(forKey: key)
+//            }
     }
+    
+    
 
     
     // Preset ProgressBar
@@ -107,6 +116,10 @@ class OnboardOne: UICollectionViewCell {
         buttonGermania.titleLabel?.font = UIFont(name: "Helvetica", size: 13)
         
         backgroundColor = .vanillaWhite
+        
+        
+        
+       
     }
     
     

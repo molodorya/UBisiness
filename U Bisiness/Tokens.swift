@@ -14,7 +14,7 @@ class Token {
     static var refreshToken = UserDefaults.standard.string(forKey: "refreshToken")
     
     
-    static var auth = UserDefaults.standard.bool(forKey: "auth")
+    static var auth = UserDefaults.standard.bool(forKey: "Auth")
     static var idUser = UserDefaults.standard.integer(forKey: "idUser")
     
 }

@@ -74,6 +74,10 @@ class OfferCard: UIViewController {
         
         top.layer.borderWidth = 2
         top.layer.borderColor = UIColor.black.cgColor
+        
+        let alertController = UIAlertController(title: "В разработке", message: nil, preferredStyle:UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     

@@ -112,7 +112,7 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        httpGet()
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
             navigationBar?.shadowImage = UIImage()
@@ -128,21 +128,13 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         emailView.backgroundColor = .vanillaWhite
         phoneView.backgroundColor = .vanillaWhite
         languageView.backgroundColor = .vanillaWhite
-        
-        nameText.text = ProfileData.nameUser
-        emailText.text = ProfileData.emailUser
-        phoneText.text = ProfileData.phoneUser
-        languageText.text = ProfileData.languageUser
-        
- 
+
         settingMenu()
         settingSubscriptionView()
         headerPreset()
         
-     
         actionMenu(.init())
         hideKeyboardWhenTappedScreen()
-    
     }
     
     
@@ -170,13 +162,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
 //        navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        DispatchQueue.main.async {
-                self.httpGet()
-        }
-    }
 
     
     @IBAction func actionButtonCabinet(_ sender: UIButton) {
@@ -294,6 +279,8 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
             
             DispatchQueue.main.async {
                     self.httpEditProfile()
+                
+                
             }
             
             editMyCabinet.setTitle("РЕДАКТИРОВАТЬ", for: .normal)
@@ -333,12 +320,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         print("setting Subscribe")
     }
     
-    
-    
-    
-    
-    
-    
    
     //MARK: - Подписка
     @IBAction func actionExtend(_ sender: UIButton) {
@@ -376,7 +357,7 @@ extension SettingProfile {
     func httpGet() {
         let url = URL(string: "https://ubusiness-ithub.ru/api/fetchProfile")!
         var request = URLRequest(url: url)
-        request.addValue("Bearer \(Token.accessToken ?? "Error token ")", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(Token.accessToken ?? "Error token")", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = "GET"
@@ -393,18 +374,15 @@ extension SettingProfile {
                 print(json)
                 if statusCode == 200 {
                     DispatchQueue.main.async {
-                        UserDefaults.standard.setValue(json.name ?? "-", forKey: "profileName")
-                        UserDefaults.standard.setValue(json.email ?? "-", forKey: "profileEmail")
-                        UserDefaults.standard.setValue(json.tel ?? "-", forKey: "profilePhone")
-                        UserDefaults.standard.setValue(json.lang ?? "-", forKey: "profileLanguage")
-                        
-                        nameText.text = ProfileData.nameUser
-                        emailText.text = ProfileData.emailUser
-                        phoneText.text = ProfileData.phoneUser
-                        languageText.text = ProfileData.languageUser
+                        nameText.text = json.name
+                        emailText.text = json.email
+                        phoneText.text = json.tel
+                        languageText.text = json.lang
+    
                     }
                 }
             } catch {
+                
                 print("errpor profile")
                 print(error
                 )
@@ -444,12 +422,13 @@ extension SettingProfile {
         
         do {
             request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
-            let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            let task = session.dataTask(with: request as URLRequest) { [self] data, response, error in
                 let nsHTTPResponse = response as! HTTPURLResponse
                 let statusCode = nsHTTPResponse.statusCode
                 
                 if let response = response { // change on the if response != nil ?
                     if statusCode == 200 {
+                        
                         print("Успешная смена пользовательских данных через access токен")
                     } else if statusCode == 400 {
                         print("Ответ от сервера: Выбран не подходящий формат файла при изменении фото профиля")
@@ -461,7 +440,10 @@ extension SettingProfile {
                 if let data = data {
                     do {
                         let jsonResponse = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions())
-                        print ("data: \(jsonResponse)")
+
+                        
+                      
+                        
                     } catch _ {
                         print("Неправильный ответ в формате JSON")
                     }

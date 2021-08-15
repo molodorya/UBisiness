@@ -8,20 +8,69 @@
 import UIKit
 
 class EventCell: UICollectionViewCell {
+    
     @IBOutlet weak var imageCollection: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         imageCollection.layer.cornerRadius = 15
-        imageCollection.image = UIImage.init(named: "crimea")
     }
 }
 
 
+
+
+struct EventStruct: Codable {
+    var id: Int?
+    var title: String?
+    var date: String?
+//    var banner: String?
+//    var category: String?
+//    var users: [Int]?
+//    var type: String?
+}
+
+typealias eventType = [EventStruct]
+
+extension Home {
+    func eventFetch(url: String) {
+        var request = URLRequest.init(url: NSURL(string: url)! as URL)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(Token.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession.init(configuration: config)
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(eventType.self, from: data)
+                    Home.events = json
+                   
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                    
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+            
+        })
+        task.resume()
+    }
+}
+
+
+
+
+/*
 struct EventStruct: Codable {
     var id: Int?
     var title, date, text: String?
-//    var users: [Int]?
+    var users: [Int]?
     var banner, category, type: String?
     
     enum CodingKeys: String, CodingKey {
@@ -29,7 +78,7 @@ struct EventStruct: Codable {
            case title
            case date
            case text
-//           case users
+           case users
            case banner
            case category
            case type
@@ -39,7 +88,6 @@ struct EventStruct: Codable {
 typealias EventType = [EventStruct]
 
 extension Home {
-    
     func eventFetch(url: String) {
         var request = URLRequest.init(url: NSURL(string: url)! as URL)
         request.httpMethod = "GET"
@@ -54,7 +102,8 @@ extension Home {
             if let data = data {
                 do {
                     let json = try JSONDecoder().decode(EventType.self, from: data)
-                    Home.event = [json]
+                    Home.events = [json]
+                
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
                     }
@@ -67,5 +116,6 @@ extension Home {
         task.resume()
     }
 }
+*/
 
 

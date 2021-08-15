@@ -36,14 +36,6 @@ struct NewsStruct: Codable {
     var date: String?
     var banner: String?
     var type: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case date
-        case banner
-        case type
-    }
 }
 
 typealias NewsType = [NewsStruct]
@@ -67,9 +59,8 @@ extension Home {
                     let json = try JSONDecoder().decode(NewsType.self, from: data)
                     Home.news = json
                     DispatchQueue.main.async {
-                        collectionViewNews.reloadData()
+                        collectionViewOffer.reloadData()
                     }
-                   
                     
                 } catch let error as NSError {
                     print(error.localizedDescription)

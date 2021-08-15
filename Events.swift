@@ -15,6 +15,7 @@ class Events: UITableViewController {
     @IBOutlet weak var leftBar: UIBarButtonItem!
     
     static let cellName = "eventsCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         settingHeaderView()
@@ -70,32 +71,35 @@ class Events: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
-//            Home.event?.endIndex ?? 0
+    
+        return Home.events?.endIndex ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let id = Home.events?[indexPath.row] {
+            UserDefaults.standard.setValue(id.id ?? 0, forKey: "idEventClick")
+            
+            let vc = storyboard?.instantiateViewController(identifier: "EventPage")
+            vc?.modalPresentationStyle = .fullScreen
+            present(vc!, animated: true, completion: nil)
+        }
+       
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Events.cellName, for: indexPath) as! EventsCell
         
-        if let titleNews = Home.event?[indexPath.section] {
-            cell.titleNews.text = titleNews[indexPath.section].title
-            cell.dateNews.text = titleNews[indexPath.section].date
-            cell.categoryNews.text = titleNews[indexPath.section].category
+        if let title = Home.events?[indexPath.row] {
+            cell.titleNews.text = title.title
+            cell.dateNews.text = title.date
+//            cell.categoryNews.text = title.c
         }
-        
         return cell
-    }
-    
-    //MARK: - Обработка касаний ячейки
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        print("Нажата ячейка №\(indexPath.row)")
     }
 }
 
