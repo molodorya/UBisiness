@@ -75,6 +75,13 @@ class CardFull: UIViewController {
         viewButtonsBottom.isHidden = false
         
         
+        if CardSearch.add_delete == false {
+            add.setTitle("ДОБАВИТЬ В КОНТАКТЫ", for: .normal)
+        } else {
+            add.setTitle("УДАЛИТЬ ИЗ КОНТАКТОВ", for: .normal)
+        }
+        
+        
         turn.underLineButton(text: "свернуть")
         
         nameUser.text = "-"
@@ -109,6 +116,24 @@ class CardFull: UIViewController {
         streetView.backgroundColor = .vanillaWhiteContrast
         tagView.backgroundColor = .vanillaWhiteContrast
     }
+    
+    
+    @IBAction func addFavorite(_ sender: UIButton) {
+
+        if CardSearch.add_delete == false {
+            add.setTitle("ДОБАВИТЬ В КОНТАКТЫ", for: .normal)
+            addFavorite(url: "https://ubusiness-ithub.ru/api/addFavoriteCard")
+        } else {
+            add.setTitle("УДАЛИТЬ ИЗ КОНТАКТОВ", for: .normal)
+            deleteFavorit(url: "https://ubusiness-ithub.ru/api/deleteFavoriteCard")
+        }
+        
+      
+        
+        
+    }
+    
+    
 }
 
 struct CardContact: Codable {
@@ -170,6 +195,107 @@ extension CardFull {
                 }
             }
         })
+        task.resume()
+    }
+}
+
+
+
+struct RequestAddFavorite: Codable {
+    var ru: String?
+    var en: String?
+    var de: String?
+}
+
+struct RequestDeleteFavorite: Codable {
+    var ru: String?
+    var en: String?
+    var de: String?
+}
+
+extension CardFull {
+    
+    
+    func addFavorite(url: String) {
+        let url = NSURL(string: url)!
+        
+        let parameters: [String: Any] = [
+            "iduser": Token.idUser, 
+            "id_card": UserDefaults.standard.integer(forKey: "idCardClick")]
+        
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url as URL)
+        
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(Token.accessToken ?? "Error Token")", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            let nsHTTPResponse = response as! HTTPURLResponse
+            let statusCode = nsHTTPResponse.statusCode
+            if let data = data {
+                print(statusCode)
+                do {
+                    let json = try JSONDecoder().decode(RequestAddFavorite.self, from: data)
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.add.setTitle("В ИЗБРАННЫХ", for: .normal)
+                        let alertController = UIAlertController(title: json.ru ?? "", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    
+                    
+                    print(json)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    
+    func deleteFavorit(url: String) {
+        let url = NSURL(string: url)!
+        
+        let parameters: [String: Any] = [
+            "iduser": Token.idUser,
+            "id_card": UserDefaults.standard.integer(forKey: "idCardClick")]
+        
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url as URL)
+        
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(Token.accessToken ?? "Error Token")", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            let nsHTTPResponse = response as! HTTPURLResponse
+            let statusCode = nsHTTPResponse.statusCode
+            if let data = data {
+                print(statusCode)
+                do {
+                    let json = try JSONDecoder().decode(RequestDeleteFavorite.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                        let alertController = UIAlertController(title: json.ru ?? "", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+//                        self.present(alertController, animated: true, completion: {
+                           
+                            
+//                        })
+                    }
+                    print(json)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
         task.resume()
     }
 }

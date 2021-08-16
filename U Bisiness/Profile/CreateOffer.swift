@@ -23,18 +23,8 @@ class CreateOffer: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    
-    // Cabinet
-    @IBOutlet weak var headerTextCabinet: UILabel!
-    @IBOutlet weak var headerButtonCabinet: UIButton!
-    
-    // Card
-    @IBOutlet weak var headerTextCard: UILabel!
-    @IBOutlet weak var headerButtonCard: UIButton!
-    
-    // Offer
-    @IBOutlet weak var headerTextOffer: UILabel!
-    @IBOutlet weak var headerButtonOffer: UIButton!
+
+    @IBOutlet weak var imageOffer: UIImageView!
     
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var protocolView: UIView!
@@ -42,27 +32,13 @@ class CreateOffer: UIViewController {
     @IBOutlet weak var textView: UIView!
     
     @IBOutlet weak var button: UIView!
+    @IBOutlet weak var add: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // Cabinet
-        headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextCabinet.text = "мой\nкабинет"
-        headerButtonCabinet.backgroundColor = .clear
-        
-        // Card
-        headerTextCard.adjustsFontSizeToFitWidth = true
-        headerTextCard.text = "моя\nвизитка"
-        headerButtonCard.backgroundColor = .clear
-        
-        //Offer
-        headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextOffer.text = "мои спец.\nпредложения"
-        headerButtonOffer.backgroundColor = .clear
-        
+        imageOffer.layer.cornerRadius = 5
+
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         nameView.backgroundColor = .vanillaWhite
@@ -76,11 +52,14 @@ class CreateOffer: UIViewController {
         termDate.backgroundColor = .vanillaWhite
         promptText.backgroundColor = .vanillaWhite
         
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 5
+        add.layer.cornerRadius = 5
         
-        let alertController = UIAlertController(title: "В разработке", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
-        self.present(alertController, animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "В разработке", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
+//        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+//        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func addCard(_ sender: UIButton) {
@@ -117,7 +96,14 @@ extension CreateOffer {
                 print(statusCode)
                 do {
                     let json = try JSONDecoder().decode(SuccesAdd.self, from: data)
-                    print(json)
+                   
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: json.ru, message: nil, preferredStyle:UIAlertController.Style.alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }
+                    
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }

@@ -17,6 +17,7 @@
 		4E33B61826C3286300A5FA3B /* CellEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33B61726C3286300A5FA3B /* CellEvent.swift */; };
 		4E33B61A26C32C7B00A5FA3B /* CellNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33B61926C32C7B00A5FA3B /* CellNews.swift */; };
 		4E34FA6E269034BB00891916 /* ShareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E34FA6D269034BB00891916 /* ShareCard.swift */; };
+		4E40C43B26CA9D5D008D12C8 /* FilterForEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E40C43A26CA9D5D008D12C8 /* FilterForEvents.swift */; };
 		4E49880C26AF5A5D00FFB77E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49880B26AF5A5D00FFB77E /* MainViewController.swift */; };
 		4E49880E26AF5A9700FFB77E /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49880D26AF5A9700FFB77E /* SideMenuModel.swift */; };
 		4E49881026AF5ABD00FFB77E /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49880F26AF5ABD00FFB77E /* SideMenuViewController.swift */; };
@@ -50,6 +51,7 @@
 		4EC5713926C9981800CC0B98 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC5713826C9981800CC0B98 /* LaunchScreen.swift */; };
 		4EC5B7E2261F391F009DAE11 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC5B7E1261F391E009DAE11 /* ForgotPassword.swift */; };
 		4EC9F84726C4298000E97CFF /* OfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F84626C4298000E97CFF /* OfferCell.swift */; };
+		4ED3922C26C9EFA300EFEB47 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3922B26C9EFA300EFEB47 /* AboutController.swift */; };
 		4EDFEE6A26BB497200831634 /* CardSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDFEE6926BB497200831634 /* CardSearch.swift */; };
 		4EDFEE6D26BB58E300831634 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDFEE6C26BB58E300831634 /* FilterController.swift */; };
 		4EEAD2F626A0A34400D43A8E /* SettingProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEAD2F526A0A34400D43A8E /* SettingProfile.swift */; };
@@ -76,6 +78,7 @@
 		4E33B61726C3286300A5FA3B /* CellEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellEvent.swift; sourceTree = "<group>"; };
 		4E33B61926C32C7B00A5FA3B /* CellNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNews.swift; sourceTree = "<group>"; };
 		4E34FA6D269034BB00891916 /* ShareCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCard.swift; sourceTree = "<group>"; };
+		4E40C43A26CA9D5D008D12C8 /* FilterForEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterForEvents.swift; sourceTree = "<group>"; };
 		4E49880B26AF5A5D00FFB77E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4E49880D26AF5A9700FFB77E /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		4E49880F26AF5ABD00FFB77E /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 		4EC5713826C9981800CC0B98 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		4EC5B7E1261F391E009DAE11 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		4EC9F84626C4298000E97CFF /* OfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferCell.swift; sourceTree = "<group>"; };
+		4ED3922B26C9EFA300EFEB47 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		4EDFEE6926BB497200831634 /* CardSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSearch.swift; sourceTree = "<group>"; };
 		4EDFEE6C26BB58E300831634 /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		4EEAD2F526A0A34400D43A8E /* SettingProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfile.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				4E163CFD2617B0C100F02B4C /* Main.storyboard */,
 				4E163D022617B0C500F02B4C /* LaunchScreen.storyboard */,
 				4E163D052617B0C500F02B4C /* Info.plist */,
+				4ED3922B26C9EFA300EFEB47 /* AboutController.swift */,
 			);
 			path = "U Bisiness";
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				4E8715542672833D0073BE60 /* EventPage.swift */,
 				4E6C6B7E2684B76E00F1A561 /* NewsPage.swift */,
 				4E6C6B802684B8B900F1A561 /* OfferPage.swift */,
+				4E40C43A26CA9D5D008D12C8 /* FilterForEvents.swift */,
 			);
 			name = Pages;
 			path = ..;
@@ -464,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E31857526755ED200C9A983 /* Extension.swift in Sources */,
+				4ED3922C26C9EFA300EFEB47 /* AboutController.swift in Sources */,
 				4EB724F3261F0D310030F862 /* IsWaiting.swift in Sources */,
 				4E49881026AF5ABD00FFB77E /* SideMenuViewController.swift in Sources */,
 				4EF7AED126C6C96B00114DF8 /* ProfileData.swift in Sources */,
@@ -512,6 +519,7 @@
 				4E97F77526A03B6A00E8F211 /* Gallery.swift in Sources */,
 				4EBAAFD0269F2A5E003F9AF6 /* ConfirmCode.swift in Sources */,
 				4EFA55982688A46F00B51B5A /* DataNetwork.swift in Sources */,
+				4E40C43B26CA9D5D008D12C8 /* FilterForEvents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,7 +676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.molodoryaVeles.U-Bisiness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -692,7 +700,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.molodoryaVeles.U-Bisiness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

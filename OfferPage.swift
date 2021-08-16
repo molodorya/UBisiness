@@ -41,7 +41,9 @@ class OfferPage: UIViewController {
     }
 
     @IBAction func buttonAction(_ sender: UIButton) {
-        print("OfferPage")
+        let alertController = UIAlertController(title: "В разработке", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     

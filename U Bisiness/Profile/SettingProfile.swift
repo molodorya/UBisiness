@@ -106,8 +106,9 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var cancel: UIButton!
     
     
-   
-    
+  
+    static var nameProfile = ""
+    static var phoneProfile = ""
     
     
     override func viewDidLoad() {
@@ -135,6 +136,7 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         
         actionMenu(.init())
         hideKeyboardWhenTappedScreen()
+        
     }
     
     
@@ -378,7 +380,10 @@ extension SettingProfile {
                         emailText.text = json.email
                         phoneText.text = json.tel
                         languageText.text = json.lang
-    
+                        
+                        
+                        SettingProfile.nameProfile = nameText.text
+                        SettingProfile.phoneProfile = phoneText.text
                     }
                 }
             } catch {

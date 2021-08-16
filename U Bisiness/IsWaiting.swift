@@ -29,6 +29,7 @@ class IsWaiting: UIViewController {
 
     typealias typeNetwork = [ServerStatusElement]
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pay.layer.cornerRadius = 5
@@ -39,7 +40,7 @@ class IsWaiting: UIViewController {
     }
     
     @IBAction func payAction(_ sender: UIButton) {
-        let urlStringId: String = "https://join.u-business.world/shop/?member=\(Token.idUser)"
+        let urlStringId: String = "https://join.u-business.world/shop/?member=\(SingIn.idUserForPayments)"
         if let url = URL(string: urlStringId) {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
@@ -72,7 +73,7 @@ extension IsWaiting {
                         
                         let vc = storyboard?.instantiateViewController(identifier: "MainViewController")
                         navigationController?.pushViewController(vc!, animated: true)
-                        
+                        UserDefaults.standard.setValue(SingIn.idUserForPayments, forKey: "idUser")
                     }
                 } else {
                     

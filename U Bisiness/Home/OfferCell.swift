@@ -13,6 +13,7 @@ class CellOffer: UICollectionViewCell {
     @IBOutlet weak var centerLabel: UILabel!
     @IBOutlet weak var bottomLabel: UILabel!
     
+    @IBOutlet weak var photo: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         

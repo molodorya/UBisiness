@@ -32,6 +32,11 @@ class ConfirmPhone: UIViewController {
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         settingNumber()
+        button.layer.cornerRadius = 5
+        
+        let alertController = UIAlertController(title: "В разработке", message: nil, preferredStyle:UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     

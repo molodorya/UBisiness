@@ -34,6 +34,10 @@ class ConfirmCode: UIViewController {
         button.layer.cornerRadius = 5
         viewCode.backgroundColor = .vanillaWhite
         textField.autocorrectionType = .no
+        
+        let alertController = UIAlertController(title: "В разработке", message: nil, preferredStyle:UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func actionButton(_ sender: UIButton) {

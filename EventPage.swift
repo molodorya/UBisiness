@@ -92,7 +92,9 @@ class EventPage: UIViewController {
     }
     
     @IBAction func buttonTouch(_ sender: UIButton) {
-        print("нажал")
+        let alertController = UIAlertController(title: "В разработке", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

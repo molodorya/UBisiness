@@ -162,6 +162,9 @@ class SettingCard: UIViewController {
         tagView.backgroundColor = .vanillaWhiteContrast
         
         
+        nameUser.text = SettingProfile.nameProfile
+        phoneText.text = SettingProfile.phoneProfile
+        
 //        industryText.text = ProfileData.cardIndustry
 //        nameCompanyText.text = ProfileData.cardNameCompany
 //        phoneText.text = ProfileData.phoneUser

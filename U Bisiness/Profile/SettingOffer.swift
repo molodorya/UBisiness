@@ -110,7 +110,7 @@ class SettingOffer: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-        self.tableView.reloadData()
+        
     }
   
     
@@ -156,6 +156,13 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
         
         cell.layer.cornerRadius = 5
        
+        if let title = Home.offers?[indexPath.section] {
+            cell.labelCenter.text = title.title
+        }
+        
+        if let date = Home.offers?[indexPath.section] {
+            cell.labelBottom.text = "ДО \(date.term ?? "")"
+        }
         
         switch indexPath.section {
         case 0:

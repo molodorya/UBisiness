@@ -70,6 +70,11 @@ class Home: UIViewController {
             let vc = storyboard?.instantiateViewController(identifier: "Welcome")
             vc?.modalPresentationStyle = .fullScreen
             self.present(vc!, animated: true, completion: nil)
+            
+            
+            
+            // Можно ничего не загружать пока диссмис не будет
+            
         }
         
         eventFetch(url: "https://ubusiness-ithub.ru/api/fetchevents")
@@ -220,8 +225,9 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     // неправильная логика
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
 
-        if collectionViewNews.tag == 2 {
-            print("nees")
+        if collectionView.tag == 1 {
+           
+            
             return true
         } else {
             return false
@@ -239,6 +245,17 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
                 titleEvent.text = title.title
                 dateEvent.text = title.date
             }
+            
+            switch indexPath.row {
+            case 1...3:
+                cell.imageCollection.backgroundColor = UIColor.systemIndigo
+            case 4:
+                cell.imageCollection.image = UIImage.init(named: "eventMore")
+            default:
+                break
+            }
+            
+           
  
             return cell
             
@@ -260,6 +277,17 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             if let id = Home.news?[indexPath.row] {
                 print("newsId \(id.id)")
             }
+            
+            switch indexPath.section {
+            case 1...3:
+                newsCell.photo.backgroundColor = UIColor.systemIndigo
+            case 4:
+                newsCell.photo.image = UIImage.init(named: "eventNews")
+            default:
+                break
+            }
+            
+            
         
             
             return newsCell
@@ -272,6 +300,14 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
                 offerCell.centerLabel.text = title.title
             }
             
+            switch indexPath.section {
+            case 1...3:
+                offerCell.photo.backgroundColor = UIColor.systemIndigo
+            case 4:
+                offerCell.photo.image = UIImage.init(named: "eventOffer")
+            default:
+                break
+            }
             
             return offerCell
             

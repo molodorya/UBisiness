@@ -1,53 +1,50 @@
 //
-//  FilterController.swift
+//  FilterForEvents.swift
 //  U Bisiness
 //
-//  Created by Nikita Molodorya on 05.08.2021.
+//  Created by Nikita Molodorya on 16.08.2021.
 //
 
 import UIKit
 
-class FilterController: UIViewController {
+class FilterForEvent: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
-    
     @IBOutlet weak var clear: UIButton!
-    @IBOutlet weak var confirm: UIButton!
+    @IBOutlet weak var apply: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
-        
+
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
         navigationBar?.shadowImage = UIImage()
         navigationBar?.backgroundColor = UIColor.clear
-        
+
         clear.layer.borderWidth = 2
         clear.layer.borderColor = UIColor.black.cgColor
         clear.layer.cornerRadius = 5
-        
-        confirm.layer.cornerRadius = 5
-        
+
+        apply.layer.cornerRadius = 5
+
         tableView.backgroundColor = .vanillaWhite
-        
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: .zero)
-        
+
         let alertController = UIAlertController(title: "В разработке", message: nil, preferredStyle:UIAlertController.Style.alert)
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
         self.present(alertController, animated: true, completion: nil)
-        
-       
     }
     
+  
     
     
     @objc func viewTapped() {
@@ -67,9 +64,7 @@ class FilterController: UIViewController {
 
 
 
-extension FilterController: UITableViewDelegate, UITableViewDataSource {
-    
-   
+extension FilterForEvent: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -80,7 +75,7 @@ extension FilterController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "filterForEventCell", for: indexPath)
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         cell.backgroundColor = .vanillaWhite
         
