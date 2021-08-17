@@ -113,13 +113,7 @@ class SettingCard: UIViewController {
         
 
         fetchBusinessCard()
-        
-        // удалить
-        nameUser.text = ProfileData.nameUser
-        phoneText.text = ProfileData.phoneUser
-        
-        
-        
+  
         
         
 //
@@ -162,15 +156,14 @@ class SettingCard: UIViewController {
         tagView.backgroundColor = .vanillaWhiteContrast
         
         
-        nameUser.text = SettingProfile.nameProfile
-        phoneText.text = SettingProfile.phoneProfile
+        industryText.backgroundColor = .vanillaWhiteContrast
+        nameCompanyText.backgroundColor = .vanillaWhiteContrast
+        phoneText.backgroundColor = .vanillaWhiteContrast
+        countryText.backgroundColor = .vanillaWhiteContrast
+        streetText.backgroundColor = .vanillaWhiteContrast
+        tagText.backgroundColor = .vanillaWhiteContrast
         
-//        industryText.text = ProfileData.cardIndustry
-//        nameCompanyText.text = ProfileData.cardNameCompany
-//        phoneText.text = ProfileData.phoneUser
-//        countryText.text = ProfileData.cardCountry
-//        streetText.text = ProfileData.cardCompanyAddress
-//        tagText.text = ProfileData.cardTags
+
         
 //        addText()
         headerPreset()
@@ -368,10 +361,17 @@ class SettingCard: UIViewController {
 extension SettingCard {
     
     struct FetchBusinessCardElement: Decodable {
-        var name: String?
+        var id_card: Int?
+        var user: String?
         var status: Bool?
-        var avatarurl, company, urllogo, country: String?
-        var address, tags: String?
+        var avatarurl: String?
+        var company: String?
+        var urllogo: String?
+        var tel: String?
+        var industry: String?
+        var country: String?
+        var address: String?
+        var tags: String?
     }
     
     func fetchBusinessCard() {
@@ -383,7 +383,7 @@ extension SettingCard {
 
         let config = URLSessionConfiguration.default
         let session = URLSession.init(configuration: config)
-        
+        print("подгрузка заранее")
 
         let dataTask = session.dataTask(with: request, completionHandler: { [self] (data, response, error) -> Void in
             
@@ -404,23 +404,16 @@ extension SettingCard {
                     if statusCode == 200 {
                         
                         DispatchQueue.main.async {
+                            print(jsonData)
                             
-                            UserDefaults.standard.setValue(jsonData.status, forKey: "cardStatus")
-                            UserDefaults.standard.setValue(jsonData.company, forKey: "cardNameCompany")
-                            UserDefaults.standard.setValue(jsonData.country, forKey: "cardCountry")
-                            UserDefaults.standard.setValue(jsonData.address, forKey: "cardCompanyAddress")
-                            UserDefaults.standard.setValue(jsonData.tags, forKey: "cardTags")
-                            
-                            
-                            
+                            nameUser.text = jsonData.user
+                            industryText.text = jsonData.industry
                             nameCompanyText.text = jsonData.company
+                            phoneText.text = jsonData.tel
                             countryText.text = jsonData.country
                             streetText.text = jsonData.address
                             tagText.text = jsonData.tags
-                            
-//
-//                            nameUser.text = ProfileData.nameUser
-//
+
                             if ProfileData.cardStatus == true {
                                 statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.black)
 
@@ -430,14 +423,8 @@ extension SettingCard {
                                 statusTel.isHidden = true
                                 statusTelText.isHidden = true
                             }
-//
-//                            nameCompanyText.text = ProfileData.cardNameCompany
-//
-//
-//                            countryText.text = ProfileData.cardCountry
-//                            streetText.text = ProfileData.cardCompanyAddress
-//                            tagText.text = ProfileData.cardTags
 
+  
                          
                         }
                     } else if statusCode != 200 {
@@ -474,7 +461,7 @@ extension SettingCard {
         
         let session = URLSession.shared
         let request = NSMutableURLRequest(url: url as URL)
-        request.httpMethod = "POST"
+        request.httpMethod = "PATCH"
         request.addValue("Bearer \(Token.accessToken ?? "Error Token")", forHTTPHeaderField: "Authorization")
         request.addValue("Accept", forHTTPHeaderField: "application/json")
         request.addValue("Content-Type", forHTTPHeaderField: "application/json")
@@ -485,7 +472,7 @@ extension SettingCard {
                                           "address": street,
                                           "industry": industry,
                                           "tags": tags,
-                                          "idUser": 7]
+                                          "tel": phone]
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters!, options: JSONSerialization.WritingOptions())
             let task = session.dataTask(with: request as URLRequest as URLRequest, completionHandler: {(data, response, error) in

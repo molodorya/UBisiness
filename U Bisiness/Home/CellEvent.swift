@@ -24,10 +24,10 @@ struct EventStruct: Codable {
     var id: Int?
     var title: String?
     var date: String?
-//    var banner: String?
-//    var category: String?
-//    var users: [Int]?
-//    var type: String?
+    var banner: String?
+    var category: String?
+    var users: [Int]?
+    var type: String?
 }
 
 typealias eventType = [EventStruct]

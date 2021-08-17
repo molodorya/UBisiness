@@ -87,22 +87,26 @@ class CardSearch: UIViewController {
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
         print("search...")
         isSearch = true
-        
-        if isSearch == false && searchTextField.text?.count == 0 {
-            all(.init())
-        }
-        
-        
         searchBusinessCard(url: "https://ubusiness-ithub.ru/api/searchBusinessCards")
         allButton.backgroundColor = .vanillaWhiteContrast
         chosenButton.backgroundColor = .clear
         CardSearch.add_delete = false
         
+        if searchTextField.text?.count != 0 {
+            
+        } else {
+            isSearch = false
+            all(.init())
+        }
+        
     }
     
     @IBAction func textFieldDidEnd(_ sender: UITextField) {
-        print("return")
-      
+        
+        
+       
+        
+        
     }
     
     

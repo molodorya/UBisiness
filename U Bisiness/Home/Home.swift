@@ -31,6 +31,7 @@ class Home: UIViewController {
     
     //News
     @IBOutlet weak var collectionViewNews: UICollectionView!
+
     
     
     // Content
@@ -63,8 +64,15 @@ class Home: UIViewController {
     static var news: [NewsStruct]?
     static var offers: [OfferStruct]?
    
+    
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+     
+ 
+        
         
         if (UserDefaults.standard.string(forKey: "Auth") != nil) == false {
             let vc = storyboard?.instantiateViewController(identifier: "Welcome")
@@ -108,6 +116,7 @@ class Home: UIViewController {
         collectionViewOffer.showsHorizontalScrollIndicator = false
         collectionViewOffer.backgroundColor = .vanillaWhite
         sideMenuOutlet.image = linesImage
+        
         navigationController?.navigationBar.barTintColor = colorHomeNav
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.shadowImage = UIImage()
@@ -287,9 +296,6 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
                 break
             }
             
-            
-        
-            
             return newsCell
             
         } else if collectionViewOffer.tag == 3 {
@@ -443,18 +449,18 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if collectionView.tag == 1 {
-            return CGSize(width: 170, height: 250)
-        } else if collectionViewNews.tag == 2 {
-            return CGSize(width: 170, height: 300)
-        } else if collectionViewOffer.tag == 3 {
-            return CGSize(width: 368, height: 200)
-        } else {
-            return CGSize()
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        if collectionView.tag == 1 {
+//            return CGSize(width: 170, height: 250)
+//        } else if collectionViewNews.tag == 2 {
+//            return CGSize(width: 170, height: 300)
+//        } else if collectionViewOffer.tag == 3 {
+//            return CGSize(width: 300, height: 200)
+//        } else {
+//            return CGSize()
+//        }
+//    }
     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

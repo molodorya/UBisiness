@@ -410,8 +410,7 @@ extension SettingProfile {
             "email": email,
             "name": name,
             "tel": tel,
-            "lang": lang,
-            "idUser": 7
+            "lang": lang
           ]
         
        
@@ -419,7 +418,7 @@ extension SettingProfile {
         let session = URLSession.shared
         let request = NSMutableURLRequest(url: url as URL)
         
-        request.httpMethod = "POST"
+        request.httpMethod = "PATCH"
         
         request.addValue("Bearer \(Token.accessToken ?? "Error Token")", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

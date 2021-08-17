@@ -10,6 +10,7 @@ import UIKit
 class CellNews: UICollectionViewCell {
     
  
+    @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var date: UILabel!
@@ -20,6 +21,7 @@ class CellNews: UICollectionViewCell {
         super.awakeFromNib()
         photo.layer.cornerRadius = 5
         button.underLineButton(text: "Подробнее >")
+        cellView.backgroundColor = .vanillaWhite
     }
     
     @IBAction func buttonMoreDetails(_ sender: UIButton) {
@@ -59,7 +61,7 @@ extension Home {
                     let json = try JSONDecoder().decode(NewsType.self, from: data)
                     Home.news = json
                     DispatchQueue.main.async {
-                        collectionViewOffer.reloadData()
+//                        collectionViewOffer.reloadData()
                     }
                     
                 } catch let error as NSError {
