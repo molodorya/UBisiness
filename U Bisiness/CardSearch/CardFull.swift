@@ -185,8 +185,7 @@ extension CardFull {
                         countryText.text = json.country
                         streetText.text = json.address
                         tagText.text = json.tags
-                        
-//                        avatar
+
                         
                     }
                     
@@ -283,7 +282,7 @@ extension CardFull {
                     
                     DispatchQueue.main.async {
                         self.navigationController?.popViewController(animated: true)
-                        let alertController = UIAlertController(title: json.ru ?? "", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
+                        let alertController = UIAlertController(title: json.ru ?? "", message: nil, preferredStyle:UIAlertController.Style.alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
 //                        self.present(alertController, animated: true, completion: {
                            

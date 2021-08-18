@@ -30,6 +30,8 @@ struct EventStruct: Codable {
     var type: String?
 }
 
+
+
 typealias eventType = [EventStruct]
 
 extension Home {
@@ -47,10 +49,10 @@ extension Home {
                 do {
                     let json = try JSONDecoder().decode(eventType.self, from: data)
                     Home.events = json
-                   
-                    
+
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
+                        
                     }
                     
                 } catch let error as NSError {

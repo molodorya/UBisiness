@@ -105,6 +105,7 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var change: UIButton!
     @IBOutlet weak var cancel: UIButton!
     
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
   
     static var nameProfile = ""
@@ -136,14 +137,13 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         
         actionMenu(.init())
         hideKeyboardWhenTappedScreen()
-        
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.revealViewController()?.gestureEnabled = false
-        
+
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -318,8 +318,8 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         languageLines.isHidden = true
         editMyCabinet.isHidden = true
         settingSubscribe.isHidden = true
-        
-        print("setting Subscribe")
+    
+        scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
    
@@ -344,6 +344,15 @@ extension SettingProfile {
         subscriptionView.backgroundColor = .vanillaWhite
         subscriptionHeader.backgroundColor = .vanillaWhiteContrast
 
+        
+        if UserDefaults.standard.bool(forKey: "Auth") == true {
+            subscriptionTitle.text = "Активная премиум подписка"
+        } else {
+            subscriptionTitle.text = "Неактивная премиум подписка"
+            subscriptionEnd.text = ""
+            subscriptionPrice.text = ""
+        }
+        
         extend.layer.cornerRadius = 5
         change.backgroundColor = .clear
         change.layer.borderWidth = 2

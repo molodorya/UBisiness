@@ -19,6 +19,12 @@ extension UIColor {
     }
 }
 
+extension UIColor {
+    public static var navigationColorVanilla: UIColor {
+        return UIColor(red: 251/255, green: 229/255, blue: 212/255, alpha: 1)
+    }
+}
+
 extension UILabel {
 
     func setLineSpacing(lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {

@@ -83,6 +83,10 @@ class SettingCard: UIViewController {
     @IBOutlet weak var tagLines: UIView!
     
     
+    // Constraint
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var cardViewHeight: NSLayoutConstraint!
+    
     
     
     
@@ -110,22 +114,8 @@ class SettingCard: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
         fetchBusinessCard()
-  
-        
-        
-//
-        if ProfileData.cardStatus == true {
-            statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.green)
-
-            statusTel.isHidden = false
-            statusTelText.isHidden = false
-        } else {
-            statusTel.isHidden = true
-            statusTelText.isHidden = true
-        }
         
         nameUser.textAlignment = .left
         nameUser.adjustsFontSizeToFitWidth = true
@@ -162,32 +152,19 @@ class SettingCard: UIViewController {
         countryText.backgroundColor = .vanillaWhiteContrast
         streetText.backgroundColor = .vanillaWhiteContrast
         tagText.backgroundColor = .vanillaWhiteContrast
-        
 
-        
-//        addText()
         headerPreset()
         startPreset()
-        
-        
-       
-        
+ 
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.cardView.frame.size.height = 411
-        
-        print("ff")
-    }
-    
 
     
     
     func startPreset() {
         
-        self.topConstraint.constant = 50
-        self.bottomConstraint.constant = 643
+
+        cardViewHeight.constant = 420
+        scrollViewHeight.constant = 800
         
         details.isHidden = false
         imageDetails.isHidden = false
@@ -228,9 +205,6 @@ class SettingCard: UIViewController {
     }
     
     func offPreset() {
-        
-        self.topConstraint.constant = 50
-        self.bottomConstraint.constant = 50
         
         details.isHidden = true
         imageDetails.isHidden = true
@@ -296,28 +270,23 @@ class SettingCard: UIViewController {
     }
     
     
-    // default 50
-    // change 643
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+
+
     
-    // default 50
-    // change 643
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBAction func buttonDetails(_ sender: UIButton) {
-        
+       
         UIView.animate(withDuration: 0.3) {
-//            self.topConstraint.constant = 50
-//            self.bottomConstraint.constant = 50
+            self.cardViewHeight.constant = 1015
+            self.scrollViewHeight.constant = 1300
         }
         offPreset()
     }
     
     @IBAction func buttonTurn(_ sender: UIButton) {
-        
         UIView.animate(withDuration: 0.3) {
-//            self.topConstraint.constant = 50
-//            self.bottomConstraint.constant = 643
+            self.cardViewHeight.constant = 420
+            self.scrollViewHeight.constant = 800
         }
         startPreset()
     }
@@ -333,7 +302,8 @@ class SettingCard: UIViewController {
             change.setTitle("СОХРАНИТЬ", for: .normal)
             change.backgroundColor = .black
             change.setTitleColor(.white, for: .normal)
-//            change.isHidden = true
+            self.cardViewHeight.constant = 1015
+            self.scrollViewHeight.constant = 1300
             buttonSelectable = true
             settingTextView(permission: true)
           print("a")
@@ -413,9 +383,10 @@ extension SettingCard {
                             countryText.text = jsonData.country
                             streetText.text = jsonData.address
                             tagText.text = jsonData.tags
-
-                            if ProfileData.cardStatus == true {
-                                statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.black)
+                            
+                            
+                            if jsonData.status == true {
+                                statusTel.image = UIImage.init(systemName: "checkmark")?.withTintColor(.green)
 
                                 statusTel.isHidden = false
                                 statusTelText.isHidden = false
@@ -423,9 +394,6 @@ extension SettingCard {
                                 statusTel.isHidden = true
                                 statusTelText.isHidden = true
                             }
-
-  
-                         
                         }
                     } else if statusCode != 200 {
                         print(statusCode)

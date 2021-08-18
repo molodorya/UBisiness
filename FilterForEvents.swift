@@ -22,10 +22,9 @@ class FilterForEvent: UIViewController {
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
 
+        navigationController?.navigationBar.barTintColor = .vanillaWhite
         let navigationBar = self.navigationController?.navigationBar
-        navigationBar?.setBackgroundImage(UIImage(), for: .default)
         navigationBar?.shadowImage = UIImage()
-        navigationBar?.backgroundColor = UIColor.clear
 
         clear.layer.borderWidth = 2
         clear.layer.borderColor = UIColor.black.cgColor

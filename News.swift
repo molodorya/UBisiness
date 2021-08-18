@@ -6,6 +6,40 @@
 //
 import UIKit
 
+
+
+
+struct SearchNews: Codable {
+    var id: Int?
+    var title: String?
+    var date: String?
+    var banner: String?
+    var type: String?
+}
+
+typealias searchType = [SearchNews]
+
+class NewsCell: UITableViewCell {
+    
+    @IBOutlet weak var viewCell: UIView!
+    @IBOutlet weak var imageNews: UIImageView!
+    @IBOutlet weak var dateNews: UILabel!
+    @IBOutlet weak var titleNews: UILabel!
+    @IBOutlet weak var promptNews: UILabel!
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: true)
+        viewCell.backgroundColor = .vanillaWhite
+        imageNews.clipsToBounds = true
+        imageNews.layer.cornerRadius = 30
+        
+        
+        contentView.backgroundColor = UIColor.vanillaWhite
+        
+    }
+}
+
+
 class News: UITableViewController {
     
     static let cellName = "newsCell"
@@ -18,39 +52,57 @@ class News: UITableViewController {
     @IBOutlet weak var menu: UIBarButtonItem!
     
     
+    var news: [searchType]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        newsFetch(url: "https://ubusiness-ithub.ru/api/fetchnewslist")
         view.backgroundColor = UIColor.vanillaWhite
         searchView.backgroundColor = .vanillaWhite
         searchTextField.backgroundColor = .vanillaWhite
 //        searchTextField.layer.cornerRadius = 5
-        settingHeaderView()
-        settingTableView()
-        settingButtonTitleImage()
-        settingSearchTextField()
+        headerView.backgroundColor = UIColor.vanillaWhite
+        searchTextField.indent(size: 20)
+        searchTextField.placeholder = "Поиск"
         
-        settingTitleButton()
-                
+  
+        searchTextField.layer.masksToBounds = true
+        searchTextField.indent(size: 20)
+        searchTextField.placeholder = "Поиск"
         
+        searchView.layer.cornerRadius = 5
+        searchView.layer.borderWidth = 2.0
+        searchView.layer.borderColor = UIColor.gray.cgColor
         
+        searchTextField.layer.masksToBounds = true
         title = "новости"
-        
+        tableView.separatorStyle = .none
+        buttonTitleImage.contentMode = .scaleAspectFill
+        buttonTitleImage.clipsToBounds = true
+        buttonTitleImage.contentMode = .scaleAspectFill
+        // Use setBackgroundImage or setImage
+//        buttonTitleImage.setBackgroundImage(UIImage(named: "crimea"), for: .normal)
+        titleButton.textColor = .white
+        titleButton.text = "Может ли самозанятый платить НДП с процентов по займам"
+        titleButton.adjustsFontSizeToFitWidth = true
+        buttonTitleImage.addTarget(self, action: #selector(btnTitleImage), for: .touchDown)
         hideKeyboardWhenTappedScreen()
+        
+        navigationController?.navigationBar.barTintColor = .vanillaWhite
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.shadowImage = UIImage()
         
         actionMenu(.init())
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+    
+    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
+        isSearch = true
+        searchNews(url: "https://ubusiness-ithub.ru/api/searchnews")
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
     
     @IBAction func actionMenu(_ sender: UIBarButtonItem) {
         menu.target = revealViewController()
@@ -61,66 +113,32 @@ class News: UITableViewController {
         
     }
     
-    func settingHeaderView() {
-        headerView.backgroundColor = UIColor.vanillaWhite
-    }
-    
-    
-    
-    func settingSearchTextField() {
-        searchTextField.indent(size: 20)
-        searchTextField.placeholder = "Поиск"
-        
-        searchTextField.layer.cornerRadius = 5
-        searchTextField.layer.borderWidth = 2.0
-        searchTextField.layer.borderColor = UIColor.gray.cgColor
-        searchTextField.layer.masksToBounds = true
-    }
-    
-    
-    
-    
-    func settingTableView() {
-        tableView.separatorStyle = .none
-    }
-    
 
-    
-    func settingButtonTitleImage() {
-        buttonTitleImage.contentMode = .scaleAspectFill
-        buttonTitleImage.clipsToBounds = true
-        buttonTitleImage.contentMode = .scaleAspectFill
-        // Use setBackgroundImage or setImage
-//        buttonTitleImage.setBackgroundImage(UIImage(named: "crimea"), for: .normal)
-        
-        buttonTitleImage.addTarget(self, action: #selector(btnTitleImage), for: .touchDown)
-    }
-    
-    func settingTitleButton() {
-        titleButton.textColor = .white
-        titleButton.text = "Может ли самозанятый платить НДП с процентов по займам"
-        titleButton.adjustsFontSizeToFitWidth = true
-
-//        titleButton.lineBreakMode = NSLineBreakMode.byTruncatingTail
-  
-    }
-    
-   
     
     @objc func btnTitleImage() {
         
         print("fe")
     }
 
-    // MARK: - Table view data source
+    
+    var isSearch = false
+    var countSearch = 0
+    var countCell = 0
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        if isSearch == true {
+            return 1
+        } else {
+            return countCell
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Home.news?.endIndex ?? 0
+        if isSearch == true {
+            return countSearch
+        } else {
+            return 1
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -128,65 +146,118 @@ class News: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("indexPath: \(indexPath.section)")
-        tableView.deselectRow(at: indexPath, animated: true)
-        if let id = Home.news?[indexPath.row] {
-            UserDefaults.standard.setValue(id.id ?? 0, forKey: "idNewsClick")
+        
+        
+        if isSearch == true {
+            if let idCard = news?[indexPath.section] {
+            
+                UserDefaults.standard.setValue(idCard[indexPath.row].id ?? 0, forKey: "idNewsClick")
+                
+                let vc = storyboard?.instantiateViewController(identifier: "NewsPage")
+                vc?.modalPresentationStyle = .fullScreen
+                present(vc!, animated: true, completion: nil)
+            }
+        } else {
+            if let idCard = news?[indexPath.row] {
+            
+                UserDefaults.standard.setValue(idCard[indexPath.section].id ?? 0, forKey: "idNewsClick")
+                
+                let vc = storyboard?.instantiateViewController(identifier: "NewsPage")
+                vc?.modalPresentationStyle = .fullScreen
+                present(vc!, animated: true, completion: nil)
+            }
         }
-        
-        
-        let vc = storyboard?.instantiateViewController(identifier: "NewsPage")
-        vc?.modalPresentationStyle = .fullScreen
-        present(vc!, animated: true, completion: nil)
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: News.cellName, for: indexPath) as! NewsCell
 
-        
-        if let title = Home.news?[indexPath.row] {
-            cell.titleNews.text = title.title
+        if isSearch == true {
+            if let title = news?[indexPath.section] {
+                cell.titleNews.text = title[indexPath.row].title
+                cell.dateNews.text = title[indexPath.row].date
+                cell.promptNews.text = title[indexPath.row].type
+          
+            }
+        } else {
+            if let title = news?[indexPath.row] {
+                cell.titleNews.text = title[indexPath.section].title
+                cell.dateNews.text = title[indexPath.section].date
+                cell.promptNews.text = title[indexPath.section].type
+          
+            }
         }
         
-        if let date = Home.news?[indexPath.row] {
-            cell.dateNews.text = date.date
-        }
-        
-        if let prompt = Home.news?[indexPath.row] {
-            cell.promptNews.text = prompt.type
-        }
-        
-        if let date = Home.news?[indexPath.row] {
-            
-       
-//            cell.dateNews.text = datec
-        }
-        
-        if let id = Home.news?[indexPath.row] {
-            print(id.id)
-        }
-    
 
         return cell
     }
 }
 
-class NewsCell: UITableViewCell {
+
+
+
+
+extension News {
+    func newsFetch(url: String) {
+        var request = URLRequest.init(url: NSURL(string: url)! as URL)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(Token.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession.init(configuration: config)
+        
+        let task = session.dataTask(with: request, completionHandler: { [self] (data, response, error) -> Void in
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(searchType.self, from: data)
+                    self.news = [json]
+                    
+                    DispatchQueue.main.async {
+                        self.countCell = json.endIndex
+                        tableView.reloadData()
+                    }
+                    
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        task.resume()
+    }
     
-    @IBOutlet weak var imageNews: UIImageView!
-    @IBOutlet weak var dateNews: UILabel!
-    @IBOutlet weak var titleNews: UILabel!
-    @IBOutlet weak var promptNews: UILabel!
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: true)
+    func searchNews(url: String) {
+        let parameters: [String: Any] = ["word": searchTextField.text ?? ""]
+        let url = NSURL(string: url)!
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url as URL)
         
-        imageNews.clipsToBounds = true
-        imageNews.layer.cornerRadius = 30
-        
-        
-        contentView.backgroundColor = UIColor.vanillaWhite
-        
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(Token.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            let nsHTTPResponse = response as! HTTPURLResponse
+            let statusCode = nsHTTPResponse.statusCode
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(searchType.self, from: data)
+                    
+                    self.news = [json]
+                    
+                    DispatchQueue.main.async {
+                        self.countSearch = json.endIndex
+                        self.tableView.reloadData()
+                    }
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        task.resume()
     }
 }

@@ -57,7 +57,6 @@ class Home: UIViewController {
     @IBOutlet weak var fourOffer: UIView!
     @IBOutlet weak var fiveOffer: UIView!
     
-    let colorHomeNav = UIColor.init(red: 251/255, green: 229/255, blue: 212/255, alpha: 1)
     let statusAuth = UserDefaults.standard.bool(forKey: "auth")
     
     static var events: [EventStruct]?
@@ -90,7 +89,7 @@ class Home: UIViewController {
         offerFetch(url: "https://ubusiness-ithub.ru/api/fetchOffers")
 
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
-        scrollView.backgroundColor = colorHomeNav
+        scrollView.backgroundColor = .navigationColorVanilla
         scrollView.bounces = true
         scrollView.showsVerticalScrollIndicator = false
         
@@ -117,7 +116,7 @@ class Home: UIViewController {
         collectionViewOffer.backgroundColor = .vanillaWhite
         sideMenuOutlet.image = linesImage
         
-        navigationController?.navigationBar.barTintColor = colorHomeNav
+        navigationController?.navigationBar.barTintColor = .navigationColorVanilla
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.shadowImage = UIImage()
         
@@ -131,6 +130,12 @@ class Home: UIViewController {
         
         print(Token.idUser)
 
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+     
     }
     
     @IBAction func sideMenu(_ sender: UIBarButtonItem) {

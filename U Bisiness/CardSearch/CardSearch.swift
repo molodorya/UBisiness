@@ -4,7 +4,6 @@
 //
 //  Created by Nikita Molodorya on 05.08.2021.
 //
-
 import UIKit
 
 class CardCell: UITableViewCell {
@@ -42,7 +41,7 @@ class CardSearch: UIViewController {
 
     var cards: [FetchBusinessCards]?
     
-    var countCell = 0
+    
     var idCard = 0
 
     override func viewDidLoad() {
@@ -74,15 +73,19 @@ class CardSearch: UIViewController {
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
             navigationBar?.shadowImage = UIImage()
         navigationBar?.backgroundColor = UIColor.clear
+      
         
         hideKeyboardWhenTappedScreen()
         
         menuAction(.init())
        
     }
+    
+
  
     var isSearch = false
     var countSearch = 0
+    var countCell = 0
     
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
         print("search...")
@@ -102,11 +105,7 @@ class CardSearch: UIViewController {
     }
     
     @IBAction func textFieldDidEnd(_ sender: UITextField) {
-        
-        
-       
-        
-        
+
     }
     
     
@@ -168,6 +167,17 @@ class CardSearch: UIViewController {
 
 
 extension CardSearch: UITableViewDelegate, UITableViewDataSource {
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        if isSearch == true {
+            return 1
+        } else {
+            return countCell
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("countCell \(countCell)")
         print("countSearch \(countSearch)")
@@ -177,18 +187,10 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
         } else {
             return 1
         }
-        
-       
+
     }
-   
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        if isSearch == true {
-            return 1
-        } else {
-            return countCell
-        }
-    }
+    
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120

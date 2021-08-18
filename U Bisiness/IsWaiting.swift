@@ -36,7 +36,7 @@ class IsWaiting: UIViewController {
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
         
-        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=5")
+        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=\(SingIn.idUserForPayments)")
     }
     
     @IBAction func payAction(_ sender: UIButton) {

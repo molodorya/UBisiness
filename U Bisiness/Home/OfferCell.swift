@@ -25,7 +25,12 @@ struct OfferStruct: Codable {
     var id: Int?
     var imgurl: String?
     var title: String?
+    var welcomeProtocol: String?
+    var timecreation: String?
     var term: String?
+    var text: String?
+    var idcreator: Int?
+    var type: String?
 }
 
 typealias offerType = [OfferStruct]
@@ -47,7 +52,7 @@ extension Home {
                 do {
                     let json = try JSONDecoder().decode(offerType.self, from: data)
                     Home.offers = json
-                    print(json)
+                   
                     DispatchQueue.main.async {
                         collectionViewOffer.reloadData()
                     }

@@ -53,6 +53,8 @@ class EventPage: UIViewController {
         dateContent.textAlignment = .left
         dateContent.font = UIFont.systemFont(ofSize: 12)
         
+        
+        
         label.numberOfLines = 0
         label.backgroundColor = .clear
         label.textAlignment = .left

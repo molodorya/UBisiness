@@ -61,7 +61,7 @@ extension Home {
                     let json = try JSONDecoder().decode(NewsType.self, from: data)
                     Home.news = json
                     DispatchQueue.main.async {
-//                        collectionViewOffer.reloadData()
+                        collectionViewNews.reloadData()
                     }
                     
                 } catch let error as NSError {
