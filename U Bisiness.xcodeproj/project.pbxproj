@@ -52,6 +52,7 @@
 		4EC5B7E2261F391F009DAE11 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC5B7E1261F391E009DAE11 /* ForgotPassword.swift */; };
 		4EC9F84726C4298000E97CFF /* OfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9F84626C4298000E97CFF /* OfferCell.swift */; };
 		4ED3922C26C9EFA300EFEB47 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED3922B26C9EFA300EFEB47 /* AboutController.swift */; };
+		4ED81D4726CEF53E006AE713 /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED81D4626CEF53E006AE713 /* SubscribeView.swift */; };
 		4EDFEE6A26BB497200831634 /* CardSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDFEE6926BB497200831634 /* CardSearch.swift */; };
 		4EDFEE6D26BB58E300831634 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDFEE6C26BB58E300831634 /* FilterController.swift */; };
 		4EEAD2F626A0A34400D43A8E /* SettingProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEAD2F526A0A34400D43A8E /* SettingProfile.swift */; };
@@ -113,6 +114,7 @@
 		4EC5B7E1261F391E009DAE11 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		4EC9F84626C4298000E97CFF /* OfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferCell.swift; sourceTree = "<group>"; };
 		4ED3922B26C9EFA300EFEB47 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
+		4ED81D4626CEF53E006AE713 /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
 		4EDFEE6926BB497200831634 /* CardSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSearch.swift; sourceTree = "<group>"; };
 		4EDFEE6C26BB58E300831634 /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		4EEAD2F526A0A34400D43A8E /* SettingProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfile.swift; sourceTree = "<group>"; };
@@ -338,9 +340,10 @@
 				4EEAD2F526A0A34400D43A8E /* SettingProfile.swift */,
 				4E6CC17026B433D3006DCBEB /* SettingCard.swift */,
 				4E6CC17226B437CD006DCBEB /* SettingOffer.swift */,
-				4EF7AED026C6C96B00114DF8 /* ProfileData.swift */,
 				4E6A677E26C72E0F00980DBC /* OfferCard.swift */,
 				4E8471AD26C91BD2007FED2A /* CreateOffer.swift */,
+				4EF7AED026C6C96B00114DF8 /* ProfileData.swift */,
+				4ED81D4626CEF53E006AE713 /* SubscribeView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				4EC07F0526779E8300D60D21 /* News.swift in Sources */,
 				4E6C6B842684B98D00F1A561 /* Settings.swift in Sources */,
 				4E53AF6C26C6E02C00E5EAD4 /* CardFull.swift in Sources */,
+				4ED81D4726CEF53E006AE713 /* SubscribeView.swift in Sources */,
 				4E49880E26AF5A9700FFB77E /* SideMenuModel.swift in Sources */,
 				4EED266F2678FCB600F597DD /* Promotions.swift in Sources */,
 				4E1A0DB8261C9EB6001B7A53 /* SingInLog.swift in Sources */,
@@ -676,7 +680,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.molodoryaVeles.U-Bisiness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -700,7 +704,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.molodoryaVeles.U-Bisiness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

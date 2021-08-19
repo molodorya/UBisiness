@@ -70,7 +70,7 @@ class CardFull: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchUserId()
         viewButtonsTop.isHidden = true
         viewButtonsBottom.isHidden = false
         
@@ -84,16 +84,15 @@ class CardFull: UIViewController {
         
         turn.underLineButton(text: "свернуть")
         
-        nameUser.text = "-"
+        nameUser.text = ""
+        nameCompanyText.text = ""
+        industryText.text = ""
+        phoneText.text = ""
+        countryText.text = ""
+        streetText.text = ""
+        tagText.text = ""
         
-        nameCompanyText.text = "-"
-        industryText.text = "-"
-        phoneText.text = "-"
-        countryText.text = "-"
-        streetText.text = "-"
-        tagText.text = "-"
-        
-        fetchUserId()
+       
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         cardView.layer.cornerRadius = 5
@@ -181,6 +180,7 @@ extension CardFull {
                         } else {
                             print("фалсе")
                         }
+                        industryText.text = json.industry
                         nameCompanyText.text = json.company
                         countryText.text = json.country
                         streetText.text = json.address

@@ -25,7 +25,7 @@ struct OfferStruct: Codable {
     var id: Int?
     var imgurl: String?
     var title: String?
-    var welcomeProtocol: String?
+    var `protocol`: String?
     var timecreation: String?
     var term: String?
     var text: String?

@@ -228,9 +228,8 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardCell
         
-
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell {
             switch indexPath.section {
             case 0...1:
                 cell.backgroundColor = .vanillaWhiteContrast
@@ -239,86 +238,41 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
             default:
                 break
             }
-         
             
-//            if let avatar = cards?[indexPath.row] {
-//
-//            }
+            
             if isSearch == true {
                 if let nameUser = cards?[indexPath.section] {
-                    if nameUser[indexPath.section].user?.count ?? 0 <= 2 {
-                        cell.user.text = "—"
-                    } else {
-                        cell.user.text = nameUser[indexPath.section].user
-                    }
+                    
+                    cell.user.text = nameUser[indexPath.section].user
+                    cell.company.text = nameUser[indexPath.section].company
+                    cell.industry.text = nameUser[indexPath.section].industry
                 }
-                if let statusUser = cards?[indexPath.section] {
-                    if statusUser[indexPath.section].status == true {
-                        cell.status.isHidden = false
-                    } else {
-                        cell.status.isHidden = true
-                    }
+            }  else {
+            if let nameUser = cards?[indexPath.row] {
+                
+                cell.user.text = nameUser[indexPath.section].user
+                cell.company.text = nameUser[indexPath.section].company
+                cell.industry.text = nameUser[indexPath.section].industry
+                
+                if nameUser[indexPath.section].status == true {
+                    cell.status.isHidden = false
+                } else {
+                    cell.status.isHidden = true
                 }
-
-                if let company = cards?[indexPath.section] {
-
-                    if company[indexPath.section].company?.count ?? 0 <= 2 {
-                        cell.company.text = "—"
-                    } else {
-                        cell.company.text = company[indexPath.section].company
-                    }
-                }
-
-                if let industry = cards?[indexPath.section] {
-                    if industry[indexPath.section].industry?.count ?? 0 <= 2 {
-                        cell.industry.text = "—"
-                    } else {
-                        cell.industry.text = industry[indexPath.section].industry
-                    }
-                }
-            } else {
-                if let nameUser = cards?[indexPath.row] {
-                    if nameUser[indexPath.section].user?.count ?? 0 <= 2 {
-                        cell.user.text = "—"
-                    } else {
-                        cell.user.text = nameUser[indexPath.section].user
-                    }
-                }
-                if let statusUser = cards?[indexPath.row] {
-                    if statusUser[indexPath.section].status == true {
-                        cell.status.isHidden = false
-                    } else {
-                        cell.status.isHidden = true
-                    }
-                }
-
-                if let company = cards?[indexPath.row] {
-
-                    if company[indexPath.section].company?.count ?? 0 <= 2 {
-                        cell.company.text = "—"
-                    } else {
-                        cell.company.text = company[indexPath.section].company
-                    }
-                }
-
-                if let industry = cards?[indexPath.row] {
-                    if industry[indexPath.section].industry?.count ?? 0 <= 2 {
-                        cell.industry.text = "—"
-                    } else {
-                        cell.industry.text = industry[indexPath.section].industry
-                    }
-                }
+                
             }
-            
-            
-           
-
-            return cell
-        }
+                
+            }
         
-        return UITableViewCell()
+        
+    
+        
+
+        return cell
+        }
     }
-}
+
+
 
 struct FetchBusinessCard: Codable {
     var idCard: Int?
@@ -353,7 +307,6 @@ extension CardSearch {
                     
                     let json = try JSONDecoder().decode(FetchBusinessCards.self, from: data)
                     self.cards = [json]
-                    print(json)
                     
                     DispatchQueue.main.async {
                         self.countCell = json.endIndex

@@ -71,17 +71,10 @@ class MainViewController: UIViewController {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         panGestureRecognizer.delegate = self
         view.addGestureRecognizer(panGestureRecognizer)
-
-
-            // Default Main View Controller
-            showViewController(viewController: UINavigationController.self, storyboardId: "navHome")
-    
-     
         
-        
-        
-
-}
+        // Default Main View Controller
+        showViewController(viewController: UINavigationController.self, storyboardId: "navHome")
+    }
     
     
     
@@ -150,20 +143,16 @@ extension MainViewController: SideMenuViewControllerDelegate {
     func selectedCell(_ row: Int) {
         switch row {
         case 0:
-            // Home
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navUser")
         case 1:
-            // card
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navCard")
         case 2:
-            // Movies
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navigationEvents")
         case 3:
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navOffer")
         case 4:
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navNews")
         case 5:
-            // Settings
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navLibrary")
         case 6:
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navPhoto")

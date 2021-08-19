@@ -14,6 +14,11 @@ class EventCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         imageCollection.layer.cornerRadius = 15
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { Timer in
+//            print("X \(self.contentView.centerXAnchor)")
+//            print("Y \(self.imageCollection.ofset)")
+//
+        }
     }
 }
 

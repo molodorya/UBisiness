@@ -91,13 +91,25 @@ class CreateOffer: UIViewController {
         add.layer.cornerRadius = 5
         
         hideKeyboardWhenTappedScreen()
-        
-        
-        
-//        let alertController = UIAlertController(title: "В разработке", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
-//        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
-//        self.present(alertController, animated: true, completion: nil)
     }
+    
+    // Navigator menu
+    @IBAction func actionCabinet(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
+        setSubView(vc!)
+    }
+    
+    @IBAction func actionCard(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
+        setSubView(vc!)
+    }
+    
+    @IBAction func actionOffer(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
+        setSubView(vc!)
+    }
+    
+    
     
     @IBAction func addTop(_ sender: UIButton) {
         topOffer(url: "https://ubusiness-ithub.ru/api/updateTime")
@@ -106,6 +118,8 @@ class CreateOffer: UIViewController {
     @IBAction func addCard(_ sender: UIButton) {
         addCardNetwork(url: "https://ubusiness-ithub.ru/api/createOffer")
     }
+    
+    
     
     
     struct RequestMessage: Codable {
@@ -148,7 +162,10 @@ class CreateOffer: UIViewController {
                     DispatchQueue.main.async {
                         CreateOffer.newIdOffer = json.idOffer ?? 0
                         let alertController = UIAlertController(title: "Успешно", message: nil, preferredStyle:UIAlertController.Style.alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { UIAlertAction in
+                            self.removeFromParent()
+                            self.view.removeFromSuperview()
+                        }))
                         self.present(alertController, animated: true, completion: nil)
                         
                     }

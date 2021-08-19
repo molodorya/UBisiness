@@ -47,6 +47,7 @@ class OfferCard: UIViewController {
         fetchIdCard()
         buttonImage.layer.cornerRadius = 5
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
+        title = "Редактирование предложения"
         
         // Cabinet
         headerTextCabinet.adjustsFontSizeToFitWidth = true
@@ -88,6 +89,25 @@ class OfferCard: UIViewController {
         hideKeyboardWhenTappedScreen()
     }
     
+ 
+    
+    // Navigator menu
+    @IBAction func actionCabinet(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
+        setSubView(vc!)
+    }
+    
+    @IBAction func actionCard(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
+        setSubView(vc!)
+    }
+    
+    @IBAction func actionOffer(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
+        setSubView(vc!)
+    }
+    
+    
     
     @IBAction func topAction(_ sender: UIButton) {
         topOffer(url: "https://ubusiness-ithub.ru/api/updateTime")
@@ -119,7 +139,6 @@ class OfferCard: UIViewController {
     func fetchIdCard() {
         let id = UserDefaults.standard.string(forKey: "selectCardId")
         var request = URLRequest.init(url: NSURL(string: "https://ubusiness-ithub.ru/api/fetchOffer?id=\(id ?? "")")! as URL)
-        print(id)
         request.httpMethod = "GET"
         request.addValue("Bearer \(Token.accessToken ?? "Error Token")", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -187,7 +206,14 @@ class OfferCard: UIViewController {
                         
                         DispatchQueue.main.async {
                             let alertController = UIAlertController(title: json.ru, message: nil, preferredStyle:UIAlertController.Style.alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { UIAlertAction in
+                                
+                                
+                                self.removeFromParent()
+                                self.view.removeFromSuperview()
+                            }))
+                    
+                            
                             self.present(alertController, animated: true, completion: nil)
                             
                         }

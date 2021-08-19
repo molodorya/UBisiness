@@ -36,7 +36,7 @@ class IsWaiting: UIViewController {
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
         
-        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=\(SingIn.idUserForPayments)")
+        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=5")
     }
     
     @IBAction func payAction(_ sender: UIButton) {
@@ -73,6 +73,7 @@ extension IsWaiting {
                         
                         let vc = storyboard?.instantiateViewController(identifier: "MainViewController")
                         navigationController?.pushViewController(vc!, animated: true)
+                        
                         UserDefaults.standard.setValue(SingIn.idUserForPayments, forKey: "idUser")
                     }
                 } else {

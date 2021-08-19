@@ -33,6 +33,9 @@ class Home: UIViewController {
     @IBOutlet weak var collectionViewNews: UICollectionView!
 
     
+    @IBOutlet weak var eventTitle: UIButton!
+    @IBOutlet weak var newsTitle: UIButton!
+    @IBOutlet weak var offerTitle: UIButton!
     
     // Content
     @IBOutlet weak var textEvent: UILabel!
@@ -57,36 +60,52 @@ class Home: UIViewController {
     @IBOutlet weak var fourOffer: UIView!
     @IBOutlet weak var fiveOffer: UIView!
     
-    let statusAuth = UserDefaults.standard.bool(forKey: "auth")
+    // Constraints
+    @IBOutlet weak var eventTitleCell: NSLayoutConstraint!
+    @IBOutlet weak var eventDateCell: NSLayoutConstraint!
     
     static var events: [EventStruct]?
     static var news: [NewsStruct]?
     static var offers: [OfferStruct]?
    
-    
-    
 
+    @IBAction func eventNow(_ sender: UIButton) {
+
+        revealViewController()?.selectedCell(2)
+    }
+    
+    @IBAction func newsNow(_ sender: UIButton) {
+        revealViewController()?.selectedCell(4)
+    }
+    
+    @IBAction func offerNow(_ sender: UIButton) {
+        revealViewController()?.selectedCell(3)
+        
+    }
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     
- 
         
         
-        if (UserDefaults.standard.string(forKey: "Auth") != nil) == false {
+        if UserDefaults.standard.bool(forKey: "Auth") == false {
             let vc = storyboard?.instantiateViewController(identifier: "Welcome")
             vc?.modalPresentationStyle = .fullScreen
-            self.present(vc!, animated: true, completion: nil)
-            
-            
-            
-            // Можно ничего не загружать пока диссмис не будет
-            
+            self.present(vc!, animated: false, completion: nil)
+        } else {
+            Token.accessToken = UserDefaults.standard.string(forKey: "accessToken")
+            eventFetch(url: "https://ubusiness-ithub.ru/api/fetchevents")
+            newsFetch(url: "https://ubusiness-ithub.ru/api/fetchnewslist")
+            offerFetch(url: "https://ubusiness-ithub.ru/api/fetchOffers")
         }
         
-        eventFetch(url: "https://ubusiness-ithub.ru/api/fetchevents")
-        newsFetch(url: "https://ubusiness-ithub.ru/api/fetchnewslist")
-        offerFetch(url: "https://ubusiness-ithub.ru/api/fetchOffers")
+        eventTitle.underLineButton(text: "СОБЫТИЯ")
+        newsTitle.underLineButton(text: "НОВОСТИ")
+        offerTitle.underLineButton(text: "СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ")
+        offerTitle.contentHorizontalAlignment = .left
 
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         scrollView.backgroundColor = .navigationColorVanilla
@@ -127,14 +146,17 @@ class Home: UIViewController {
         buttonEvent.layer.borderColor = UIColor.black.cgColor
         
         settingProgressBar()
-        
-        print(Token.idUser)
 
     }
     
+ 
+    
+ 
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+        
+        
      
     }
     
@@ -226,8 +248,10 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             return 5
         } else if collectionViewNews.tag == 2 {
             return 5
+        } else if collectionViewOffer.tag == 3 {
+            return 5
         } else {
-            return 10
+            return 5
         }
     }
     // правильная логика
@@ -238,24 +262,20 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     
     // неправильная логика
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-
-        if collectionView.tag == 1 {
-           
-            
-            return true
-        } else {
-            return false
-        }
        
-       
+        print("ddd")
+       return false
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView.tag == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCell
+           
+          
             
             if let title = Home.events?[0] {
+               
                 titleEvent.text = title.title
                 dateEvent.text = title.date
             }
@@ -265,6 +285,7 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
                 cell.imageCollection.backgroundColor = UIColor.systemIndigo
             case 4:
                 cell.imageCollection.image = UIImage.init(named: "eventMore")
+               
             default:
                 break
             }
@@ -278,19 +299,9 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             
             if let title = Home.news?[indexPath.row] {
                 newsCell.title.text = title.title
+                newsCell.date.text = title.date
             }
-            
-            if let date = Home.news?[indexPath.row] {
-                newsCell.date.text = date.date
-            }
-            
-            if let banner = Home.news?[indexPath.row] {
-                
-            }
-            
-            if let id = Home.news?[indexPath.row] {
-                print("newsId \(id.id)")
-            }
+          
             
             switch indexPath.section {
             case 1...3:
@@ -309,6 +320,7 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             
             if let title = Home.offers?[indexPath.row] {
                 offerCell.centerLabel.text = title.title
+                offerCell.bottomLabel.text = title.protocol
             }
             
             switch indexPath.section {
@@ -328,14 +340,20 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if self.collectionView.indexPathForItem(at: visiblePoint) != nil {
         }
         
         if collectionView.tag == 1 {
+            
             let witdh = collectionView.frame.width - (collectionView.contentInset.left * 2)
             let index = collectionView.contentOffset.x / witdh * 3.2
+            
+            eventTitleCell.constant = -collectionView.contentOffset.x + 45
+            eventDateCell.constant = -collectionView.contentOffset.x + 45
+            
             let nowRoundedIndex = Int(round(index))
             switch nowRoundedIndex {
             case 0:
@@ -415,7 +433,7 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
         
         if collectionViewOffer.tag == 3 {
             let witdh = collectionViewOffer.frame.width - (collectionViewOffer.contentInset.left * 2)
-            let index = collectionViewOffer.contentOffset.x / witdh * 3.2
+            let index = collectionViewOffer.contentOffset.x / witdh * 1.1
             let nowRoundedIndex = Int(round(index))
             switch nowRoundedIndex {
             case 0:

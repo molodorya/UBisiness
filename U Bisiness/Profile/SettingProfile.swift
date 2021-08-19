@@ -110,11 +110,16 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
   
     static var nameProfile = ""
     static var phoneProfile = ""
+    var ds: [typeNetwork]?
     
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         httpGet()
+        
+        let userId = UserDefaults.standard.integer(forKey: "idUser")
+        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=\(userId)")
+        
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
             navigationBar?.shadowImage = UIImage()
@@ -214,6 +219,7 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
 
     }
     
+   
 
     @IBAction func actionCard(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
@@ -295,31 +301,33 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func actionSettingSubscribe(_ sender: UIButton) {
-        subscriptionView.isHidden = false
-        
-        cabinetView.isHidden = false
-        titleLabel.isHidden = true
-        imageUser.isHidden = true
-        nameView.isHidden = true
-        name.isHidden = true
-        nameText.isHidden = true
-        nameLines.isHidden = true
-        emailView.isHidden = true
-        email.isHidden = true
-        emailText.isHidden = true
-        emailLine.isHidden = true
-        phoneView.isHidden = true
-        phone.isHidden = true
-        phoneText.isHidden = true
-        phoneLines.isHidden = true
-        languageView.isHidden = true
-        language.isHidden = true
-        languageText.isHidden = true
-        languageLines.isHidden = true
-        editMyCabinet.isHidden = true
-        settingSubscribe.isHidden = true
-    
-        scrollView.setContentOffset(CGPoint.zero, animated: true)
+        let vc = storyboard?.instantiateViewController(identifier: "SubscribeView")
+        setSubView(vc!)
+//        subscriptionView.isHidden = false
+//
+//        cabinetView.isHidden = false
+//        titleLabel.isHidden = true
+//        imageUser.isHidden = true
+//        nameView.isHidden = true
+//        name.isHidden = true
+//        nameText.isHidden = true
+//        nameLines.isHidden = true
+//        emailView.isHidden = true
+//        email.isHidden = true
+//        emailText.isHidden = true
+//        emailLine.isHidden = true
+//        phoneView.isHidden = true
+//        phone.isHidden = true
+//        phoneText.isHidden = true
+//        phoneLines.isHidden = true
+//        languageView.isHidden = true
+//        language.isHidden = true
+//        languageText.isHidden = true
+//        languageLines.isHidden = true
+//        editMyCabinet.isHidden = true
+//        settingSubscribe.isHidden = true
+//
+//        scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
    
@@ -469,4 +477,68 @@ extension SettingProfile {
             task.resume()
         }
     }
+}
+
+
+extension SettingProfile {
+    // MARK: - ServerStatusElement
+    struct StatusSubscribe: Decodable {
+        var data: DataSubscribe?
+        var items: ItemsSubscribe?
+    }
+    struct DataSubscribe: Decodable {
+        var id: Int?
+        var status: String?
+    }
+    struct ItemsSubscribe: Codable {
+        var the3: ItemSubscribe?
+        
+        enum CodingKeys: String, CodingKey {
+            case the3 = "3"
+        }
+    }
+    struct ItemSubscribe: Codable {
+        var product_id: Int?
+    }
+    
+    typealias typeNetwork = [StatusSubscribe]
+    
+  
+
+    func fetchSubscribe(url: String) {
+        let url = URL(string: url)!
+        var strValue = 0
+     
+        
+        URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
+            guard let data = data else { return }
+            guard error == nil else { return }
+            do {
+                let json = try JSONDecoder().decode(typeNetwork.self, from: data)
+                
+                DispatchQueue.main.async {
+                  print(strValue)
+                    if strValue == 244 {
+                        subscriptionTitle.text = "Тариф VIP 1 год"
+                    } else if strValue == 247 {
+                        subscriptionTitle.text = "Тариф VIP 6 месяцев"
+                    } else if strValue == 241 {
+                        subscriptionTitle.text = "Тариф Базовый 6 месяцев"
+                    } else if strValue == 238 {
+                        subscriptionTitle.text = "Тариф Базовый 1 год"
+                    } else if strValue == 0 {
+                        subscriptionTitle.text = "Ошибка загрузки"
+                    }
+                }
+             
+               
+
+                    
+                    
+               } catch let error {
+                   print("Ошибка: \(error)")
+               }
+           }.resume()
+    }
+    
 }

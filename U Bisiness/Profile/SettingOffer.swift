@@ -74,6 +74,9 @@ class SettingOffer: UIViewController {
       
     }
     
+    
+ 
+    
     @IBAction func actionCabinet(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
         setSubView(vc!)
@@ -115,16 +118,21 @@ class SettingOffer: UIViewController {
     }
     
     @IBAction func addClick(_ sender: UIButton) {
-        
+        let vc = storyboard?.instantiateViewController(identifier: "CreateOffer")
+        setSubView(vc!)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.offerFetch(url: "https://ubusiness-ithub.ru/api/fetchUserOffers")
+        }
+        
+        self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
     }
-  
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tableView.removeObserver(self, forKeyPath: "contentSize")
@@ -169,6 +177,12 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
         if let index = offersUser?[indexPath.row] {
             UserDefaults.standard.setValue(index[indexPath.section].id ?? 0, forKey: "selectCardId")
         }
+       
+//        let vc = storyboard?.instantiateViewController(identifier: "OfferCard")
+//        navigationController?.pushViewController(vc!, animated: true)
+        
+        let vc = storyboard?.instantiateViewController(identifier: "OfferCard")
+        setSubView(vc!)
     }
     
     
@@ -184,7 +198,10 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
         if let data = offersUser?[indexPath.row] {
             cell.titleCell.text = data[indexPath.section].title
             cell.protocolCell.text = data[indexPath.section].protocol ?? ""
+         
         }
+        
+     
         
         
         cell.contentView.backgroundColor = UIColor.random.withAlphaComponent(0.8)

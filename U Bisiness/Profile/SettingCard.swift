@@ -26,6 +26,12 @@ class SettingCard: UIViewController {
     
     // View
     @IBOutlet weak var cardView: UIView!
+    
+    @IBOutlet weak var cardNotLabel: UILabel!
+    @IBOutlet weak var cardNotButton: UIButton!
+    
+    
+    
     @IBOutlet weak var change: UIButton!
     
     @IBOutlet weak var viewButtonsTop: UIView!
@@ -86,7 +92,7 @@ class SettingCard: UIViewController {
     // Constraint
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var cardViewHeight: NSLayoutConstraint!
-    
+
     
     
     
@@ -116,6 +122,9 @@ class SettingCard: UIViewController {
         super.viewDidLoad()
 
         fetchBusinessCard()
+        
+        cardNotLabel.isHidden = true
+        cardNotButton.isHidden = true
         
         nameUser.textAlignment = .left
         nameUser.adjustsFontSizeToFitWidth = true
@@ -296,7 +305,7 @@ class SettingCard: UIViewController {
     
     var buttonSelectable = false
     @IBAction func buttonChange(_ sender: UIButton) {
-        
+        cardView.isHidden = false
         if buttonSelectable == false {
             offPreset()
             change.setTitle("СОХРАНИТЬ", for: .normal)
@@ -322,6 +331,22 @@ class SettingCard: UIViewController {
         }
         
     }
+    
+    
+    @IBAction func createCards(_ sender: UIButton) {
+        cardNotLabel.isHidden = true
+        cardNotButton.isHidden = true
+        
+        userImage.isHidden = false
+        nameUser.isHidden = false
+        userView.isHidden = false
+        industryView.isHidden = false
+        nameCompanyView.isHidden = false
+        viewButtonsBottom.isHidden = false
+        change.isHidden = false
+        buttonChange(.init())
+    }
+    
     
 }
 
@@ -368,21 +393,45 @@ extension SettingCard {
                     let json = try JSONDecoder().decode([FetchBusinessCardElement].self, from: data)
                     
                     let jsonData = json[0]
-                    
+                    print(jsonData)
 
                     
                     if statusCode == 200 {
                         
                         DispatchQueue.main.async {
-                            print(jsonData)
+                            print("fwergiwergnie")
                             
-                            nameUser.text = jsonData.user
-                            industryText.text = jsonData.industry
-                            nameCompanyText.text = jsonData.company
-                            phoneText.text = jsonData.tel
-                            countryText.text = jsonData.country
-                            streetText.text = jsonData.address
-                            tagText.text = jsonData.tags
+                            
+                            if jsonData.industry == nil && jsonData.company == nil && jsonData.address == nil {
+                                
+                                cardNotLabel.isHidden = false
+                                cardNotButton.isHidden = false
+                                
+                                userImage.isHidden = true
+                                nameUser.isHidden = true
+                                userView.isHidden = true
+                                industryView.isHidden = true
+                                nameCompanyView.isHidden = true
+                                viewButtonsBottom.isHidden = true
+                                change.isHidden = true
+                                
+                                cardNotButton.layer.cornerRadius = 5
+                                
+                                
+//                                change.setTitle("СОЗДАТЬ ВИЗИТКУ", for: .normal)
+        
+                                print("nil")
+                            } else {
+                                nameUser.text = jsonData.user
+                                industryText.text = jsonData.industry
+                                nameCompanyText.text = jsonData.company
+                                phoneText.text = jsonData.tel
+                                countryText.text = jsonData.country
+                                streetText.text = jsonData.address
+                                tagText.text = jsonData.tags
+                            }
+                            
+                           
                             
                             
                             if jsonData.status == true {
@@ -419,12 +468,12 @@ extension SettingCard {
     func changeCard(url: String) {
         let url = NSURL(string: url)!
         
-        let industry = industryText.text ?? "-"
-        let company = nameCompanyText.text ?? "-"
-        let phone = phoneText.text ?? "-"
-        let country = countryText.text ?? "-"
-        let street = streetText.text ?? "-"
-        let tags = tagText.text ?? "-"
+        let industry = industryText.text ?? ""
+        let company = nameCompanyText.text ?? ""
+        let phone = phoneText.text ?? ""
+        let country = countryText.text ?? ""
+        let street = streetText.text ?? ""
+        let tags = tagText.text ?? ""
         
         
         let session = URLSession.shared
@@ -456,15 +505,13 @@ extension SettingCard {
                     do {
                         let json = try JSONDecoder().decode(SuccesChange.self, from: data)
                         print(json)
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [self] in
                             if statusCode == 200 {
                                 UserDefaults.standard.setValue(industry, forKey: "cardIndustry")
                                 UserDefaults.standard.setValue(company, forKey: "cardNameCompany")
                                 UserDefaults.standard.setValue(country, forKey: "cardCountry")
                                 UserDefaults.standard.setValue(street, forKey: "cardCompanyAddress")
                                 UserDefaults.standard.setValue(tags, forKey: "cardTags")
-                                
-                                
                             } else if statusCode == 401 {
                                 
                                 DispatchQueue.main.async {

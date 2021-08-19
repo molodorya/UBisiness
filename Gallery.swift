@@ -40,8 +40,8 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         navigationBar?.backgroundColor = UIColor.clear
 
         
-        let alertController = UIAlertController(title: "В разработке", message: nil, preferredStyle:UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        let alertController = UIAlertController(title: "В разработке", message: nil, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alertController, animated: true, completion: nil)
         
     }
