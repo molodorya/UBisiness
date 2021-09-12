@@ -71,8 +71,9 @@ class CardFull: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUserId()
-        viewButtonsTop.isHidden = true
-        viewButtonsBottom.isHidden = false
+        
+//        viewButtonsTop.isHidden = true
+//        viewButtonsBottom.isHidden = false
         
         
         if CardSearch.add_delete == false {
@@ -80,9 +81,9 @@ class CardFull: UIViewController {
         } else {
             add.setTitle("УДАЛИТЬ ИЗ КОНТАКТОВ", for: .normal)
         }
-        
-        
+
         turn.underLineButton(text: "свернуть")
+        details.underLineButton(text: "подробнее")
         
         nameUser.text = ""
         nameCompanyText.text = ""
@@ -92,7 +93,7 @@ class CardFull: UIViewController {
         streetText.text = ""
         tagText.text = ""
         
-       
+        settingTextView(permission: false)
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         cardView.layer.cornerRadius = 5
@@ -114,7 +115,120 @@ class CardFull: UIViewController {
         contryView.backgroundColor = .vanillaWhiteContrast
         streetView.backgroundColor = .vanillaWhiteContrast
         tagView.backgroundColor = .vanillaWhiteContrast
+        
+        details.isHidden = true
+        imageDetails.isHidden = true
+        
+//        statusTel.isHidden = true
+//        statusTelText.isHidden = true
+    
     }
+    
+    
+    func settingTextView(permission: Bool) {
+        
+        industryText.isScrollEnabled = false
+        nameCompanyText.isScrollEnabled = false
+        phoneText.isScrollEnabled = false
+        countryText.isScrollEnabled = false
+        streetText.isScrollEnabled = false
+        tagText.isScrollEnabled = false
+        
+        if permission == true {
+            industryText.isEditable = true
+            nameCompanyText.isEditable = true
+            phoneText.isEditable = true
+            countryText.isEditable = true
+            streetText.isEditable = true
+            tagText.isEditable = true
+        } else {
+            industryText.isEditable = false
+            nameCompanyText.isEditable = false
+            phoneText.isEditable = false
+            countryText.isEditable = false
+            streetText.isEditable = false
+            tagText.isEditable = false
+        }
+    }
+    
+    @IBOutlet weak var cardViewHeight: NSLayoutConstraint!
+    
+    @IBAction func detailsAction(_ sender: UIButton) {
+        
+        UIView.animate(withDuration: 0.3) {
+        self.cardViewHeight.constant = 1015
+//        self.scrollViewHeight.constant = 1300
+        }
+        
+        details.isHidden = true
+        imageDetails.isHidden = true
+        
+        turn.isHidden = false
+        imageTurn.isHidden = false
+        
+        imageCompany.isHidden = false
+        
+        phoneTitle.isHidden = false
+        phoneText.isHidden = false
+        phoneLines.isHidden = false
+        
+        countryTitle.isHidden = false
+        countryText.isHidden = false
+        countryLines.isHidden = false
+        
+        streetTitle.isHidden = false
+        streetText.isHidden = false
+        streetLines.isHidden = false
+        
+        tagTitle.isHidden = false
+        tagText.isHidden = false
+        tagLines.isHidden = false
+        
+    }
+    
+    @IBAction func turnAction(_ sender: UIButton) {
+        cardViewHeight.constant = 420
+//        scrollViewHeight.constant = 800
+        
+        scrollView.scrollToBottom(animated: true)
+        
+        details.isHidden = false
+        imageDetails.isHidden = false
+        
+//        statusTel.isHidden = true
+//        statusTelText.isHidden = true
+        
+        turn.isHidden = true
+        imageTurn.isHidden = true
+        
+        industryTitle.isHidden = false
+        industryText.isHidden = false
+        industryLines.isHidden = false
+        
+        nameCompanyTitle.isHidden = false
+        nameCompanyText.isHidden = false
+        nameCompanyLines.isHidden = false
+        
+        imageCompany.isHidden = true
+        
+        phoneTitle.isHidden = true
+        phoneText.isHidden = true
+        phoneLines.isHidden = true
+        
+        countryTitle.isHidden = true
+        countryText.isHidden = true
+        countryLines.isHidden = true
+        
+        streetTitle.isHidden = true
+        streetText.isHidden = true
+        streetLines.isHidden = true
+        
+        tagTitle.isHidden = true
+        tagText.isHidden = true
+        tagLines.isHidden = true
+        
+    }
+    
     
     
     @IBAction func addFavorite(_ sender: UIButton) {
@@ -122,17 +236,14 @@ class CardFull: UIViewController {
         if CardSearch.add_delete == false {
             add.setTitle("ДОБАВИТЬ В КОНТАКТЫ", for: .normal)
             addFavorite(url: "https://ubusiness-ithub.ru/api/addFavoriteCard")
+            
+            
+            
         } else {
             add.setTitle("УДАЛИТЬ ИЗ КОНТАКТОВ", for: .normal)
             deleteFavorit(url: "https://ubusiness-ithub.ru/api/deleteFavoriteCard")
         }
-        
-      
-        
-        
     }
-    
-    
 }
 
 struct CardContact: Codable {
@@ -143,6 +254,7 @@ struct CardContact: Codable {
     var country: String?
     var address: String?
     var tags: String?
+    var urllogo: String?
 
     enum CodingKeys: String, CodingKey {
         case idCard = "id_card"
@@ -169,7 +281,6 @@ extension CardFull {
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
             if let data = data {
                 do {
-                  
                     let json = try JSONDecoder().decode(CardContact.self, from: data)
                   
                     DispatchQueue.main.async { [self] in
@@ -180,13 +291,17 @@ extension CardFull {
                         } else {
                             print("фалсе")
                         }
+                        
+                        
                         industryText.text = json.industry
                         nameCompanyText.text = json.company
                         countryText.text = json.country
                         streetText.text = json.address
                         tagText.text = json.tags
-
+                    
+                        userImage.downloaded(from: "https://ubusiness-ithub.ru/avatars/\(json.avatarurl ?? "")")
                         
+                        imageCompany.downloaded(from: "https://ubusiness-ithub.ru/companies/\(json.urllogo ?? "")")
                     }
                     
                 } catch let error as NSError {
@@ -197,8 +312,6 @@ extension CardFull {
         task.resume()
     }
 }
-
-
 
 struct RequestAddFavorite: Codable {
     var ru: String?
@@ -239,11 +352,15 @@ extension CardFull {
                     let json = try JSONDecoder().decode(RequestAddFavorite.self, from: data)
                     
                     
+                    
+                    
                     DispatchQueue.main.async {
                         self.add.setTitle("В ИЗБРАННЫХ", for: .normal)
                         let alertController = UIAlertController(title: json.ru ?? "", message: "Возможны ошибки", preferredStyle:UIAlertController.Style.alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
                         self.present(alertController, animated: true, completion: nil)
+                        
+                       
                     }
                     
                     
@@ -297,4 +414,14 @@ extension CardFull {
         }
         task.resume()
     }
+}
+
+
+
+extension UIScrollView {
+   func scrollToBottom(animated: Bool) {
+     if self.contentSize.height < self.bounds.size.height { return }
+     let bottomOffset = CGPoint(x: 0, y: -100)
+     self.setContentOffset(bottomOffset, animated: animated)
+  }
 }

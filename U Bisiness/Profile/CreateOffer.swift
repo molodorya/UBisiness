@@ -14,7 +14,8 @@ struct SuccesAdd: Decodable {
     let de: String?
 }
 
-class CreateOffer: UIViewController {
+class CreateOffer: UIViewController, UIImagePickerControllerDelegate,  UINavigationControllerDelegate {
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
@@ -31,6 +32,7 @@ class CreateOffer: UIViewController {
     @IBOutlet weak var headerButtonOffer: UIButton!
 
     @IBOutlet weak var buttonImage: UIButton!
+    @IBOutlet weak var imageViewButton: UIImageView!
     
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var protocolView: UIView!
@@ -53,17 +55,17 @@ class CreateOffer: UIViewController {
 
         // Cabinet
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextCabinet.text = "мой\nкабинет"
+//        headerTextCabinet.text = "мой\nкабинет"
         headerButtonCabinet.backgroundColor = .clear
         
         // Card
         headerTextCard.adjustsFontSizeToFitWidth = true
-        headerTextCard.text = "моя\nвизитка"
+//        headerTextCard.text = "моя\nвизитка"
         headerButtonCard.backgroundColor = .clear
         
         //Offer
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextOffer.text = "мои спец.\nпредложения"
+//        headerTextOffer.text = "мои спец.\nпредложения"
         headerButtonOffer.backgroundColor = .clear
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
@@ -90,23 +92,84 @@ class CreateOffer: UIViewController {
         top.layer.cornerRadius = 5
         add.layer.cornerRadius = 5
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         hideKeyboardWhenTappedScreen()
+//        imagePicker.delegate = self
+        imageView.layer.cornerRadius = 5
+        
+        
     }
+    
+    
+    // Open gallery
+    @IBOutlet var imageView: UIImageView!
+    var imagePicker = UIImagePickerController()
+
+    @IBAction func setPicture(_ sender: Any) {
+         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+             imagePicker.delegate = self
+             imagePicker.sourceType = .photoLibrary
+             imagePicker.allowsEditing = false
+
+             present(imagePicker, animated: true, completion: nil)
+         }
+     }
+
+     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+         picker.dismiss(animated: true, completion: nil)
+         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+             imageView.image = image
+         }
+
+     }
+
+
+    
+    
+    // Keyboard top
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    // Keyboard hide
+  @objc func keyboardWillHide(notification: NSNotification) {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+           super.viewWillDisappear(animated)
+        self.removeFromParent()
+        self.view.removeFromSuperview()
+       }
     
     // Navigator menu
     @IBAction func actionCabinet(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
-        setSubView(vc!)
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
+//        setSubView(vc!)
+        self.tabBarController?.selectedIndex = 0
     }
     
     @IBAction func actionCard(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
-        setSubView(vc!)
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
+//        setSubView(vc!)
+        self.tabBarController?.selectedIndex = 1
     }
     
     @IBAction func actionOffer(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
-        setSubView(vc!)
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
+//        setSubView(vc!)
+//        self.tabBarController?.selectedIndex = 2
+        self.removeFromParent()
+        self.view.removeFromSuperview()
     }
     
     

@@ -15,18 +15,20 @@ class Welcome: UIViewController {
     
     // Content
   
+    @IBOutlet weak var stackViewProgressBar: UIStackView!
     @IBOutlet weak var one: UIView!
     @IBOutlet weak var two: UIView!
     @IBOutlet weak var three: UIView!
     @IBOutlet weak var four: UIView!
     @IBOutlet weak var five: UIView!
     
-
+    static var statusButtons = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Color background
         view.backgroundColor = .vanillaWhite
+        
         
         // Hidden navigation bar
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -45,11 +47,16 @@ class Welcome: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         settingProgressBar()
         
-//        let defaults = UserDefaults.standard
-//            let dictionary = defaults.dictionaryRepresentation()
-//            dictionary.keys.forEach { key in
-//                defaults.removeObject(forKey: key)
-//            }
+        collectionView.isScrollEnabled = false
+        stackViewProgressBar.isHidden = true
+        
+        
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { Timer in
+            if Welcome.statusButtons == true {
+                self.collectionView.isScrollEnabled = true
+                self.stackViewProgressBar.isHidden = false
+            }
+        }
     }
     
     
@@ -91,7 +98,7 @@ class OnboardOne: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+        titleLabel.text = titleLabel.text?.uppercased()
         presetStartButtons(text: "EN", button: buttonEnglish, textColor: .black)
         presetStartButtons(text: "RU", button: buttonRussia, textColor: .black)
         presetStartButtons(text: "DE", button: buttonGermania, textColor: .black)
@@ -117,9 +124,13 @@ class OnboardOne: UICollectionViewCell {
         
         backgroundColor = .vanillaWhite
         
+        let locale = NSLocale.preferredLanguages.first!
         
-        
-       
+        if locale == "ru-RU" {
+            actionRU(.init())
+        } else if locale == "en-EN" {
+            actionEN(.init())
+        }
     }
     
     
@@ -129,12 +140,24 @@ class OnboardOne: UICollectionViewCell {
         button.backgroundColor = background
     }
     
+    
+   
+    
  
     // Target action buttonEN
     @IBAction func actionEN(_ sender: UIButton) {
         atrButtons(button: buttonEnglish, text: "EN", textColor: .white, background: .black)
         atrButtons(button: buttonRussia, text: "RU", textColor: .black, background: .clear)
         atrButtons(button: buttonGermania, text: "DE", textColor: .black, background: .clear)
+        
+        UserDefaults.standard.set(["en-GB"], forKey: "AppleLanguages")
+        UserDefaults.standard.setValue("en", forKey: "languageCustom")
+        UserDefaults.standard.synchronize()
+        
+        
+        Welcome.statusButtons = true
+        
+        
     }
 
     // Target action buttonRU
@@ -142,6 +165,14 @@ class OnboardOne: UICollectionViewCell {
         atrButtons(button: buttonEnglish, text: "EN", textColor: .black, background: .clear)
         atrButtons(button: buttonRussia, text: "RU", textColor: .white, background: .black)
         atrButtons(button: buttonGermania, text: "DE", textColor: .black, background: .clear)
+        
+        UserDefaults.standard.set(["ru"], forKey: "AppleLanguages")
+        UserDefaults.standard.setValue("ru", forKey: "languageCustom")
+        UserDefaults.standard.synchronize()
+        
+        
+        Welcome.statusButtons = true
+     
     }
     
     // Target action buttonDE
@@ -149,6 +180,15 @@ class OnboardOne: UICollectionViewCell {
         atrButtons(button: buttonEnglish, text: "EN", textColor: .black, background: .clear)
         atrButtons(button: buttonRussia, text: "RU", textColor: .black, background: .clear)
         atrButtons(button: buttonGermania, text: "DE", textColor: .white, background: .black)
+        
+        UserDefaults.standard.set(["de"], forKey: "AppleLanguages")
+        UserDefaults.standard.setValue("de", forKey: "languageCustom")
+        UserDefaults.standard.synchronize()
+       
+        
+        
+        Welcome.statusButtons = true
+    
     }
     
     func presetStartButtons(text: String, button: UIButton, textColor: UIColor) {
@@ -165,7 +205,7 @@ class OnboardTwo: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.text = "ЗНАКОМСТВО И ОБЩЕНИЕ\n С ПРЕДПРИНИМАТЕЛЯМИ\n СО ВСЕГО МИРА"
+//        titleLabel.text = "ЗНАКОМСТВО И ОБЩЕНИЕ\n С ПРЕДПРИНИМАТЕЛЯМИ\n СО ВСЕГО МИРА"
         backgroundColor = .vanillaWhite
     }
 }
@@ -175,7 +215,7 @@ class OnboardThree: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.text = "ВОЗМОЖНОСТЬ НАЙТИ\n БИЗНЕС-ПАРТНЕРОВ\n И МАСШТАБИРОВАТЬ\n БИЗНЕС"
+//        titleLabel.text = "ВОЗМОЖНОСТЬ НАЙТИ\n БИЗНЕС-ПАРТНЕРОВ\n И МАСШТАБИРОВАТЬ\n БИЗНЕС"
         backgroundColor = .vanillaWhite
     }
 }
@@ -186,7 +226,7 @@ class OnboardFour: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.text = "ВСТРЕЧИ С ЭКСПЕРТАМИ ПО АКТУАЛЬНЫМ НАПРАВЛЕНИЯМ РАЗВИТИЯ БИЗНЕСА"
+//        titleLabel.text = "ВСТРЕЧИ С ЭКСПЕРТАМИ ПО АКТУАЛЬНЫМ НАПРАВЛЕНИЯМ РАЗВИТИЯ БИЗНЕСА"
         backgroundColor = .vanillaWhite
     }
 }
@@ -284,4 +324,32 @@ extension Welcome: UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     }
 }
 
+extension Bundle {
+    private static var bundle: Bundle!
 
+    public static func localizedBundle() -> Bundle! {
+        if bundle == nil {
+            let appLang = UserDefaults.standard.string(forKey: "app_lang") ?? "ru"
+            let path = Bundle.main.path(forResource: appLang, ofType: "lproj")
+            bundle = Bundle(path: path!)
+        }
+
+        return bundle;
+    }
+
+    public static func setLanguage(lang: String) {
+        UserDefaults.standard.set([lang], forKey: "app_lang")
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        bundle = Bundle(path: path!)
+    }
+}
+
+extension String {
+    func localized() -> String {
+        return NSLocalizedString(self, tableName: nil, bundle: Bundle.localizedBundle(), value: "", comment: "")
+    }
+
+    func localizeWithFormat(arguments: CVarArg...) -> String{
+        return String(format: self.localized(), arguments: arguments)
+    }
+}

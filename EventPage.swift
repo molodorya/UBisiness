@@ -24,13 +24,12 @@ class EventPage: UIViewController {
     @IBOutlet weak var viewProfileLabel: UIView!
     @IBOutlet weak var button: UIButton!
     
-    
     @IBOutlet weak var back: UIBarButtonItem!
     @IBOutlet weak var share: UIBarButtonItem!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         eventFetchId()
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         
@@ -52,17 +51,14 @@ class EventPage: UIViewController {
         dateContent.textColor = .lightGray
         dateContent.textAlignment = .left
         dateContent.font = UIFont.systemFont(ofSize: 12)
-        
-        
-        
+
         label.numberOfLines = 0
         label.backgroundColor = .clear
         label.textAlignment = .left
+        
         label.setLineSpacing(lineSpacing: 0, lineHeightMultiple: 1.6)
         
         button.layer.cornerRadius = 5
-        
-        
         
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
@@ -107,9 +103,9 @@ struct eventPage: Codable {
     var title: String?
     var date: String?
     var text: String?
-//    var banner: String?
-//    var category: String?
-//    var users: [Int]?
+    var banner: String?
+    var category: String?
+    var users: [Int]?
     var type: String?
 }
 
@@ -133,6 +129,10 @@ extension EventPage {
 //                        titleContent.text = "json?.title"
                         typeContent.text = json?.type
                         dateContent.text = json?.date
+                        imageView.downloaded(from: "https://ubusiness-ithub.ru/events/\(json?.banner ?? "")")
+                        
+                       
+                        
                         label.text = json?.text
                         print("fwdefge")
                     }

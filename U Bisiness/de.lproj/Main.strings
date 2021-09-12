@@ -1,0 +1,768 @@
+
+/* Class = "UINavigationItem"; title = "сменить пароль"; ObjectID = "0cx-V7-6V8"; */
+"0cx-V7-6V8.title" = "Passwort ändern";
+
+/* Class = "UILabel"; text = "ПРОТОКОЛ"; ObjectID = "0gl-fm-AwX"; */
+"0gl-fm-AwX.text" = "Protokoll";
+
+/* Class = "UITextView"; text = "НАЗВАНИЕ"; ObjectID = "127-aB-rbj"; */
+"127-aB-rbj.text" = "Bezeichnung";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "1dX-84-3tO"; */
+"1dX-84-3tO.title" = " ";
+
+/* Class = "UILabel"; text = "Может ли самозанятый платить НПД с процентов по займам"; ObjectID = "1yT-2T-MV2"; */
+"1yT-2T-MV2.text" = "Может ли самозанятый платить НПД с процентов по займам";
+
+/* Class = "UILabel"; text = "мои спец. предложения"; ObjectID = "2DB-JE-BNg"; */
+"2DB-JE-BNg.text" = "Meine Spezialangebote";
+
+/* Class = "UILabel"; text = "ЯЗЫК"; ObjectID = "2Dk-Eg-iZ1"; */
+"2Dk-Eg-iZ1.text" = "Sprache";
+
+/* Class = "UILabel"; text = "— 350₽"; ObjectID = "2jY-sX-1vh"; */
+"2jY-sX-1vh.text" = "— 350₽";
+
+/* Class = "UILabel"; text = "Продление премиум доступа"; ObjectID = "2lt-vC-Ma9"; */
+"2lt-vC-Ma9.text" = "Продление премиум доступа";
+
+/* Class = "UILabel"; text = "Seo – продвижение \nбизнесса"; ObjectID = "2xv-yI-5g8"; */
+"2xv-yI-5g8.text" = "Seo – продвижение \nбизнесса";
+
+/* Class = "UITextView"; text = "ПРОТОКОЛ"; ObjectID = "2zP-CX-gwQ"; */
+"2zP-CX-gwQ.text" = "Protokoll";
+
+/* Class = "UITextView"; text = "Телефон"; ObjectID = "35d-zH-Jev"; */
+"35d-zH-Jev.text" = "Telefonnummer";
+
+/* Class = "UIButton"; normalTitle = "подробнее "; ObjectID = "3pp-RQ-h1Y"; */
+"3pp-RQ-h1Y.normalTitle" = "Mehr erfahren";
+
+/* Class = "UITextField"; text = "E-Mail"; ObjectID = "4Pv-ju-Y72"; */
+"4Pv-ju-Y72.text" = "E-Mail";
+
+/* Class = "UILabel"; text = "мой кабинет"; ObjectID = "4bS-C5-8Jf"; */
+"4bS-C5-8Jf.text" = "Mein Konto";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "4ne-YD-lv8"; */
+"4ne-YD-lv8.title" = "Item";
+
+/* Class = "UILabel"; text = "ДО 29 СЕНТЯБРЯ"; ObjectID = "5AO-8K-Eq7"; */
+"5AO-8K-Eq7.text" = "ДО 29 СЕНТЯБРЯ";
+
+/* Class = "UILabel"; text = "СТРАНА"; ObjectID = "5Nz-sh-H1e"; */
+"5Nz-sh-H1e.text" = "Land";
+
+/* Class = "UIBarButtonItem"; title = "Menu"; ObjectID = "5Q2-MY-meH"; */
+"5Q2-MY-meH.title" = "Menu";
+
+/* Class = "UITextView"; text = "#ubusiness"; ObjectID = "5S0-eQ-NOA"; */
+"5S0-eQ-NOA.text" = "#ubusiness";
+
+/* Class = "UIBarButtonItem"; title = "back"; ObjectID = "5Tk-21-3UL"; */
+"5Tk-21-3UL.title" = "back";
+
+/* Class = "UILabel"; text = "мои спец. предложения"; ObjectID = "5bU-pO-f65"; */
+"5bU-pO-f65.text" = "Meine Spezialangebote";
+
+/* Class = "UILabel"; text = "ПОЛЕ ВВОДА"; ObjectID = "5cd-lF-bdi"; */
+"5cd-lF-bdi.text" = "Eingabefeld";
+
+/* Class = "UITextView"; text = "ПРОТОКОЛ"; ObjectID = "5kh-ZP-JZw"; */
+"5kh-ZP-JZw.text" = "Protokoll";
+
+/* Class = "UITextView"; text = "РОССИЯ"; ObjectID = "66H-0r-9dX"; */
+"66H-0r-9dX.text" = "РОССИЯ";
+
+/* Class = "UIButton"; normalTitle = "DE"; ObjectID = "69v-WC-bEA"; */
+"69v-WC-bEA.normalTitle" = "DE";
+
+/* Class = "UILabel"; text = "— 350₽"; ObjectID = "6zp-hw-yBQ"; */
+"6zp-hw-yBQ.text" = "— 350₽";
+
+/* Class = "UIButton"; normalTitle = "ИЗМЕНИТЬ"; ObjectID = "72b-8k-dns"; */
+"72b-8k-dns.normalTitle" = "Ändern";
+
+/* Class = "UIViewController"; title = "EventPage"; ObjectID = "7DU-9g-rFM"; */
+"7DU-9g-rFM.title" = "EventPage";
+
+/* Class = "UILabel"; text = "ВОССТАНОВЛЕНИЕ ДОСТУПА "; ObjectID = "7GJ-XI-fwf"; */
+"7GJ-XI-fwf.text" = "Zugang wiederherstellen ";
+
+/* Class = "UIButton"; normalTitle = "ПРОДЛИТЬ"; ObjectID = "7Kp-WU-qbS"; */
+"7Kp-WU-qbS.normalTitle" = "Verlängern";
+
+/* Class = "UIButton"; normalTitle = "ОЧИСТИТЬ"; ObjectID = "7ZH-Oh-6de"; */
+"7ZH-Oh-6de.normalTitle" = "Löschen";
+
+/* Class = "UILabel"; text = "Активная премиум подписка"; ObjectID = "817-MR-q0T"; */
+"817-MR-q0T.text" = "Aktives Premium-Abonnement";
+
+/* Class = "UITextField"; placeholder = "Подтвердите пароль"; ObjectID = "8MH-iI-Zqp"; */
+"8MH-iI-Zqp.placeholder" = "Passwort bestätigen";
+
+/* Class = "UILabel"; text = "ПОДТВЕРЖДЕНИЯ НОМЕРА"; ObjectID = "8MK-Tw-rKz"; */
+"8MK-Tw-rKz.text" = "ПОДТВЕРЖДЕНИЯ НОМЕРА";
+
+/* Class = "UIButton"; normalTitle = "свернуть"; ObjectID = "8dk-u1-yCn"; */
+"8dk-u1-yCn.normalTitle" = "Einklappen";
+
+/* Class = "UITextView"; text = "ТЕКСТ"; ObjectID = "8et-k1-1ke"; */
+"8et-k1-1ke.text" = "Text";
+
+/* Class = "UIButton"; normalTitle = "СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ"; ObjectID = "8lh-sx-0pm"; */
+"8lh-sx-0pm.normalTitle" = "Spezialangebote";
+
+/* Class = "UILabel"; text = "маркетинг"; ObjectID = "8pd-hu-YaZ"; */
+"8pd-hu-YaZ.text" = "Marketing";
+
+/* Class = "UILabel"; text = "ДОБРО ПОЖАЛОВАТЬ В БИЗНЕС СООБЩЕСТВО U."; ObjectID = "8qp-cF-q91"; */
+"8qp-cF-q91.text" = "WILLKOMMEN BEI DER U.BUSINESS-COMMUNITY";
+
+/* Class = "UILabel"; text = "E-MAIL"; ObjectID = "8vp-ep-7vf"; */
+"8vp-ep-7vf.text" = "E-MAIL";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "96W-K2-CXn"; */
+"96W-K2-CXn.title" = " ";
+
+/* Class = "UILabel"; text = "ПРОТОКОЛ"; ObjectID = "97L-1h-J6S"; */
+"97L-1h-J6S.text" = "Protokoll";
+
+/* Class = "UITabBarItem"; title = "1"; ObjectID = "9bP-DW-3Ww"; */
+"9bP-DW-3Ww.title" = "1";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "A3h-eR-fRy"; */
+"A3h-eR-fRy.title" = "Item";
+
+/* Class = "UILabel"; text = "мой кабинет"; ObjectID = "ANo-ad-P7R"; */
+"ANo-ad-P7R.text" = "Mein Konto";
+
+/* Class = "UITextField"; placeholder = "Номер телефона"; ObjectID = "AZo-HM-jAz"; */
+"AZo-HM-jAz.placeholder" = "Telefonnummer";
+
+/* Class = "UILabel"; text = "DOC - PDF"; ObjectID = "Ae2-gj-d75"; */
+"Ae2-gj-d75.text" = "DOC - PDF";
+
+/* Class = "UILabel"; text = "действует до 5 апреля 2021 года"; ObjectID = "Aiw-xw-uYh"; */
+"Aiw-xw-uYh.text" = "действует до 5 апреля 2021 года";
+
+/* Class = "UILabel"; text = "мой кабинет"; ObjectID = "B1V-ib-tov"; */
+"B1V-ib-tov.text" = "Mein Konto";
+
+/* Class = "UILabel"; text = "моя визитка"; ObjectID = "BCR-Qq-s6L"; */
+"BCR-Qq-s6L.text" = "Meine Visitenkarte";
+
+/* Class = "UIViewController"; title = "Редактировать предложение"; ObjectID = "BaE-uP-VgH"; */
+"BaE-uP-VgH.title" = "Bearbeiten Angebot";
+
+/* Class = "UIButton"; normalTitle = "ПРИМЕНИТЬ"; ObjectID = "BnL-kc-lzx"; */
+"BnL-kc-lzx.normalTitle" = "Anwenden";
+
+/* Class = "UIButton"; normalTitle = "СОБЫТИЯ"; ObjectID = "C7X-b0-x8s"; */
+"C7X-b0-x8s.normalTitle" = "Events";
+
+/* Class = "UILabel"; text = "document.pdf"; ObjectID = "CMp-Mg-gmr"; */
+"CMp-Mg-gmr.text" = "document.pdf";
+
+/* Class = "UITextField"; placeholder = "Поиск"; ObjectID = "CVm-HF-Eym"; */
+"CVm-HF-Eym.placeholder" = "Suchen";
+
+/* Class = "UILabel"; text = "маркетинг"; ObjectID = "Cgv-zn-WYe"; */
+"Cgv-zn-WYe.text" = "Marketing";
+
+/* Class = "UIButton"; normalTitle = "все"; ObjectID = "D40-ek-IRP"; */
+"D40-ek-IRP.normalTitle" = "Alle";
+
+/* Class = "UIButton"; normalTitle = "EN"; ObjectID = "DCe-gZ-YPH"; */
+"DCe-gZ-YPH.normalTitle" = "EN";
+
+/* Class = "UILabel"; text = "Nikita Molodorya"; ObjectID = "DEn-AU-aSf"; */
+"DEn-AU-aSf.text" = "";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "DVP-bu-A5S"; */
+"DVP-bu-A5S.title" = "Item";
+
+/* Class = "UILabel"; text = "5 марта 2021"; ObjectID = "Dbi-Qq-RR6"; */
+"Dbi-Qq-RR6.text" = "5 марта 2021";
+
+/* Class = "UIBarButtonItem"; title = "Меню"; ObjectID = "Dcv-bQ-26f"; */
+"Dcv-bQ-26f.title" = "Меню";
+
+/* Class = "UITextView"; text = "Повседневная практика показывает, что укрепление и развитие структуры позволяет оценить значение систем массового участия"; ObjectID = "E0B-By-wwY"; */
+"E0B-By-wwY.text" = "Повседневная практика показывает, что укрепление и развитие структуры позволяет оценить значение систем массового участия";
+
+/* Class = "UIButton"; normalTitle = "актуальные"; ObjectID = "ECJ-wv-8Dh"; */
+"ECJ-wv-8Dh.normalTitle" = "Aktuelle";
+
+/* Class = "UILabel"; text = "ВВЕДИТЕ КОД ПОДТВЕРЖДЕНИЯ"; ObjectID = "EPf-40-Z7z"; */
+"EPf-40-Z7z.text" = "Bestätigungscode eingeben";
+
+/* Class = "UILabel"; text = "подтвержден"; ObjectID = "ElQ-3w-vfe"; */
+"ElQ-3w-vfe.text" = "подтвержден";
+
+/* Class = "UILabel"; text = "Участник"; ObjectID = "Exz-Xv-gEZ"; */
+"Exz-Xv-gEZ.text" = "Участник";
+
+/* Class = "UITextView"; text = "НАЗВАНИЕ"; ObjectID = "F8G-X3-Fh2"; */
+"F8G-X3-Fh2.text" = "Bezeichnung";
+
+/* Class = "UILabel"; text = "18 ОКТЯБРЯ"; ObjectID = "FKH-XO-UFY"; */
+"FKH-XO-UFY.text" = "18 ОКТЯБРЯ";
+
+/* Class = "UILabel"; text = "НАЗВАНИЕ КОМПАНИИ"; ObjectID = "FdJ-VC-BXT"; */
+"FdJ-VC-BXT.text" = "Unternehmensname";
+
+/* Class = "UITextField"; placeholder = "Код подтверждения"; ObjectID = "Fms-dE-bWR"; */
+"Fms-dE-bWR.placeholder" = "Bestätigungscode";
+
+/* Class = "UIBarButtonItem"; title = "menu"; ObjectID = "G74-im-XUo"; */
+"G74-im-XUo.title" = "menu";
+
+/* Class = "UILabel"; text = "29 СЕНТЯБРЯ ⋅ 22:00"; ObjectID = "GWc-UA-U9c"; */
+"GWc-UA-U9c.text" = "29 СЕНТЯБРЯ ⋅ 22:00";
+
+/* Class = "UINavigationItem"; title = "фильтр"; ObjectID = "GkH-JL-jek"; */
+"GkH-JL-jek.title" = "Filter";
+
+/* Class = "UIButton"; normalTitle = "СОЗДАТЬ "; ObjectID = "H1Q-vj-CJt"; */
+"H1Q-vj-CJt.normalTitle" = "erstellen ";
+
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "HHN-iZ-UMg"; */
+"HHN-iZ-UMg.text" = "FAQ";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "HSf-U5-cjw"; */
+"HSf-U5-cjw.title" = " ";
+
+/* Class = "UILabel"; text = "ТЕГИ"; ObjectID = "Hrv-k5-wwO"; */
+"Hrv-k5-wwO.text" = "Tags";
+
+/* Class = "UILabel"; text = "350₽ / месяц"; ObjectID = "HyZ-Rw-W0H"; */
+"HyZ-Rw-W0H.text" = "350₽ / месяц";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "I9A-X5-MjF"; */
+"I9A-X5-MjF.title" = "Item";
+
+/* Class = "UILabel"; text = "АДРЕС КОМПАНИИ"; ObjectID = "I9F-ey-4mF"; */
+"I9F-ey-4mF.text" = "Firmenadresse";
+
+/* Class = "UIButton"; normalTitle = "ОПУБЛИКОВАТЬ"; ObjectID = "IPm-fe-RuY"; */
+"IPm-fe-RuY.normalTitle" = "veröffentlichen";
+
+/* Class = "UILabel"; text = "ОПИСАНИЕ"; ObjectID = "ISp-O6-HQK"; */
+"ISp-O6-HQK.text" = "Beschreibung";
+
+/* Class = "UILabel"; text = "МЫ ПРИНИМАЕМ УЧАСТИЕ В НАУЧНОМ ИССЛЕДОВАНИИ"; ObjectID = "Icd-LB-eGb"; */
+"Icd-LB-eGb.text" = "МЫ ПРИНИМАЕМ УЧАСТИЕ В НАУЧНОМ ИССЛЕДОВАНИИ";
+
+/* Class = "UITextField"; placeholder = "Поиск"; ObjectID = "Imu-ev-SIK"; */
+"Imu-ev-SIK.placeholder" = "Suchen";
+
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "J2j-Ft-Hth"; */
+"J2j-Ft-Hth.title" = "Settings";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "J2x-ot-iCN"; */
+"J2x-ot-iCN.title" = "Item";
+
+/* Class = "UILabel"; text = "ИМЯ"; ObjectID = "KSH-vD-RHA"; */
+"KSH-vD-RHA.text" = "Name";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "KTn-Dr-9p8"; */
+"KTn-Dr-9p8.title" = "Item";
+
+/* Class = "UILabel"; text = "ЗАКРЫТАЯ ВСТРЕЧА МЕЖДУНАРОДНОГО БИЗНЕСС-СООБЩЕСТВА U."; ObjectID = "Lhy-pa-c3N"; */
+"Lhy-pa-c3N.text" = "ЗАКРЫТАЯ ВСТРЕЧА МЕЖДУНАРОДНОГО БИЗНЕСС-СООБЩЕСТВА U.";
+
+/* Class = "UILabel"; text = "АДРЕС КОМПАНИИ"; ObjectID = "LqA-p2-LN5"; */
+"LqA-p2-LN5.text" = "Firmenadresse";
+
+/* Class = "UILabel"; text = "Библиотека"; ObjectID = "Lvl-rj-19V"; */
+"Lvl-rj-19V.text" = "Bibliothek";
+
+/* Class = "UIButton"; normalTitle = "ВОЙТИ"; ObjectID = "M0V-VU-RT6"; */
+"M0V-VU-RT6.normalTitle" = "Anmelden";
+
+/* Class = "UILabel"; text = "СРОК ДЕЙСТВИЯ"; ObjectID = "MX0-a9-Ond"; */
+"MX0-a9-Ond.text" = "Gültigkeitszeitraum";
+
+/* Class = "UINavigationItem"; title = "подтверждения номера"; ObjectID = "McY-ue-1y8"; */
+"McY-ue-1y8.title" = "подтверждения номера";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "MkY-SY-KdA"; */
+"MkY-SY-KdA.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "MlM-Fw-vQf"; */
+"MlM-Fw-vQf.title" = "Item";
+
+/* Class = "UILabel"; text = "Продление премиум доступа"; ObjectID = "Mub-LI-NcA"; */
+"Mub-LI-NcA.text" = "Продление премиум доступа";
+
+/* Class = "UITextView"; text = "Адрес компании"; ObjectID = "NFY-R7-FdO"; */
+"NFY-R7-FdO.text" = "Firmenadresse";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "NQV-Eb-T6z"; */
+"NQV-Eb-T6z.title" = "Item";
+
+/* Class = "UITextField"; placeholder = "Поиск"; ObjectID = "OIi-fE-bhy"; */
+"OIi-fE-bhy.placeholder" = "Suchen";
+
+/* Class = "UILabel"; text = "ТЕЛЕФОН"; ObjectID = "OL3-yf-Mgs"; */
+"OL3-yf-Mgs.text" = "Telefonnummer";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "OR3-DN-Oov"; */
+"OR3-DN-Oov.title" = "Item";
+
+/* Class = "UILabel"; text = "мои спец. предложения"; ObjectID = "Obt-1r-Tl9"; */
+"Obt-1r-Tl9.text" = "Meine Spezialangebote";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "OnR-AA-Vaw"; */
+"OnR-AA-Vaw.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "ВОЙТИ"; ObjectID = "OyZ-t6-xFD"; */
+"OyZ-t6-xFD.normalTitle" = "Anmelden";
+
+/* Class = "UIButton"; normalTitle = "ОЧИСТИТЬ"; ObjectID = "P6L-L2-vKY"; */
+"P6L-L2-vKY.normalTitle" = "Löschen";
+
+/* Class = "UINavigationItem"; title = "Создать предложение"; ObjectID = "PFS-Ab-B52"; */
+"PFS-Ab-B52.title" = "erstellen Angebot";
+
+/* Class = "UILabel"; text = "СТРАНА"; ObjectID = "PL5-y5-7aO"; */
+"PL5-y5-7aO.text" = "Land";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Q0Q-2C-OrQ"; */
+"Q0Q-2C-OrQ.title" = "Item";
+
+/* Class = "UITextView"; text = "Имя"; ObjectID = "QBu-G2-pR9"; */
+"QBu-G2-pR9.text" = "Name";
+
+/* Class = "UILabel"; text = "мой кабинет"; ObjectID = "QEn-YD-aQU"; */
+"QEn-YD-aQU.text" = "Mein Konto";
+
+/* Class = "UILabel"; text = "Знакомство и общение\nс предпринимателями\nсо всего мира"; ObjectID = "QJ8-8y-W1P"; */
+"QJ8-8y-W1P.text" = "Treffen und Networking mit Unternehmern aus aller Welt";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "QXT-Tu-rjk"; */
+"QXT-Tu-rjk.title" = " ";
+
+/* Class = "UINavigationItem"; title = "о нас"; ObjectID = "QYC-Kb-H7w"; */
+"QYC-Kb-H7w.title" = "Über uns";
+
+/* Class = "UILabel"; text = "НАСТРОЙКИ"; ObjectID = "QiT-G3-aHl"; */
+"QiT-G3-aHl.text" = "Einstellungen";
+
+/* Class = "UILabel"; text = "моя визитка"; ObjectID = "R2T-Zm-QZs"; */
+"R2T-Zm-QZs.text" = "Meine Visitenkarte";
+
+/* Class = "UILabel"; text = "мои спец. предложения"; ObjectID = "R8M-ql-LQu"; */
+"R8M-ql-LQu.text" = "Meine Spezialangebote";
+
+/* Class = "UILabel"; text = "СПЕЦИАЛЬНАЯ ЦЕНА ДЛЯ УЧАСТНИКОВ СООБЩЕСТВА"; ObjectID = "RC4-uW-mJD"; */
+"RC4-uW-mJD.text" = "СПЕЦИАЛЬНАЯ ЦЕНА ДЛЯ УЧАСТНИКОВ СООБЩЕСТВА";
+
+/* Class = "UIButton"; normalTitle = "ВЫВЕСТИ В ТОП"; ObjectID = "Rjc-do-Dft"; */
+"Rjc-do-Dft.normalTitle" = "Hervorheben";
+
+/* Class = "UILabel"; text = "Может ли самозанятый платить НДП с процентов по займам"; ObjectID = "S2U-vZ-cmm"; */
+"S2U-vZ-cmm.text" = "Может ли самозанятый платить НДП с процентов по займам";
+
+/* Class = "UITabBarItem"; title = "2"; ObjectID = "SE4-fA-eZ4"; */
+"SE4-fA-eZ4.title" = "2";
+
+/* Class = "UITextView"; text = "ТЕКСТ"; ObjectID = "SHz-B8-djs"; */
+"SHz-B8-djs.text" = "Text";
+
+/* Class = "UILabel"; text = "5 марта 2021"; ObjectID = "T44-h2-IeT"; */
+"T44-h2-IeT.text" = "5 марта 2021";
+
+/* Class = "UILabel"; text = "22 Декабря 2021"; ObjectID = "TCC-ZD-CFv"; */
+"TCC-ZD-CFv.text" = "22 Декабря 2021";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "TQv-yf-PcM"; */
+"TQv-yf-PcM.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "ОТПРАВИТЬ"; ObjectID = "TZ8-ya-Wr8"; */
+"TZ8-ya-Wr8.normalTitle" = "Senden";
+
+/* Class = "UIButton"; normalTitle = "ПРИМЕНИТЬ"; ObjectID = "Tbq-DB-O6G"; */
+"Tbq-DB-O6G.normalTitle" = "ПРИМЕНИТЬ";
+
+/* Class = "UILabel"; text = "ТЕГИ"; ObjectID = "Tc7-Wa-tzV"; */
+"Tc7-Wa-tzV.text" = "Tags";
+
+/* Class = "UITabBarItem"; title = "0"; ObjectID = "TgF-2t-by2"; */
+"TgF-2t-by2.title" = "0";
+
+/* Class = "UIButton"; normalTitle = "ПРИКРЕПИТЬ ФАЙЛ"; ObjectID = "Tgh-ho-2xa"; */
+"Tgh-ho-2xa.normalTitle" = "Datei anhängen";
+
+/* Class = "UILabel"; text = "\n"; ObjectID = "Tlm-R4-KJt"; */
+"Tlm-R4-KJt.text" = "\n";
+
+/* Class = "UINavigationItem"; title = "новости"; ObjectID = "TyS-hA-OWb"; */
+"TyS-hA-OWb.title" = "Nachrichten";
+
+/* Class = "UILabel"; text = "моя визитка"; ObjectID = "TzX-jb-qg6"; */
+"TzX-jb-qg6.text" = "Meine Visitenkarte";
+
+/* Class = "UILabel"; text = "мои спец. предложения"; ObjectID = "Tzb-tg-m34"; */
+"Tzb-tg-m34.text" = "Meine Spezialangebote";
+
+/* Class = "UITextView"; text = "Телефон"; ObjectID = "Tze-71-ztT"; */
+"Tze-71-ztT.text" = "Telefonnummer";
+
+/* Class = "UILabel"; text = "Ваш аккаунт в ожидании оплаты. \nПосле подтверждения статуса платежа, вы сможете начать пользоваться приложением!"; ObjectID = "U2g-VC-Boh"; */
+"U2g-VC-Boh.text" = "Ihr Konto ist noch nicht freigeschaltet. Nach bestätigtem Zahlungseingang können Sie die App nutzen!";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "USC-Hi-R9r"; */
+"USC-Hi-R9r.text" = "Label";
+
+/* Class = "UILabel"; text = "СМЕНИТЬ ПАРОЛЬ"; ObjectID = "Ucx-kg-eqM"; */
+"Ucx-kg-eqM.text" = "Passwort ändern";
+
+/* Class = "UITextField"; placeholder = "Пароль"; ObjectID = "Uhq-en-F3v"; */
+"Uhq-en-F3v.placeholder" = "Passwort";
+
+/* Class = "UIButton"; normalTitle = "ДОБАВИТЬ В КОНТАКТЫ"; ObjectID = "Uob-eZ-Sdc"; */
+"Uob-eZ-Sdc.normalTitle" = "Zu Kontakten hinzufügen";
+
+/* Class = "UITextField"; placeholder = "Новый пароль"; ObjectID = "VGN-4k-a1L"; */
+"VGN-4k-a1L.placeholder" = "Passwort пароль";
+
+/* Class = "UIBarButtonItem"; title = "а"; ObjectID = "VJg-dy-1Mf"; */
+"VJg-dy-1Mf.title" = "а";
+
+/* Class = "UIButton"; normalTitle = "ОТМЕНИТЬ ПОДПИСКУ"; ObjectID = "Vpv-qD-QjT"; */
+"Vpv-qD-QjT.normalTitle" = "Abonnement beenden";
+
+/* Class = "UIViewController"; title = "NewsPage"; ObjectID = "VsL-DD-Nlx"; */
+"VsL-DD-Nlx.title" = "NewsPage";
+
+/* Class = "UIViewController"; title = "OfferPage"; ObjectID = "Vsm-3W-okb"; */
+"Vsm-3W-okb.title" = "OfferPage";
+
+/* Class = "UILabel"; text = "SEO - Продвижения бизнеса и деградация "; ObjectID = "Vtl-Cq-ZCt"; */
+"Vtl-Cq-ZCt.text" = "SEO - Продвижения бизнеса и деградация ";
+
+/* Class = "UILabel"; text = "СРОК ДЕЙСТВИЯ"; ObjectID = "VwR-I9-3IY"; */
+"VwR-I9-3IY.text" = "Gültigkeitszeitraum";
+
+/* Class = "UILabel"; text = "Скидка 10% на ароматические масла"; ObjectID = "WKp-bL-5lc"; */
+"WKp-bL-5lc.text" = "Скидка 10% на ароматические масла";
+
+/* Class = "UILabel"; text = "ОПИСАНИЕ"; ObjectID = "WP0-QR-M4P"; */
+"WP0-QR-M4P.text" = "Beschreibung";
+
+/* Class = "UIButton"; normalTitle = "НОВОСТИ"; ObjectID = "Wml-L7-MJb"; */
+"Wml-L7-MJb.normalTitle" = "Nachrichten";
+
+/* Class = "UILabel"; text = "Грузовые перевозки в Москве"; ObjectID = "XXi-g6-5uG"; */
+"XXi-g6-5uG.text" = "Грузовые перевозки в Москве";
+
+/* Class = "UIButton"; normalTitle = "СОХРАНИТЬ"; ObjectID = "Yhc-fp-WeV"; */
+"Yhc-fp-WeV.normalTitle" = "Speichern";
+
+/* Class = "UILabel"; text = "Разнообразный и богатый опыт..."; ObjectID = "Yrj-5u-5L4"; */
+"Yrj-5u-5L4.text" = "Разнообразный и богатый опыт...";
+
+/* Class = "UILabel"; text = "ВИЗИТКИ"; ObjectID = "Yu2-5Y-9Vb"; */
+"Yu2-5Y-9Vb.text" = "Visitenkarten";
+
+/* Class = "UIButton"; normalTitle = "избранное"; ObjectID = "Z6u-Ff-Vfy"; */
+"Z6u-Ff-Vfy.normalTitle" = "Ausgewählte";
+
+/* Class = "UIButton"; normalTitle = "RU"; ObjectID = "Z8c-7b-4vG"; */
+"Z8c-7b-4vG.normalTitle" = "RU";
+
+/* Class = "UILabel"; text = "29 СЕНТЯБРЯ ⋅ 22:00"; ObjectID = "ZeK-II-Azc"; */
+"ZeK-II-Azc.text" = "29 СЕНТЯБРЯ ⋅ 22:00";
+
+/* Class = "UILabel"; text = "моя визитка"; ObjectID = "a6z-35-8xS"; */
+"a6z-35-8xS.text" = "Meine Visitenkarte";
+
+/* Class = "UILabel"; text = "ПОЛЕ ВВОДА"; ObjectID = "aST-cN-xLC"; */
+"aST-cN-xLC.text" = "Eingabefeld";
+
+/* Class = "UILabel"; text = "РЕГИСТРАЦИЯ"; ObjectID = "aXU-Fi-5JQ"; */
+"aXU-Fi-5JQ.text" = "Registrierung";
+
+/* Class = "UILabel"; text = "18.02 пройдет еженедельная закрытая встреча для участников международного бизнес-\nсообщества U., где мы обсудим, какую роль играет SEO-продвижение и оптимизация в развитии бизнеса."; ObjectID = "b9t-SC-BcF"; */
+"b9t-SC-BcF.text" = "18.02 пройдет еженедельная закрытая встреча для участников международного бизнес-\nсообщества U., где мы обсудим, какую роль играет SEO-продвижение и оптимизация в развитии бизнеса.";
+
+/* Class = "UILabel"; text = "маркетинг"; ObjectID = "bJu-Zj-zPo"; */
+"bJu-Zj-zPo.text" = "Marketing";
+
+/* Class = "UITextView"; text = "Индустрия"; ObjectID = "bWb-gV-Fdo"; */
+"bWb-gV-Fdo.text" = "Branche";
+
+/* Class = "UILabel"; text = "В ОЖИДАНИИ ОПЛАТЫ"; ObjectID = "bzO-Iu-IC9"; */
+"bzO-Iu-IC9.text" = "Ausstehende Zahlung";
+
+/* Class = "UIButton"; normalTitle = "СОХРАНИТЬ"; ObjectID = "cIz-rF-E7Z"; */
+"cIz-rF-E7Z.normalTitle" = "Speichern";
+
+/* Class = "UIButton"; normalTitle = "ПРОДОЛЖИТЬ"; ObjectID = "cKL-dZ-dYL"; */
+"cKL-dZ-dYL.normalTitle" = "Weiter";
+
+/* Class = "UILabel"; text = "мой кабинет"; ObjectID = "cqr-Nj-qIt"; */
+"cqr-Nj-qIt.text" = "Mein Konto";
+
+/* Class = "UITextField"; placeholder = "Подтвердите пароль"; ObjectID = "cvH-yD-4px"; */
+"cvH-yD-4px.placeholder" = "Passwort bestätigen";
+
+/* Class = "UIButton"; normalTitle = "ЗАРЕГИСТРИРОВАТЬСЯ"; ObjectID = "d3F-iw-hly"; */
+"d3F-iw-hly.normalTitle" = "ЗАРЕГИСТРИРОВАТЬСЯ";
+
+/* Class = "UILabel"; text = "Участников U пригласили изучить воздействия эфирных масел и релаксирующих программ на психофизиологическое состояние человека!\n\nЦель исследования – понять, как ароматерапия помогает человеку расслабиться и снизить стресс."; ObjectID = "d7W-tl-5wH"; */
+"d7W-tl-5wH.text" = "Участников U пригласили изучить воздействия эфирных масел и релаксирующих программ на психофизиологическое состояние человека!\n\nЦель исследования – понять, как ароматерапия помогает человеку расслабиться и снизить стресс.";
+
+/* Class = "UIButton"; normalTitle = "просроченные"; ObjectID = "dJG-lj-gHC"; */
+"dJG-lj-gHC.normalTitle" = "Abgelaufene";
+
+/* Class = "UIButton"; normalTitle = "ВЫВЕСТИ В ТОП"; ObjectID = "dmb-gJ-jSM"; */
+"dmb-gJ-jSM.normalTitle" = "Hervorheben";
+
+/* Class = "UINavigationItem"; title = "события"; ObjectID = "e7k-4b-nbk"; */
+"e7k-4b-nbk.title" = "Events";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "eTV-Lr-4q1"; */
+"eTV-Lr-4q1.title" = "Item";
+
+/* Class = "UILabel"; text = "мой кабинет"; ObjectID = "eTy-T6-G1U"; */
+"eTy-T6-G1U.text" = "Mein Konto";
+
+/* Class = "UITextView"; text = "Email"; ObjectID = "eeM-yC-5ud"; */
+"eeM-yC-5ud.text" = "Email";
+
+/* Class = "UILabel"; text = "СПЕЦИАЛЬНАЯ ЦЕНА ДЛЯ УЧАСТНИКОВ СООБЩЕСТВА"; ObjectID = "ekG-3z-1Lb"; */
+"ekG-3z-1Lb.text" = "СПЕЦИАЛЬНАЯ ЦЕНА ДЛЯ УЧАСТНИКОВ СООБЩЕСТВА";
+
+/* Class = "UILabel"; text = "29 СЕНТЯБРЯ ⋅ 22:00"; ObjectID = "eox-ga-olD"; */
+"eox-ga-olD.text" = "29 СЕНТЯБРЯ ⋅ 22:00";
+
+/* Class = "UILabel"; text = "РЕГИСТРАЦИЯ"; ObjectID = "fRP-ac-Ty6"; */
+"fRP-ac-Ty6.text" = "Registrierung";
+
+/* Class = "UILabel"; text = "Возможность найти\nбизнес-партнеров и масштабировать\nбизнес"; ObjectID = "fSx-A2-pqk"; */
+"fSx-A2-pqk.text" = "Die Möglichkeit, Businesspartner zu finden und das Unternehmen vergrößern";
+
+/* Class = "UIButton"; normalTitle = "свернуть"; ObjectID = "fYJ-hi-tve"; */
+"fYJ-hi-tve.normalTitle" = "Einklappen";
+
+/* Class = "UILabel"; text = "Imagine Dragon"; ObjectID = "fm2-je-qaV"; */
+"fm2-je-qaV.text" = "Imagine Dragon";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "fn2-y5-F8m"; */
+"fn2-y5-F8m.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "последние"; ObjectID = "gNA-Pp-4h8"; */
+"gNA-Pp-4h8.normalTitle" = "Neueste";
+
+/* Class = "UIButton"; normalTitle = "ПОДРОБНЕЕ"; ObjectID = "h3N-or-GBx"; */
+"h3N-or-GBx.normalTitle" = "ПОДРОБНЕЕ";
+
+/* Class = "UIBarButtonItem"; title = "menu"; ObjectID = "h8g-f1-StL"; */
+"h8g-f1-StL.title" = "menu";
+
+/* Class = "UIButton"; normalTitle = "Я согласен с правилами пользования"; ObjectID = "hHj-yo-B54"; */
+"hHj-yo-B54.normalTitle" = "Ich bin mit den Nutzungsbedingungen einverstanden";
+
+/* Class = "UITextView"; text = "2022.07.04"; ObjectID = "hlh-Nt-yCH"; */
+"hlh-Nt-yCH.text" = "2022.07.04";
+
+/* Class = "UINavigationItem"; title = "подтверждения номера"; ObjectID = "i2i-gg-9Ba"; */
+"i2i-gg-9Ba.title" = "подтверждения номера";
+
+/* Class = "UILabel"; text = "СКИДКА 10%"; ObjectID = "iJT-dT-kq6"; */
+"iJT-dT-kq6.text" = "СКИДКА 10%";
+
+/* Class = "UILabel"; text = "ООО “Трансмашгорстроймонтаж холдинг”"; ObjectID = "j1Y-G3-VZr"; */
+"j1Y-G3-VZr.text" = "ООО “Трансмашгорстроймонтаж холдинг”";
+
+/* Class = "UITextField"; placeholder = "Поиск"; ObjectID = "jZE-nX-sif"; */
+"jZE-nX-sif.placeholder" = "Suchen";
+
+/* Class = "UITextField"; text = "Имя"; ObjectID = "js5-TX-AEQ"; */
+"js5-TX-AEQ.text" = "Name";
+
+/* Class = "UILabel"; text = "моя визитка"; ObjectID = "jyw-CY-o9R"; */
+"jyw-CY-o9R.text" = "Meine Visitenkarte";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "l5U-Lc-oi7"; */
+"l5U-Lc-oi7.title" = "Item";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "lla-dd-lbG"; */
+"lla-dd-lbG.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "подробнее "; ObjectID = "lsD-ei-ALG"; */
+"lsD-ei-ALG.normalTitle" = "Mehr erfahren";
+
+/* Class = "UILabel"; text = "ПРИНИМАЙТЕ УЧАСТИЕ В ЗАКРЫТЫХ ВСТРЕЧАХ"; ObjectID = "mH8-Gj-f2w"; */
+"mH8-Gj-f2w.text" = "Nehmen Sie an privaten Treffen teil";
+
+/* Class = "UILabel"; text = "НАЗВАНИЕ КОМПАНИИ"; ObjectID = "mJz-o2-nn4"; */
+"mJz-o2-nn4.text" = "Unternehmensname";
+
+/* Class = "UITextField"; placeholder = "Старый пароль"; ObjectID = "mzk-Mu-HqM"; */
+"mzk-Mu-HqM.placeholder" = "Altes Passwort";
+
+/* Class = "UILabel"; text = "ИНДУСТРИЯ"; ObjectID = "n8D-7N-YyT"; */
+"n8D-7N-YyT.text" = "Branche";
+
+/* Class = "UILabel"; text = "моя визитка"; ObjectID = "nIG-Kd-7E2"; */
+"nIG-Kd-7E2.text" = "Meine Visitenkarte";
+
+/* Class = "UILabel"; text = "ТЕЛЕФОН"; ObjectID = "nOT-g6-Wmd"; */
+"nOT-g6-Wmd.text" = "Telefonnummer";
+
+/* Class = "UITextView"; text = "Название компании"; ObjectID = "nol-HJ-Qrc"; */
+"nol-HJ-Qrc.text" = "Unternehmensname";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "oXd-IY-bPf"; */
+"oXd-IY-bPf.title" = " ";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "pYJ-cp-yGz"; */
+"pYJ-cp-yGz.title" = "Item";
+
+/* Class = "UILabel"; text = "ВОЙТИ"; ObjectID = "phN-Zq-4cR"; */
+"phN-Zq-4cR.text" = "Anmelden";
+
+/* Class = "UIButton"; normalTitle = "ЗАРЕГИСТРИРОВАТЬСЯ"; ObjectID = "qQ9-hP-0jd"; */
+"qQ9-hP-0jd.normalTitle" = "Registrieren";
+
+/* Class = "UIButton"; normalTitle = "РЕДАКТИРОВАТЬ"; ObjectID = "qQn-mo-ujR"; */
+"qQn-mo-ujR.normalTitle" = "Bearbeiten";
+
+/* Class = "UIButton"; normalTitle = "ЗАРЕГИСТРИРОВАТЬСЯ"; ObjectID = "qWs-nH-33h"; */
+"qWs-nH-33h.normalTitle" = "ЗАРЕГИСТРИРОВАТЬСЯ";
+
+/* Class = "UITextField"; text = "E-Mail"; ObjectID = "rBR-Hk-XgQ"; */
+"rBR-Hk-XgQ.text" = "E-Mail";
+
+/* Class = "UITextView"; text = "2022.07.04"; ObjectID = "rZV-Tt-X9H"; */
+"rZV-Tt-X9H.text" = "2022.07.04";
+
+/* Class = "UILabel"; text = "подтвержден"; ObjectID = "riG-fc-0RY"; */
+"riG-fc-0RY.text" = "подтвержден";
+
+/* Class = "UILabel"; text = "НА ВСЕ АРОМА МАСЛА"; ObjectID = "ruj-Gt-D27"; */
+"ruj-Gt-D27.text" = "НА ВСЕ АРОМА МАСЛА";
+
+/* Class = "UILabel"; text = "ИНДУСТРИЯ"; ObjectID = "sHy-cn-31j"; */
+"sHy-cn-31j.text" = "Branche";
+
+/* Class = "UILabel"; text = "СКИДКА 10%"; ObjectID = "sOk-Oh-hkw"; */
+"sOk-Oh-hkw.text" = "СКИДКА 10%";
+
+/* Class = "UILabel"; text = "ЛИЧНЫЕ ДАННЫЕ"; ObjectID = "sVz-bv-Rqb"; */
+"sVz-bv-Rqb.text" = "Persönliche Daten";
+
+/* Class = "UIBarButtonItem"; title = "Menu"; ObjectID = "sgb-zj-Gn4"; */
+"sgb-zj-Gn4.title" = "Menu";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "sgc-qp-Aou"; */
+"sgc-qp-Aou.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "избранные"; ObjectID = "sqi-Sj-c5d"; */
+"sqi-Sj-c5d.normalTitle" = "Ausgewählte";
+
+/* Class = "UILabel"; text = "НА ВСЕ АРОМА МАСЛА"; ObjectID = "tCH-hi-cIy"; */
+"tCH-hi-cIy.text" = "НА ВСЕ АРОМА МАСЛА";
+
+/* Class = "UILabel"; text = "Документы"; ObjectID = "tEn-Oi-1pr"; */
+"tEn-Oi-1pr.text" = "Dokumente";
+
+/* Class = "UILabel"; text = "ТЕЛЕФОН"; ObjectID = "tkt-hA-SHc"; */
+"tkt-hA-SHc.text" = "Telefonnummer";
+
+/* Class = "UIButton"; normalTitle = "ОПЛАТИТЬ"; ObjectID = "tlv-rZ-0V4"; */
+"tlv-rZ-0V4.normalTitle" = "ОПЛАТИТЬ";
+
+/* Class = "UIButton"; normalTitle = "ЗАПИСАТЬСЯ"; ObjectID = "tme-Cg-T40"; */
+"tme-Cg-T40.normalTitle" = "Abonnieren";
+
+/* Class = "UILabel"; text = "НАЗВАНИЕ"; ObjectID = "tox-sz-Qj6"; */
+"tox-sz-Qj6.text" = "Bezeichnung";
+
+/* Class = "UIBarButtonItem"; title = "setting"; ObjectID = "uG5-gJ-GIy"; */
+"uG5-gJ-GIy.title" = "setting";
+
+/* Class = "UILabel"; text = "19 ФЕВРАЛЯ"; ObjectID = "uIo-va-tPy"; */
+"uIo-va-tPy.text" = "19 ФЕВРАЛЯ";
+
+/* Class = "UIButton"; normalTitle = "Подробнее >"; ObjectID = "uME-eb-Nbn"; */
+"uME-eb-Nbn.normalTitle" = "Mehr erfahren>";
+
+/* Class = "UITextView"; text = "Язык"; ObjectID = "uoQ-in-zwp"; */
+"uoQ-in-zwp.text" = "Sprache";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "uyQ-7i-HQj"; */
+"uyQ-7i-HQj.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Забыли пароль?"; ObjectID = "v1l-fB-dAD"; */
+"v1l-fB-dAD.normalTitle" = "Passwort vergessen?";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "vRN-fg-rEp"; */
+"vRN-fg-rEp.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "ПОДТВЕРДИТЬ"; ObjectID = "vVi-3E-10R"; */
+"vVi-3E-10R.normalTitle" = "Bestätigen";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "vct-m4-ZeX"; */
+"vct-m4-ZeX.title" = "Item";
+
+/* Class = "UILabel"; text = "Катерина Новицкая"; ObjectID = "vpf-LX-tmp"; */
+"vpf-LX-tmp.text" = "Катерина Новицкая";
+
+/* Class = "UILabel"; text = "Участник"; ObjectID = "w3I-bM-dhm"; */
+"w3I-bM-dhm.text" = "Участник";
+
+/* Class = "UIButton"; normalTitle = "ИЗМЕНИТЬ"; ObjectID = "wEB-52-ugV"; */
+"wEB-52-ugV.normalTitle" = "Ändern";
+
+/* Class = "UIButton"; normalTitle = "ПРОДОЛЖИТЬ"; ObjectID = "wVi-GN-fP2"; */
+"wVi-GN-fP2.normalTitle" = "Weiter";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "wYu-aL-4ho"; */
+"wYu-aL-4ho.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "СОЗДАТЬ ЕЩЕ"; ObjectID = "whT-SW-GeK"; */
+"whT-SW-GeK.normalTitle" = "Mehr erstellen";
+
+/* Class = "UILabel"; text = "Встречи с экспертами\nпо актуальным\nнаправлениям\nразвития бизнеса"; ObjectID = "whg-ei-5Gd"; */
+"whg-ei-5Gd.text" = "Besprechungen mit Experten zu aktuellen Themen der Geschäftsentwicklung";
+
+/* Class = "UILabel"; text = "НАЗВАНИЕ"; ObjectID = "wu4-UL-OOd"; */
+"wu4-UL-OOd.text" = "Bezeichnung";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "xVe-wg-Z5r"; */
+"xVe-wg-Z5r.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "ПРОДОЛЖИТЬ"; ObjectID = "xYw-cO-m6D"; */
+"xYw-cO-m6D.normalTitle" = "Weiter";
+
+/* Class = "UILabel"; text = "18 Февраля 19:00"; ObjectID = "xjW-BR-pQQ"; */
+"xjW-BR-pQQ.text" = "18 Февраля 19:00";
+
+/* Class = "UILabel"; text = "Может ли самозанятый платить НДП с процентов по займам"; ObjectID = "xn4-S6-d4O"; */
+"xn4-S6-d4O.text" = "Может ли самозанятый платить НДП с процентов по займам";
+
+/* Class = "UILabel"; text = "ОБРАТНАЯ СВЯЗЬ"; ObjectID = "y0d-0M-dD0"; */
+"y0d-0M-dD0.text" = "Feedback";
+
+/* Class = "UILabel"; text = "Визитка еще не создана"; ObjectID = "yFk-WA-4vd"; */
+"yFk-WA-4vd.text" = "Визитка еще не создана";
+
+/* Class = "UINavigationItem"; title = "акции"; ObjectID = "yNn-8U-u8Z"; */
+"yNn-8U-u8Z.title" = "Spezialangebote";
+
+/* Class = "UILabel"; text = "мои спец. предложения"; ObjectID = "yQ1-hD-D4g"; */
+"yQ1-hD-D4g.text" = "Meine Spezialangebote";
+
+/* Class = "UIButton"; normalTitle = "УПРАВЛЕНИЕ ПОДПИСКОЙ"; ObjectID = "yrp-9E-GPx"; */
+"yrp-9E-GPx.normalTitle" = "Abonnement verwalten";
+
+/* Class = "UILabel"; text = "256 kb"; ObjectID = "zHq-Rb-eZK"; */
+"zHq-Rb-eZK.text" = "256 kb";
+
+/* Class = "UITextField"; text = "Проблемы с доступом в аккаунт"; ObjectID = "zgC-MX-T37"; */
+"zgC-MX-T37.text" = "Проблемы с доступом в аккаунт";

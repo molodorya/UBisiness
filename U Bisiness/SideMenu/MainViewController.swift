@@ -86,6 +86,7 @@ class MainViewController: UIViewController {
             if self.revealSideMenuOnTop {
                 self.sideMenuTrailingConstraint.constant = self.isExpanded ? 0 : (-self.sideMenuRevealWidth - self.paddingForRotation)
             }
+            
         }
     }
 
@@ -99,6 +100,7 @@ class MainViewController: UIViewController {
     // Вызовите это действие кнопки из контроллера просмотра, который вы хотите развернуть / свернуть, когда вы нажимаете кнопку
     @IBAction open func revealSideMenu() {
         self.sideMenuState(expanded: self.isExpanded ? false : true)
+       
     }
     
     
@@ -110,7 +112,7 @@ class MainViewController: UIViewController {
             }
             // Animate Shadow (Fade In)
             UIView.animate(withDuration: 0.3) {  self.sideMenuShadowView.alpha = 0.6
-                
+                self.view.endEditing(true)
             }
         }
         else {
@@ -165,6 +167,7 @@ extension MainViewController: SideMenuViewControllerDelegate {
             present(vc, animated: true, completion: nil)
         case 9:
             self.showViewController(viewController: UINavigationController.self, storyboardId: "navHome")
+            print("navhome")
         default:
             break
         }

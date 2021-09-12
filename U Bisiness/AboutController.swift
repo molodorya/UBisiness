@@ -18,7 +18,7 @@ class AboutController: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        titleLabel.text = titleLabel.text?.uppercased()
         view.backgroundColor = .vanillaWhite
         tableView.backgroundColor = .vanillaWhite
 

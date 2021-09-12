@@ -27,7 +27,7 @@ class ConfirmPhone: UIViewController {
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
             navigationBar?.shadowImage = UIImage()
         navigationBar?.backgroundColor = UIColor.clear
-        
+        titleLabel.text = titleLabel.text?.uppercased()
         navigationItem.backBarButtonItem?.tintColor = .black
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)

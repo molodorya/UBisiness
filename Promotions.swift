@@ -141,27 +141,32 @@ class Promotions: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Promotions.cellName, for: indexPath) as! PromotionsCell
-  
+        
         if isSearch == true {
             if let search = offer?[indexPath.section] {
                 cell.titlePromotions.text = search[indexPath.row].title
                 cell.datePromotions.text = "ДО \(search[indexPath.row].term ?? "")"
+                cell.imagePromotions.image = nil
+                cell.imagePromotions.downloaded(from: "https://ubusiness-ithub.ru/offers/\(search[indexPath.row].imgurl ?? "")")
             }
             
         } else {
             if let notSearch = offer?[indexPath.row] {
                 cell.titlePromotions.text = notSearch[indexPath.section].title
                 cell.datePromotions.text = "ДО \(notSearch[indexPath.section].term ?? "")"
+                cell.imagePromotions.image = nil
+                cell.imagePromotions.downloaded(from: "https://ubusiness-ithub.ru/offers/\(notSearch[indexPath.section].imgurl ?? "")")
+
             }
         }
-
+        
         return cell
     }
 }
 
 struct OfferSearch: Codable {
     var id: Int?
-    var img: String?
+    var imgurl: String?
     var title: String?
     var welcomeProtocol: String?
     var timecreation: String?

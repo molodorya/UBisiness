@@ -77,6 +77,7 @@ extension NewsPage {
                     DispatchQueue.main.async {
                         centerLabel.text = json?.title
                         bottomLabel.text = json?.date
+                        profileImageView.downloaded(from: "https://ubusiness-ithub.ru/news/\(json?.banner ?? "")")
                         label.text = json?.text
                     }
                 } catch let error as NSError {

@@ -23,6 +23,7 @@ class CellNews: UICollectionViewCell {
         button.underLineButton(text: "Подробнее >")
         cellView.backgroundColor = .vanillaWhite
     }
+
     
     @IBAction func buttonMoreDetails(_ sender: UIButton) {
         print("more details")

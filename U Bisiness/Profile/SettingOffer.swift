@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingOffer: UIViewController {
+class SettingOffer: UIViewController, UIGestureRecognizerDelegate {
   
     // Content
     @IBOutlet weak var scrollView: UIScrollView!
@@ -41,9 +41,21 @@ class SettingOffer: UIViewController {
     
     static var selectCardId = 0
     
+    
+    @objc func touch() {
+        print("touch")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         offerFetch(url: "https://ubusiness-ithub.ru/api/fetchUserOffers")
+        
+        
+        // off
+        let tapOnScreen: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: nil)
+        tapOnScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapOnScreen)
+
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         tableView.backgroundColor = .vanillaWhite
@@ -59,17 +71,17 @@ class SettingOffer: UIViewController {
         
         // Cabinet
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextCabinet.text = "мой\nкабинет"
+//        headerTextCabinet.text = "мой\nкабинет"
         headerButtonCabinet.backgroundColor = .clear
         
         // Card
         headerTextCard.adjustsFontSizeToFitWidth = true
-        headerTextCard.text = "моя\nвизитка"
+//        headerTextCard.text = "моя\nвизитка"
         headerButtonCard.backgroundColor = .clear
         
         //Offer
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextOffer.text = "мои спец.\nпредложения"
+//        headerTextOffer.text = "мои спец.\nпредложения"
         headerButtonOffer.backgroundColor = .clear
       
     }
@@ -78,16 +90,17 @@ class SettingOffer: UIViewController {
  
     
     @IBAction func actionCabinet(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
-        setSubView(vc!)
-        print("1")
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
+//        setSubView(vc!)
+        self.tabBarController?.selectedIndex = 0
         
     }
     
     @IBAction func actionCard(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
-        setSubView(vc!)
-        print("2")
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
+//        setSubView(vc!)
+        
+        self.tabBarController?.selectedIndex = 1
     }
     
     
@@ -109,12 +122,10 @@ class SettingOffer: UIViewController {
         
         overdue.setTitleColor(.black, for: .normal)
         actual.setTitleColor(.lightGray, for: .normal)
-        
+         
         add.isHidden = true
         
         offerFetchOld(url: "https://ubusiness-ithub.ru/api/fetchHistoryOffers")
-        print(SettingOffer.countCell)
-        
     }
     
     @IBAction func addClick(_ sender: UIButton) {
@@ -125,11 +136,6 @@ class SettingOffer: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.offerFetch(url: "https://ubusiness-ithub.ru/api/fetchUserOffers")
-        }
-        
         self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
     }
     
@@ -177,18 +183,9 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
         if let index = offersUser?[indexPath.row] {
             UserDefaults.standard.setValue(index[indexPath.section].id ?? 0, forKey: "selectCardId")
         }
-       
-//        let vc = storyboard?.instantiateViewController(identifier: "OfferCard")
-//        navigationController?.pushViewController(vc!, animated: true)
-        
         let vc = storyboard?.instantiateViewController(identifier: "OfferCard")
         setSubView(vc!)
     }
-    
-    
-    
-
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "celling", for: indexPath) as! TableScroll
@@ -200,10 +197,6 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
             cell.protocolCell.text = data[indexPath.section].protocol ?? ""
          
         }
-        
-     
-        
-        
         cell.contentView.backgroundColor = UIColor.random.withAlphaComponent(0.8)
         
         switch indexPath.section {
@@ -224,109 +217,3 @@ extension SettingOffer: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-class TableScroll: UITableViewCell {
-    @IBOutlet weak var titleCell: UILabel!
-    @IBOutlet weak var protocolCell: UILabel!
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        titleCell.adjustsFontSizeToFitWidth = true
-        protocolCell.adjustsFontSizeToFitWidth = true
-    }
-    
-}
-
-
-
-extension SettingOffer {
-    struct OfferStruct: Codable {
-        var id: Int?
-        var imgurl: String?
-        var title: String?
-        var `protocol`: String?
-        var timecreation: String?
-        var term: String?
-        var text: String?
-        var idcreator: Int?
-        var type: String?
-    }
-
-    typealias offerType = [OfferStruct]
-    
-        func offerFetch(url: String) {
-            var request = URLRequest.init(url: NSURL(string: url)! as URL)
-            request.httpMethod = "GET"
-            request.addValue("Bearer \(Token.accessToken ?? "")", forHTTPHeaderField: "Authorization")
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            
-            let config = URLSessionConfiguration.default
-            let session = URLSession.init(configuration: config)
-            
-            let task = session.dataTask(with: request, completionHandler: { [self] (data, response, error) -> Void in
-                if let data = data {
-                    do {
-                        let json = try JSONDecoder().decode(offerType.self, from: data)
-                        offersUser = [json]
-                       
-                        DispatchQueue.main.async {
-                            SettingOffer.countCell = json.endIndex
-                            print(SettingOffer.countCell)
-                            tableView.reloadData()
-                        }
-                    } catch let error as NSError {
-                        print(error.localizedDescription)
-                    }
-                }
-            })
-            task.resume()
-        }
-    
-    func offerFetchOld(url: String) {
-        var request = URLRequest.init(url: NSURL(string: url)! as URL)
-        request.httpMethod = "GET"
-        request.addValue("Bearer \(Token.accessToken ?? "")", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let config = URLSessionConfiguration.default
-        let session = URLSession.init(configuration: config)
-        
-        let task = session.dataTask(with: request, completionHandler: { [self] (data, response, error) -> Void in
-            if let data = data {
-                do {
-                    let json = try JSONDecoder().decode(offerType.self, from: data)
-                    offersUser = [json]
-                   
-                    DispatchQueue.main.async {
-                        SettingOffer.countCell = json.endIndex
-                        
-                        if SettingOffer.countCell == 0 {
-                            let alertController = UIAlertController(title: "Просроченных предложений нету", message: nil, preferredStyle:UIAlertController.Style.alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
-                            self.present(alertController, animated: true, completion: nil)
-                        }
-                        
-                        tableView.reloadData()
-                    }
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                }
-            }
-        })
-        task.resume()
-    }
-    
-
-}
-extension UIColor {
-    static var random: UIColor {
-        return UIColor(
-            red: .random(in: 0...1),
-            green: .random(in: 0...1),
-            blue: .random(in: 0...1),
-            alpha: 1.0
-        )
-    }
-}

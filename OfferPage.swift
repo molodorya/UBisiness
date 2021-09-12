@@ -88,6 +88,7 @@ extension OfferPage {
                     DispatchQueue.main.async {
                         centerLabel.text = json?.title
                         bottomLabel.text = "ДО \(json?.term ?? "")"
+                        profileImageView.downloaded(from: "https://ubusiness-ithub.ru/offers/\(json?.imgurl ?? "")")
                         label.text = json?.text
                     }
                 } catch let error as NSError {

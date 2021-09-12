@@ -15,12 +15,13 @@ extension UIColor {
 }
 
 class Home: UIViewController {
-
     @IBOutlet weak var collectionViewOffer: UICollectionView!
 
     // Views
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet weak var bottomBackground: UIView!
     @IBOutlet weak var user: UIBarButtonItem!
     @IBOutlet weak var sideMenuOutlet: UIBarButtonItem!
     
@@ -31,7 +32,6 @@ class Home: UIViewController {
     
     //News
     @IBOutlet weak var collectionViewNews: UICollectionView!
-
     
     @IBOutlet weak var eventTitle: UIButton!
     @IBOutlet weak var newsTitle: UIButton!
@@ -68,9 +68,7 @@ class Home: UIViewController {
     static var news: [NewsStruct]?
     static var offers: [OfferStruct]?
    
-
     @IBAction func eventNow(_ sender: UIButton) {
-
         revealViewController()?.selectedCell(2)
     }
     
@@ -80,16 +78,10 @@ class Home: UIViewController {
     
     @IBAction func offerNow(_ sender: UIButton) {
         revealViewController()?.selectedCell(3)
-        
     }
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         if UserDefaults.standard.bool(forKey: "Auth") == false {
             let vc = storyboard?.instantiateViewController(identifier: "Welcome")
@@ -102,9 +94,17 @@ class Home: UIViewController {
             offerFetch(url: "https://ubusiness-ithub.ru/api/fetchOffers")
         }
         
-        eventTitle.underLineButton(text: "СОБЫТИЯ")
-        newsTitle.underLineButton(text: "НОВОСТИ")
-        offerTitle.underLineButton(text: "СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ")
+        let tapOnScreen: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: nil)
+        tapOnScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapOnScreen)
+        
+        bottomBackground.backgroundColor = .vanillaWhite
+        
+        eventTitle.underline()
+        newsTitle.underline()
+        offerTitle.underline()
+        
+        
         offerTitle.contentHorizontalAlignment = .left
 
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
@@ -146,18 +146,13 @@ class Home: UIViewController {
         buttonEvent.layer.borderColor = UIColor.black.cgColor
         
         settingProgressBar()
-
-    }
-    
- 
-    
- 
-    
-    override func viewWillAppear(_ animated: Bool) {
-    
         
+//        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { Timer in
+//            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//            self.revealViewController()?.gestureEnabled = false
+//            self.view.gestureRecognizers?.forEach(self.view.delete(_:))
+//        }
         
-     
     }
     
     @IBAction func sideMenu(_ sender: UIBarButtonItem) {
@@ -166,7 +161,7 @@ class Home: UIViewController {
     }
   
     @IBAction func actionUser(_ sender: UIBarButtonItem) {
-        print("user")
+//        revealViewController()?.selectedCell(0)
     }
     
     @IBAction func actionEvent(_ sender: UIButton) {
@@ -238,6 +233,8 @@ class Home: UIViewController {
     let kCellHeight : CGFloat = 250
     let kLineSpacing : CGFloat = 15
     let kInset: CGFloat = 10
+    
+  
   
 }
 
@@ -254,44 +251,74 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             return 5
         }
     }
-    // правильная логика
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        print("fsf")
-        }
+
     
     // неправильная логика
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
        
-        print("ddd")
-       return false
+        
+        if collectionView.tag == 1 {
+            if let idCard = Home.events?[indexPath.row] {
+            
+                UserDefaults.standard.setValue(idCard.id ?? 0, forKey: "idEventClick")
+                
+                let vc = storyboard?.instantiateViewController(identifier: "EventPage")
+                vc?.modalPresentationStyle = .fullScreen
+                present(vc!, animated: true, completion: nil)
+            }
+        }
+        
+        
+        if collectionView.tag == 2 {
+            if let idCard = Home.news?[indexPath.row] {
+                UserDefaults.standard.setValue(idCard.id ?? 0, forKey: "idNewsClick")
+                let vc = storyboard?.instantiateViewController(identifier: "NewsPage")
+                vc?.modalPresentationStyle = .fullScreen
+                present(vc!, animated: true, completion: nil)
+            }
+        }
+        
+        
+        if collectionView.tag == 3 {
+            if let idCard = Home.offers?[indexPath.row] {
+            
+                UserDefaults.standard.setValue(idCard.id ?? 0, forKey: "idOfferClick")
+                let vc = storyboard?.instantiateViewController(identifier: "OfferPage")
+                vc?.modalPresentationStyle = .fullScreen
+                present(vc!, animated: true, completion: nil)
+            }
+        }
+     
+     
+        
+        
+        return false
     }
+    
+   
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView.tag == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCell
-           
-          
-            
             if let title = Home.events?[0] {
-               
                 titleEvent.text = title.title
                 dateEvent.text = title.date
+                cell.imageCollection.downloaded(from: "https://ubusiness-ithub.ru/events/\(title.banner ?? "")")
             }
             
             switch indexPath.row {
-            case 1...3:
-                cell.imageCollection.backgroundColor = UIColor.systemIndigo
+            case 0:
+                cell.imageCollection.image = UIImage.init(named: "demo event")
+            case 1:
+                cell.imageCollection.image = UIImage.init(named: "demo event2")
             case 4:
                 cell.imageCollection.image = UIImage.init(named: "eventMore")
-               
+                
             default:
                 break
             }
-            
-           
- 
+
             return cell
             
         } else if collectionView.tag == 2 {
@@ -300,6 +327,12 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             if let title = Home.news?[indexPath.row] {
                 newsCell.title.text = title.title
                 newsCell.date.text = title.date
+                
+                
+                // если изображение дублируется при прокрутке
+                newsCell.photo.image = nil
+                
+                newsCell.photo.downloaded(from: "https://ubusiness-ithub.ru/news/\(title.banner ?? "")")
             }
           
             
@@ -321,6 +354,7 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             if let title = Home.offers?[indexPath.row] {
                 offerCell.centerLabel.text = title.title
                 offerCell.bottomLabel.text = title.protocol
+                offerCell.photo.downloaded(from: "https://ubusiness-ithub.ru/offers/\(title.imgurl ?? "")")
             }
             
             switch indexPath.section {
@@ -393,7 +427,7 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
         
         if collectionViewNews.tag == 2 {
             let witdh = collectionViewNews.frame.width - (collectionViewNews.contentInset.left * 2)
-            let index = collectionViewNews.contentOffset.x / witdh * 3.2
+            let index = collectionViewNews.contentOffset.x / witdh * 3.6
             let nowRoundedIndex = Int(round(index))
             switch nowRoundedIndex {
             case 0:
@@ -471,31 +505,15 @@ extension Home: UICollectionViewDataSource, UICollectionViewDelegate, UICollecti
             }
         }
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        if collectionView.tag == 1 {
-//            return CGSize(width: 170, height: 250)
-//        } else if collectionViewNews.tag == 2 {
-//            return CGSize(width: 170, height: 300)
-//        } else if collectionViewOffer.tag == 3 {
-//            return CGSize(width: 300, height: 200)
-//        } else {
-//            return CGSize()
-//        }
-//    }
-    
+
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
     
-   
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
     }
-    
 }
 
 
@@ -515,9 +533,7 @@ extension Home {
             let nsHTTPResponse = response as? HTTPURLResponse
             let statusCode = nsHTTPResponse?.statusCode ?? 0
             
-            
             if statusCode == 200 {
-              
                 
             } else if statusCode == 401 {
                 
@@ -526,7 +542,7 @@ extension Home {
                     alert.addAction(UIAlertAction(title: "Перезайти", style: .cancel, handler: { UIAlertAction in
                         
                     }))
-                   
+                    
                 }
             }
         })
@@ -535,11 +551,25 @@ extension Home {
     }
 }
 
-   
+extension Home {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(Home.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        tap.cancelsTouchesInView = false
+    }
+
+    override func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 
 
-
-
-
-
-
+extension UIButton {
+    func underline() {
+        guard let title = self.titleLabel else { return }
+        guard let tittleText = title.text else { return }
+        let attributedString = NSMutableAttributedString(string: (tittleText))
+        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: (tittleText.count)))
+        self.setAttributedTitle(attributedString, for: .normal)
+    }
+}

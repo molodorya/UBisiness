@@ -16,8 +16,6 @@ class CardCell: UITableViewCell {
     @IBOutlet weak var industry: UILabel!
     
   
-    
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         avatarurl.layer.cornerRadius = 35
@@ -30,6 +28,9 @@ class CardSearch: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentViewHeader: UIView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     @IBOutlet weak var searchView: UIView!
@@ -47,6 +48,8 @@ class CardSearch: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchBusinessCards(url: "https://ubusiness-ithub.ru/api/fetchBusinessCards")
+    
+        titleLabel.text = titleLabel.text?.uppercased()
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         contentViewHeader.backgroundColor = .vanillaWhite
@@ -246,6 +249,8 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
                     cell.user.text = nameUser[indexPath.section].user
                     cell.company.text = nameUser[indexPath.section].company
                     cell.industry.text = nameUser[indexPath.section].industry
+                    
+                    cell.avatarurl.downloaded(from: "https://ubusiness-ithub.ru/avatars/\(nameUser[indexPath.row].avatarurl ?? "")")
                 }
             }  else {
             if let nameUser = cards?[indexPath.row] {
@@ -253,6 +258,8 @@ extension CardSearch: UITableViewDelegate, UITableViewDataSource {
                 cell.user.text = nameUser[indexPath.section].user
                 cell.company.text = nameUser[indexPath.section].company
                 cell.industry.text = nameUser[indexPath.section].industry
+                
+                cell.avatarurl.downloaded(from: "https://ubusiness-ithub.ru/avatars/\(nameUser[indexPath.section].avatarurl ?? "")")
                 
                 if nameUser[indexPath.section].status == true {
                     cell.status.isHidden = false

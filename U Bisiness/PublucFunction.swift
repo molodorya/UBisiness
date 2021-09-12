@@ -65,7 +65,7 @@ public func bounceScroll(scrollView: UIScrollView) {
 
 
 
-// Валид e,mail
+// Валид email
 public func isValidEmail(testStr: String) -> Bool {
      let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
      let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -92,7 +92,6 @@ public func navigationCustom(viewController: UIViewController) {
 
 
 public func textFieldFeature(textField: UITextField, contentType: UITextContentType, capitalization: UITextAutocapitalizationType, correction: UITextAutocorrectionType, smartDashes: UITextSmartDashesType, smartInsert: UITextSmartInsertDeleteType, smartQuotes: UITextSmartQuotesType, spellCheking: UITextSpellCheckingType, keyboardType: UIKeyboardType, keyboardLook: UIKeyboardAppearance, returnKey: UIReturnKeyType) {
-    
     textField.textContentType = contentType
     textField.autocapitalizationType = capitalization
     textField.autocorrectionType = correction
@@ -103,7 +102,6 @@ public func textFieldFeature(textField: UITextField, contentType: UITextContentT
     textField.keyboardType = keyboardType
     textField.keyboardAppearance = keyboardLook
     textField.returnKeyType = returnKey
-    
 }
 
 

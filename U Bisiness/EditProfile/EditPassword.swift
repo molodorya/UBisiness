@@ -44,7 +44,7 @@ class EditPassword: UIViewController {
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
         
-    
+        titleLabel.text = titleLabel.text?.uppercased()
         navigationItem.backBarButtonItem?.tintColor = .black
         oldView.backgroundColor = .vanillaWhite
         oldPassword.autocorrectionType = .no

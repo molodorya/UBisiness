@@ -132,12 +132,16 @@ class Events: UITableViewController {
                 cell.titleNews.text = search[indexPath.row].title
                 cell.dateNews.text = search[indexPath.row].date
                 cell.categoryNews.text = search[indexPath.row].type
+                cell.imageNews.image = nil
+                cell.imageNews.downloaded(from: "https://ubusiness-ithub.ru/events/\(search[indexPath.row].banner ?? "")")
             }
         } else {
             if let notSearch = search?[indexPath.row] {
                 cell.titleNews.text = notSearch[indexPath.section].title
                 cell.dateNews.text = notSearch[indexPath.section].date
                 cell.categoryNews.text = notSearch[indexPath.section].type
+                cell.imageNews.image = nil
+                cell.imageNews.downloaded(from: "https://ubusiness-ithub.ru/events/\(notSearch[indexPath.section].banner ?? "")")
             }
         }
 

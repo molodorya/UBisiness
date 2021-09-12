@@ -33,6 +33,7 @@ class NewsCell: UITableViewCell {
         imageNews.clipsToBounds = true
         imageNews.layer.cornerRadius = 30
         
+      
         
         contentView.backgroundColor = UIColor.vanillaWhite
         
@@ -58,6 +59,9 @@ class News: UITableViewController {
         super.viewDidLoad()
         
         newsFetch(url: "https://ubusiness-ithub.ru/api/fetchnewslist")
+       
+        
+        
         view.backgroundColor = UIColor.vanillaWhite
         searchView.backgroundColor = .vanillaWhite
         searchTextField.backgroundColor = .vanillaWhite
@@ -94,6 +98,8 @@ class News: UITableViewController {
         navigationBar?.shadowImage = UIImage()
         
         actionMenu(.init())
+        
+
         
     }
     
@@ -178,14 +184,16 @@ class News: UITableViewController {
                 cell.titleNews.text = title[indexPath.row].title
                 cell.dateNews.text = title[indexPath.row].date
                 cell.promptNews.text = title[indexPath.row].type
-          
+                cell.imageNews.image = nil
+                cell.imageNews.downloaded(from: "https://ubusiness-ithub.ru/news/\(title[indexPath.row].banner ?? "")")
             }
         } else {
             if let title = news?[indexPath.row] {
                 cell.titleNews.text = title[indexPath.section].title
                 cell.dateNews.text = title[indexPath.section].date
                 cell.promptNews.text = title[indexPath.section].type
-          
+                cell.imageNews.image = nil
+                cell.imageNews.downloaded(from: "https://ubusiness-ithub.ru/news/\(title[indexPath.section].banner ?? "")")
             }
         }
         
@@ -227,6 +235,9 @@ extension News {
         })
         task.resume()
     }
+
+    
+    
     
     
     func searchNews(url: String) {
@@ -261,3 +272,4 @@ extension News {
         task.resume()
     }
 }
+

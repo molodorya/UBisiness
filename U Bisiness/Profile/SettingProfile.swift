@@ -4,14 +4,12 @@
 //
 //  Created by Nikita Molodorya on 15.07.2021.
 //
-
-
 import UIKit
-
 
 struct Profile: Codable {
     var email, name, tel, lang: String?
     var idUser: Int?
+    var avatarurl: String?
 }
 
 class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
@@ -21,7 +19,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    
     
     // Cabinet
     @IBOutlet weak var headerTextCabinet: UILabel!
@@ -38,17 +35,17 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     func headerPreset() {
         // Cabinet
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextCabinet.text = "мой\nкабинет"
+//        headerTextCabinet.text = "мой\nкабинет"
         headerButtonCabinet.backgroundColor = .clear
         
         // Card
         headerTextCard.adjustsFontSizeToFitWidth = true
-        headerTextCard.text = "моя\nвизитка"
+//        headerTextCard.text = "моя\nвизитка"
         headerButtonCard.backgroundColor = .clear
         
         //Offer
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextOffer.text = "мои спец.\nпредложения"
+//        headerTextOffer.text = "мои спец.\nпредложения"
         headerButtonOffer.backgroundColor = .clear
     }
  
@@ -80,46 +77,15 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var editMyCabinet: UIButton!
     @IBOutlet weak var settingSubscribe: UIButton!
-    
-    
-    
-    //MARK: - subscription view's
-    @IBOutlet weak var subscriptionView: UIView!
-    @IBOutlet weak var subscriptionHeader: UIView!
-    
-    @IBOutlet weak var subscriptionTitle: UILabel!
-    @IBOutlet weak var subscriptionEnd: UILabel!
-    @IBOutlet weak var subscriptionPrice: UILabel!
-    
-    
-    @IBOutlet weak var firstTitle: UILabel!
-    @IBOutlet weak var lastTitle: UILabel!
-    
-    @IBOutlet weak var firstPrice: UILabel!
-    @IBOutlet weak var lastPrice: UILabel!
-    
-    @IBOutlet weak var firstDate: UILabel!
-    @IBOutlet weak var lastDate: UILabel!
-    
-    @IBOutlet weak var extend: UIButton!
-    @IBOutlet weak var change: UIButton!
-    @IBOutlet weak var cancel: UIButton!
-    
-    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
-    
-  
+
     static var nameProfile = ""
     static var phoneProfile = ""
-    var ds: [typeNetwork]?
     
   
     override func viewDidLoad() {
         super.viewDidLoad()
         httpGet()
-        
-        let userId = UserDefaults.standard.integer(forKey: "idUser")
-        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=\(userId)")
-        
+    
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
             navigationBar?.shadowImage = UIImage()
@@ -127,7 +93,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         
         navigationItem.backBarButtonItem?.tintColor = .black
        
-        
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
         
@@ -137,8 +102,9 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         languageView.backgroundColor = .vanillaWhite
 
         settingMenu()
-        settingSubscriptionView()
         headerPreset()
+        
+        self.tabBarController?.tabBar.isHidden = true
         
         actionMenu(.init())
         hideKeyboardWhenTappedScreen()
@@ -148,7 +114,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.revealViewController()?.gestureEnabled = false
-
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -165,8 +130,12 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func actionSetting(_ sender: UIBarButtonItem) {
-//        let vc = storyboard!.instantiateViewController(withIdentifier: "settings") as! Settings
+//        let vc = storyboard!.instantiateViewController(withIdentifier: "settings")
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: true, completion: nil)
 //        navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
     
 
@@ -195,7 +164,7 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
         settingTextView(permission: false)
         
         
-        subscriptionView.isHidden = true
+//        subscriptionView.isHidden = true
         titleLabel.isHidden = false
         imageUser.isHidden = false
         nameView.isHidden = false
@@ -222,16 +191,15 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
    
 
     @IBAction func actionCard(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
-        setSubView(vc!)
-        
-        print("ff")
-        
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingCard")
+//        setSubView(vc!)
+        self.tabBarController?.selectedIndex = 1
     }
     
     @IBAction func actionOffer(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
-        setSubView(vc!)
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
+//        setSubView(vc!)
+        self.tabBarController?.selectedIndex = 2
     }
     
 
@@ -283,13 +251,14 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
             settingSubscribe.isHidden = true
             buttonSelectable = true
             settingTextView(permission: true)
+            imageUser.image = UIImage.init(named: "userOverlay")
         } else {
             
             DispatchQueue.main.async {
                     self.httpEditProfile()
-                
-                
             }
+            imageUser.image = nil
+            
             
             editMyCabinet.setTitle("РЕДАКТИРОВАТЬ", for: .normal)
             editMyCabinet.backgroundColor = .clear
@@ -303,70 +272,6 @@ class SettingProfile: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func actionSettingSubscribe(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "SubscribeView")
         setSubView(vc!)
-//        subscriptionView.isHidden = false
-//
-//        cabinetView.isHidden = false
-//        titleLabel.isHidden = true
-//        imageUser.isHidden = true
-//        nameView.isHidden = true
-//        name.isHidden = true
-//        nameText.isHidden = true
-//        nameLines.isHidden = true
-//        emailView.isHidden = true
-//        email.isHidden = true
-//        emailText.isHidden = true
-//        emailLine.isHidden = true
-//        phoneView.isHidden = true
-//        phone.isHidden = true
-//        phoneText.isHidden = true
-//        phoneLines.isHidden = true
-//        languageView.isHidden = true
-//        language.isHidden = true
-//        languageText.isHidden = true
-//        languageLines.isHidden = true
-//        editMyCabinet.isHidden = true
-//        settingSubscribe.isHidden = true
-//
-//        scrollView.setContentOffset(CGPoint.zero, animated: true)
-    }
-    
-   
-    //MARK: - Подписка
-    @IBAction func actionExtend(_ sender: UIButton) {
-        print("actionExtend")
-    }
-    
-    @IBAction func actionChange(_ sender: UIButton) {
-        print("actionChange")
-    }
-    
-    @IBAction func actionCancel(_ sender: UIButton) {
-        print("actionCancel")
-    }
-    
-}
-
-//MARK: -  подписка
-extension SettingProfile {
-    func settingSubscriptionView() {
-        subscriptionView.backgroundColor = .vanillaWhite
-        subscriptionHeader.backgroundColor = .vanillaWhiteContrast
-
-        
-        if UserDefaults.standard.bool(forKey: "Auth") == true {
-            subscriptionTitle.text = "Активная премиум подписка"
-        } else {
-            subscriptionTitle.text = "Неактивная премиум подписка"
-            subscriptionEnd.text = ""
-            subscriptionPrice.text = ""
-        }
-        
-        extend.layer.cornerRadius = 5
-        change.backgroundColor = .clear
-        change.layer.borderWidth = 2
-        change.layer.borderColor = UIColor.black.cgColor
-        change.layer.cornerRadius = 5
-        subscriptionView.isHidden = true
     }
 }
 
@@ -397,7 +302,12 @@ extension SettingProfile {
                         emailText.text = json.email
                         phoneText.text = json.tel
                         languageText.text = json.lang
+//                        imageUser.image = json.avatarurl
                         
+                        
+                        imageUser.downloaded(from: "https://ubusiness-ithub.ru/avatars/\(json.avatarurl ?? "")")
+                        
+                       
                         
                         SettingProfile.nameProfile = nameText.text
                         SettingProfile.phoneProfile = phoneText.text
@@ -406,8 +316,7 @@ extension SettingProfile {
             } catch {
                 
                 print("errpor profile")
-                print(error
-                )
+                print(error)
             }
             
         }.resume()
@@ -430,8 +339,6 @@ extension SettingProfile {
             "lang": lang
           ]
         
-       
-        
         let session = URLSession.shared
         let request = NSMutableURLRequest(url: url as URL)
         
@@ -444,12 +351,11 @@ extension SettingProfile {
         do {
             request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions())
             let task = session.dataTask(with: request as URLRequest) { [self] data, response, error in
-                let nsHTTPResponse = response as! HTTPURLResponse
-                let statusCode = nsHTTPResponse.statusCode
+                let nsHTTPResponse = response as? HTTPURLResponse
+                let statusCode = nsHTTPResponse?.statusCode
                 
                 if let response = response { // change on the if response != nil ?
                     if statusCode == 200 {
-                        
                         print("Успешная смена пользовательских данных через access токен")
                     } else if statusCode == 400 {
                         print("Ответ от сервера: Выбран не подходящий формат файла при изменении фото профиля")
@@ -461,10 +367,7 @@ extension SettingProfile {
                 if let data = data {
                     do {
                         let jsonResponse = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions())
-
-                        
-                      
-                        
+   
                     } catch _ {
                         print("Неправильный ответ в формате JSON")
                     }
@@ -477,68 +380,4 @@ extension SettingProfile {
             task.resume()
         }
     }
-}
-
-
-extension SettingProfile {
-    // MARK: - ServerStatusElement
-    struct StatusSubscribe: Decodable {
-        var data: DataSubscribe?
-        var items: ItemsSubscribe?
-    }
-    struct DataSubscribe: Decodable {
-        var id: Int?
-        var status: String?
-    }
-    struct ItemsSubscribe: Codable {
-        var the3: ItemSubscribe?
-        
-        enum CodingKeys: String, CodingKey {
-            case the3 = "3"
-        }
-    }
-    struct ItemSubscribe: Codable {
-        var product_id: Int?
-    }
-    
-    typealias typeNetwork = [StatusSubscribe]
-    
-  
-
-    func fetchSubscribe(url: String) {
-        let url = URL(string: url)!
-        var strValue = 0
-     
-        
-        URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
-            guard let data = data else { return }
-            guard error == nil else { return }
-            do {
-                let json = try JSONDecoder().decode(typeNetwork.self, from: data)
-                
-                DispatchQueue.main.async {
-                  print(strValue)
-                    if strValue == 244 {
-                        subscriptionTitle.text = "Тариф VIP 1 год"
-                    } else if strValue == 247 {
-                        subscriptionTitle.text = "Тариф VIP 6 месяцев"
-                    } else if strValue == 241 {
-                        subscriptionTitle.text = "Тариф Базовый 6 месяцев"
-                    } else if strValue == 238 {
-                        subscriptionTitle.text = "Тариф Базовый 1 год"
-                    } else if strValue == 0 {
-                        subscriptionTitle.text = "Ошибка загрузки"
-                    }
-                }
-             
-               
-
-                    
-                    
-               } catch let error {
-                   print("Ошибка: \(error)")
-               }
-           }.resume()
-    }
-    
 }

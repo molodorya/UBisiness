@@ -99,20 +99,18 @@ class SettingCard: UIViewController {
     func headerPreset() {
         // Cabinet
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextCabinet.text = "мой\nкабинет"
+//        headerTextCabinet.text = "мой\nкабинет"
         headerButtonCabinet.backgroundColor = .clear
         
         // Card
         headerTextCard.adjustsFontSizeToFitWidth = true
-        headerTextCard.text = "моя\nвизитка"
+//        headerTextCard.text = "моя\nвизитка"
         headerButtonCard.backgroundColor = .clear
         
         //Offer
         headerTextCabinet.adjustsFontSizeToFitWidth = true
-        headerTextOffer.text = "мои спец.\nпредложения"
+//        headerTextOffer.text = "мои спец.\nпредложения"
         headerButtonOffer.backgroundColor = .clear
-        
-        
     }
    
     
@@ -269,13 +267,15 @@ class SettingCard: UIViewController {
     
     
     @IBAction func actionCabinet(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
-        setSubView(vc!)
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingProfile")
+//        setSubView(vc!)
+        self.tabBarController?.selectedIndex = 0
     }
     
     @IBAction func actionOffer(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
-        setSubView(vc!)
+//        let vc = storyboard?.instantiateViewController(identifier: "SettingOffer")
+//        setSubView(vc!)
+        self.tabBarController?.selectedIndex = 2
     }
     
     

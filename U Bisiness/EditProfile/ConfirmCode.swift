@@ -24,7 +24,7 @@ class ConfirmCode: UIViewController {
         super.viewDidLoad()
         
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
-        
+        titleLabel.text = titleLabel.text?.uppercased()
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
             navigationBar?.shadowImage = UIImage()

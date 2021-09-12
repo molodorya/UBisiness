@@ -32,12 +32,24 @@ class IsWaiting: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleLabel.text = titleLabel.text?.uppercased()
         pay.layer.cornerRadius = 5
         colorVanilla(view: view, scrollView: scrollView, contentView: contentView)
         bounceScroll(scrollView: scrollView)
         
-        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=5")
+        fetchSubscribe(url: "https://join.u-business.world/wp-admin/admin-ajax.php?action=get_orders&u-member-id=\(SingIn.idUserForPayments)")
     }
+    
+    
+    @IBAction func notPayAction(_ sender: UIButton) {
+        UserDefaults.standard.set(true, forKey: "Auth")
+        let vc = storyboard?.instantiateViewController(identifier: "MainViewController")
+        navigationController?.pushViewController(vc!, animated: true)
+        
+        UserDefaults.standard.setValue(SingIn.idUserForPayments, forKey: "idUser")
+    }
+    
     
     @IBAction func payAction(_ sender: UIButton) {
         let urlStringId: String = "https://join.u-business.world/shop/?member=\(SingIn.idUserForPayments)"
@@ -47,6 +59,10 @@ class IsWaiting: UIViewController {
             }
         }
     }
+    
+    
+    
+    
     var a = ""
 }
 
@@ -70,7 +86,6 @@ extension IsWaiting {
                 if json.first?.data?.status ?? "" == "completed" {
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(true, forKey: "Auth")
-                        
                         let vc = storyboard?.instantiateViewController(identifier: "MainViewController")
                         navigationController?.pushViewController(vc!, animated: true)
                         
